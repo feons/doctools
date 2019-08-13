@@ -35,7 +35,7 @@
 </li><li class=" ">    <p><a class="document-link " href="iOS_Interactive_Notifications.html#src-40930452_iOSInteractiveNotifications-Example">Example</a>    </p>
 </li></ul>    <div class="section section-2 " id="src-40930452_iOSInteractiveNotifications-Introduction">
         <h2 class="heading "><span>Introduction</span></h2>
-    <p>Starting with Release 3.4.0, you can create interactive notifications, where users can respond to application notifications without launching the application to the foreground. The user needs to reveal notification actions in the notification, then press a notification action to respond to the notification. This feature is available on devices running iOS 8 or later.    </p>
+    <p>You can create interactive notifications, where users can respond to application notifications without launching the application to the foreground. The user needs to reveal notification actions in the notification, then press a notification action to respond to the notification. This feature is available on devices running iOS 8 or later.    </p>
     <p>To create an interactive notification, the applications needs to:    </p>
 <ol class=" "><li class=" ">    <p>Create and configure notification actions    </p>
 </li><li class=" ">    <p>Create notification categories and assign notification actions to them    </p>
@@ -44,7 +44,7 @@
 </li></ol>    </div>
     <div class="section section-2 " id="src-40930452_iOSInteractiveNotifications-Interactivenotificationtypes">
         <h2 class="heading "><span>Interactive notification types</span></h2>
-    <p>The following screen shots illustrate how iOS presents and the user interacts with the notification:    </p>
+    <p>The following screenshots illustrate how iOS presents and the user interacts with the notification:    </p>
     <div class="section section-3 " id="src-40930452_iOSInteractiveNotifications-Alertdialog">
         <h3 class="heading "><span>Alert dialog</span></h3>
     <p>The user needs to tap the <strong class=" ">Options</strong> button when the alert dialog first appears to display the notification actions. Tapping <strong class=" ">Open</strong> launches the application in the foreground, while tapping <strong class=" ">Close</strong> dismisses the notification.    </p>
@@ -119,7 +119,7 @@
     </div>
     <div class="section section-2 " id="src-40930452_iOSInteractiveNotifications-Registernotificationcategories">
         <h2 class="heading "><span>Register notification categories</span></h2>
-    <p>Like notification types, you also need to register notification categories with iOS by using the <tt class=" ">Titanium.App.iOS.registerUserNotificationSettings()</tt> method.  Pass the method a dictionary with the <tt class=" ">type</tt> property set to the notification types to use and the <tt class=" ">categories</tt> property to an array of notification category objects the application needs to use.    </p>
+    <p>Like notification types, you also need to register notification categories with iOS by using the <tt class=" ">Titanium.App.iOS.registerUserNotificationSettings()</tt>method. Pass the method a dictionary with the <tt class=" ">type</tt> property set to the notification types to use and the <tt class=" ">categories</tt> property to an array of notification category objects the application needs to use.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">Ti.App.iOS.registerUserNotificationSettings({</code></div>
@@ -128,7 +128,7 @@
 <div class="line"><code class="plain">});</code></div>
 </div>
     </div>
-    <p>If you are using push notifications, the application needs to call the <tt class=" ">Titanium.Network.registerForPushNotifications()</tt> method.  The application should monitor the <tt class=" ">usernotificationsettings</tt> to register for push notifications.    </p>
+    <p>If you are using push notifications, the application needs to call the <tt class=" ">Titanium.Network.registerForPushNotifications()</tt> method. The application should monitor the <tt class=" ">usernotificationsettings</tt> to register for push notifications.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="keyword">function</code><code class="plain"> registerForPush() {</code></div>
@@ -148,10 +148,10 @@
     </div>
     <div class="section section-2 " id="src-40930452_iOSInteractiveNotifications-Monitorinteractivenotifications">
         <h2 class="heading "><span>Monitor interactive notifications</span></h2>
-    <p>The application can monitor interactive notifications and respond to them in the background by using the  iOS application-level <tt class=" ">localnotificationaction</tt>  event for local notifications and <tt class=" ">remotenotificationaction</tt> event for push notifications.  The event is triggered when the user selects a notification action.    </p>
+    <p>The application can monitor interactive notifications and respond to them in the background by using the  iOS application-level<tt class=" "> localnotificationaction</tt>event for local notifications and <tt class=" ">remotenotificationaction</tt> event for push notifications. The event is triggered when the user selects a notification action.    </p>
     <div class="section section-3 " id="src-40930452_iOSInteractiveNotifications-localnotificationaction">
         <h3 class="heading "><span>localnotificationaction</span></h3>
-    <p>Monitor the  iOS application-level<tt class=" "> localnotificationaction</tt> event to respond to an interactive local notification.   The event is passed the same object as the  <tt class=" ">notification</tt>  event except it returns two extra properties:    </p>
+    <p>Monitor the iOS application-level<tt class=" "> localnotificationaction</tt> event to respond to an interactive local notification.  The event is passed the same object as the  <tt class=" ">notification</tt>  event except it returns two extra properties:    </p>
 <ul class=" "><li class=" ">    <p><tt class=" ">category</tt>: string identifier indicating the notification category that triggered the event    </p>
 </li><li class=" ">    <p><tt class=" ">identifier</tt> : string identifier indicating the notification action the user pressed    </p>
 </li></ul>    <p>Use the properties to have the application decide how to respond to the interactive notification.    </p>
@@ -182,12 +182,11 @@
     </div>
     <div class="section section-3 " id="src-40930452_iOSInteractiveNotifications-remotenotificationaction">
         <h3 class="heading "><span>remotenotificationaction</span></h3>
-    <p>Monitor the iOS application-level <tt class=" ">remotenotificationaction</tt> event to respond to an interactive push notification.  The event is passed an object with the following  properties:    </p>
+    <p>Monitor the iOS application-level <tt class=" ">remotenotificationaction</tt> event to respond to an interactive push notification. The event is passed an object with the following  properties:    </p>
 <ul class=" "><li class=" ">    <p><tt class=" ">category</tt>: string identifier indicating the notification category that triggered the event    </p>
 </li><li class=" ">    <p><tt class=" ">data</tt>: push notification payload as a JSON object    </p>
 </li><li class=" ">    <p><tt class=" ">identifier</tt>: string identifier indicating the notification action the user pressed    </p>
 </li></ul>    <p>Use the properties to have the application decide how to respond to the interactive notification.    </p>
-    <p>    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">Ti.App.iOS.addEventListener(</code><code class="string">&apos;remotenotificationaction&apos;</code><code class="plain">, </code><code class="keyword">function</code><code class="plain">(e) {</code></div>
@@ -211,12 +210,11 @@
 <div class="line"><code class="plain">});</code></div>
 </div>
     </div>
-    <p>    </p>
     </div>
     </div>
     <div class="section section-2 " id="src-40930452_iOSInteractiveNotifications-Scheduleaninteractivelocalnotification">
         <h2 class="heading "><span>Schedule an interactive local notification</span></h2>
-    <p>To send an interactive local notification, use the <tt class=" ">Titanium.App.iOS.scheduleLocalNotification()</tt> method.  Use it the same way when scheduling a non-interactive local notifications except when creating the dictionary of options to pass to the method, the application must specify the <tt class=" ">category</tt> property and set it to the <tt class=" ">identifier</tt> of the notification category to use.  The notification category indicates which group of actions to use with the notification.  The notification category must also be registered or else the notification will be presented as a default non-interactive notification.    </p>
+    <p>To send an interactive local notification, use the <tt class=" ">Titanium.App.iOS.scheduleLocalNotification()</tt> method. Use it the same way when scheduling a non-interactive local notifications except when creating the dictionary of options to pass to the method, the application must specify the <tt class=" ">category</tt> property and set it to the <tt class=" ">identifier</tt> of the notification category to use.  The notification category indicates which group of actions to use with the notification.  The notification category must also be registered or else the notification will be presented as a default non-interactive notification.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">Ti.App.iOS.scheduleLocalNotification({</code></div>
@@ -245,11 +243,11 @@
     <p>To send the payload, you can use either the:    </p>
 <ul class=" "><li class=" ">    <p>Appcelerator Dashboard: <a class="document-link " href="Sending_and_Scheduling_Push_Notifications.html">Sending and Scheduling Push Notifications</a>    </p>
 </li><li class=" ">    <p>Titanium Cloud Module (ti.cloud) APIs: <a class="external-link external-link" href="http://docs.appcelerator.com/platform/latest/#!/api/Modules.Cloud.PushNotifications-method-notify">Cloud.PushNotifications.notify()</a> or <a class="external-link external-link" href="http://docs.appcelerator.com/platform/latest/#!/api/Modules.Cloud.PushNotifications-method-notifyTokens">Cloud.PushNotifications.notifyTokens()</a>    </p>
-</li><li class=" ">    <p>Arrow REST APIs: <a class="external-link external-link" href="http://docs.appcelerator.com/arrowdb/latest/#!/api/PushNotifications-method-notify"> PushNotification.notify </a> or  <a class="external-link external-link" href="http://docs.appcelerator.com/arrowdb/latest/#!/api/PushNotifications-method-notify_token">PushNotification.notify_tokens</a>    </p>
+</li><li class=" ">    <p>Arrow REST APIs:<a class="external-link external-link" href="http://docs.appcelerator.com/arrowdb/latest/#!/api/PushNotifications-method-notify"> PushNotification.notify</a> or <a class="external-link external-link" href="http://docs.appcelerator.com/arrowdb/latest/#!/api/PushNotifications-method-notify_token">PushNotification.notify_tokens</a>    </p>
 </li></ul>    </div>
     <div class="section section-2 " id="src-40930452_iOSInteractiveNotifications-Example">
         <h2 class="heading "><span>Example</span></h2>
-    <p>In the following example, run the code on an iOS device or simulator.  Click the &quot;Trigger Notification&quot; button, then either lock the phone or place the application in the background.  You will have three seconds or else the application will respond to the notification in the foreground.  If the device or simulator is running iOS 8 or later, you will receive the interactive local notification.  If not, you will receive a regular local notification.    </p>
+    <p>In the following example, run the code on an iOS device or simulator. Click the &quot;Trigger Notification&quot; button, then either lock the phone or place the application in the background.  You will have three seconds or else the application will respond to the notification in the foreground. If the device or simulator is running iOS 8 or later, you will receive the interactive local notification. If not, you will receive a regular local notification.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="comments">// Check for iOS 8 or greater</code></div>
