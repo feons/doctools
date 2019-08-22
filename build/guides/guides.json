@@ -426,6 +426,10 @@
                                 "title": "AMPLIFY Runtime Services Best Practices"
                             },
                             {
+                                "name": "Deploy_an_API_Builder_Standalone_application_to_AMPLIFY_Runtime_Services",
+                                "title": "Deploy an API Builder Standalone application to AMPLIFY Runtime Services"
+                            },
+                            {
                                 "name": "In-place_App_Upgrading",
                                 "title": "In-place App Upgrading"
                             },
@@ -951,7 +955,13 @@
                     },
                     {
                         "name": "AMPLIFY_Crash_Analytics",
-                        "title": "AMPLIFY Crash Analytics"
+                        "title": "AMPLIFY Crash Analytics",
+                        "items": [
+                            {
+                                "name": "Leverage_Custom_Queries_to_gather_insights_from_Crash_Analytics_Data",
+                                "title": "Leverage Custom Queries to gather insights from Crash Analytics Data"
+                            }
+                        ]
                     }
                 ]
             },
@@ -2760,6 +2770,10 @@
                                 "title": "Visual Studio Code Extension Tips and Tricks"
                             }
                         ]
+                    },
+                    {
+                        "name": "WKWebView",
+                        "title": "WKWebView"
                     }
                 ]
             },
@@ -3671,6 +3685,10 @@
                         "name": "Appcelerator_CLI_Release_Notes_7.x",
                         "title": "Appcelerator CLI Release Notes 7.x",
                         "items": [
+                            {
+                                "name": "Appcelerator_CLI_7.1.1.RC_Release_Note",
+                                "title": "Appcelerator CLI 7.1.1.RC Release Note"
+                            },
                             {
                                 "name": "Appcelerator_CLI_7.1.0.GA_Release_Note",
                                 "title": "Appcelerator CLI 7.1.0.GA Release Note"

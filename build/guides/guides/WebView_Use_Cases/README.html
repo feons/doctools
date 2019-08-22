@@ -18,10 +18,17 @@
 
         <div id="src-29004920" class="content">
                         <h1>WebView Use Cases</h1>
+    <p>    </p>
+<ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="#!/guide/WebView_Use_Cases-section-src-29004920_WebViewUseCases-Overview">Overview</a>    </p>
 <ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="#!/guide/WebView_Use_Cases-section-src-29004920_WebViewUseCases-Ti.Facebook">Ti.Facebook</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/WebView_Use_Cases-section-src-29004920_WebViewUseCases-HTML5CanvasRendering">HTML5 Canvas Rendering</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/WebView_Use_Cases-section-src-29004920_WebViewUseCases-Forms">Forms</a>    </p>
-</li></ul>    <div class="section section-2 " id="src-29004920_WebViewUseCases-Overview">
+</li></ul></li><li class=" ">    <p><a class="document-link " href="#!/guide/WebView_Use_Cases-section-src-29004920_WebViewUseCases-Summary">Summary</a>    </p>
+</li></ul>    <p>    </p>
+    <div class="confbox admonition admonition-note aui-message warning shadowed information-macro">
+            <p>With Titanium SDK 8.0.0, we now use <a class="document-link " href="#!/guide/WKWebView">WKWebView</a> to implement Ti.UI.WebView (as Apple has deprecated <a class="external-link external-link" href="https://developer.apple.com/documentation/uikit/uiwebview" target="_blank">UIWebView</a>).    </p>
+    </div>
+        <div class="section section-2 " id="src-29004920_WebViewUseCases-Overview">
         <h2 class="heading "><span>Overview</span></h2>
     <p>We&apos;ve discussed when you should and shouldn&apos;t use <tt class=" ">WebViews</tt> in your apps. It requires a careful evaluation of necessary functionality versus performance. Let&apos;s look at some real cases where <tt class=" ">WebViews</tt> are the most appropriate solution. We&apos;ll discuss integration with social networking authentication and leveraging HTML5 graphics processing as prime reasons to use <tt class=" ">WebViews</tt>.    </p>
     <div class="section section-3 " id="src-29004920_WebViewUseCases-Ti.Facebook">
@@ -53,7 +60,7 @@
     <div class="section section-3 " id="src-29004920_WebViewUseCases-HTML5CanvasRendering">
         <h3 class="heading "><span>HTML5 Canvas Rendering</span></h3>
     <p>Titanium, through its core API, does not include a canvas-like rendering context. While Titanium can animate properties of its UI components, it can&apos;t generate graphics, animation, physics, and other interactions as one would expect in a game. Modules give us the opportunity to extend rendering capabilities through native code, but in many cases a simpler solution is more appropriate.    </p>
-    <p>Titanium developers, like other web-based mobile developers, can use the <tt class=" ">WebView</tt> component to render animations and interactions in the HTML5 &lt;canvas&gt; element. While the &lt;canvas&gt; element has varying levels of support in desktop browsers, Android and iOS webviews have supported it for some time now. Because of this, Titanium developers can deliver Flash-like apps via this powerful HTML5 element.    </p>
+    <p>Titanium developers, like other web-based mobile developers, can use the <tt class=" ">WebView</tt> component to render animations and interactions in the HTML5 &lt;canvas&gt; element. While the &lt;canvas&gt; element has varying levels of support in desktop browsers, Android and iOS webviews have supported it for some time now. Because of this, Titanium developers can deliver rich interactive apps via this powerful HTML5 element.    </p>
     <p>A tutorial explaining how to develop with the HTML5 &lt;canvas&gt; element is beyond the scope of this document, but that doesn&apos;t mean we can&apos;t take a look at what&apos;s possible. The following screenshots give just a taste of what&apos;s possible with &lt;canvas&gt; rendering. In addition to the visuals shown, the animation and user interaction possible with this element can create very complex and immersive user experiences.    </p>
     <p>    <img src="images/download/attachments/29004920/asteroid.jpg" alt="images/download/attachments/29004920/asteroid.jpg" class="confluence-embedded-image confluence-content-image-border" width="300">
      <img src="images/download/attachments/29004920/hakin-trail.jpg" alt="images/download/attachments/29004920/hakin-trail.jpg" class="confluence-embedded-image confluence-content-image-border" width="300">

@@ -18,6 +18,9 @@
 
         <div id="src-29004918" class="content">
                         <h1>The WebView Component</h1>
+    <p>    </p>
+<ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="The_WebView_Component.html#src-29004918_TheWebViewComponent-Overview">Overview</a>    </p>
+</li><li class=" ">    <p><a class="document-link " href="The_WebView_Component.html#src-29004918_TheWebViewComponent-Contents">Contents</a>    </p>
 <ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="The_WebView_Component.html#src-29004918_TheWebViewComponent-UsingRemoteWebContentwithWebView">Using Remote WebContent with WebView</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="The_WebView_Component.html#src-29004918_TheWebViewComponent-UsingLocalWebContentwithWebView">Using Local Web Content with WebView</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="The_WebView_Component.html#src-29004918_TheWebViewComponent-WebViewPropertiesandFunctions">WebView Properties and Functions</a>    </p>
@@ -27,7 +30,12 @@
 </li><li class=" ">    <p><a class="document-link " href="The_WebView_Component.html#src-29004918_TheWebViewComponent-Events">Events</a>    </p>
 </li></ul></li><li class=" ">    <p><a class="document-link " href="The_WebView_Component.html#src-29004918_TheWebViewComponent-PerformanceandInteractionConcerns">Performance and Interaction Concerns</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="The_WebView_Component.html#src-29004918_TheWebViewComponent-BestPracticesforWebContent">Best Practices for Web Content</a>    </p>
-</li></ul>    <div class="section section-2 " id="src-29004918_TheWebViewComponent-Overview">
+</li></ul></li><li class=" ">    <p><a class="document-link " href="The_WebView_Component.html#src-29004918_TheWebViewComponent-Summary">Summary</a>    </p>
+</li></ul>    <p>    </p>
+    <div class="confbox admonition admonition-note aui-message warning shadowed information-macro">
+            <p>With Titanium SDK 8.0.0, we now use <a class="document-link " href="WKWebView.html">WKWebView</a> to implement Ti.UI.WebView (as Apple has deprecated <a class="external-link external-link" href="https://developer.apple.com/documentation/uikit/uiwebview">UIWebView</a>).    </p>
+    </div>
+        <div class="section section-2 " id="src-29004918_TheWebViewComponent-Overview">
         <h2 class="heading "><span>Overview</span></h2>
     <p>Despite the fact that Titanium gives us the opportunity to use native UI components, sometimes we still need to make use of web content. Whether it&apos;s displaying an existing website, making use of the &lt;canvas&gt;, or handling an RSS feed, leveraging web content is something mobile developers need to be able to do. In order to make use of a platform&apos;s native webview component, we need only use <tt class=" ">Ti.UI.WebView</tt>. This API allows us to create, display, and interact with both local and remote web content.    </p>
     <p>In the following sections we&apos;ll see exactly how we can create <tt class=" ">WebViews</tt> in our apps using the Titanium API, use both local and remote data as the source of our web content, and examine how we can use the properties and functions of the <tt class=" ">Ti.UI.WebView</tt> to enhance the user experience.    </p>

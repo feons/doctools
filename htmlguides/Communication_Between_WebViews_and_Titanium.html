@@ -18,11 +18,19 @@
 
         <div id="src-29004919" class="content">
                         <h1>Communication Between WebViews and Titanium</h1>
+    <p>    </p>
+<ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="Communication_Between_WebViews_and_Titanium.html#src-29004919_CommunicationBetweenWebViewsandTitanium-Overview">Overview</a>    </p>
+</li><li class=" ">    <p><a class="document-link " href="Communication_Between_WebViews_and_Titanium.html#src-29004919_CommunicationBetweenWebViewsandTitanium-Contents">Contents</a>    </p>
 <ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="Communication_Between_WebViews_and_Titanium.html#src-29004919_CommunicationBetweenWebViewsandTitanium-Localwebcontent">Local web content</a>    </p>
 <ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="Communication_Between_WebViews_and_Titanium.html#src-29004919_CommunicationBetweenWebViewsandTitanium-Logging">Logging</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="Communication_Between_WebViews_and_Titanium.html#src-29004919_CommunicationBetweenWebViewsandTitanium-Ti.AppEvents">Ti.App Events</a>    </p>
 </li></ul></li><li class=" ">    <p><a class="document-link " href="Communication_Between_WebViews_and_Titanium.html#src-29004919_CommunicationBetweenWebViewsandTitanium-Remotewebcontent">Remote web content</a>    </p>
-</li></ul>    <div class="section section-2 " id="src-29004919_CommunicationBetweenWebViewsandTitanium-Overview">
+</li></ul></li><li class=" ">    <p><a class="document-link " href="Communication_Between_WebViews_and_Titanium.html#src-29004919_CommunicationBetweenWebViewsandTitanium-Summary">Summary</a>    </p>
+</li></ul>    <p>    </p>
+    <div class="confbox admonition admonition-note aui-message warning shadowed information-macro">
+            <p>With Titanium SDK 8.0.0, we now use <a class="document-link " href="WKWebView.html">WKWebView</a> to implement Ti.UI.WebView (as Apple has deprecated <a class="external-link external-link" href="https://developer.apple.com/documentation/uikit/uiwebview">UIWebView</a>).    </p>
+    </div>
+        <div class="section section-2 " id="src-29004919_CommunicationBetweenWebViewsandTitanium-Overview">
         <h2 class="heading "><span>Overview</span></h2>
     <p>You can use features of the <tt class=" ">Ti.UI.WebView</tt> component to interact with local and remote web content. However, as you&apos;ll see, most of this functionality is limited to local web content (HTML you load from the device rather than from a web server). In this section, you&apos;ll examine how to use the Titanium logging and event APIs with local HTML content. And, you&apos;ll see how you can use the <tt class=" ">evalJS()</tt> method to inject JavaScript code into remote HTML content.    </p>
     </div>
