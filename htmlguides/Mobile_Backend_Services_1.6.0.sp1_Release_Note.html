@@ -32,13 +32,13 @@
     </div>
     <div class="section section-2 " id="src-50725282_MobileBackendServices1.6.0.sp1ReleaseNote-Newfeaturesandimprovements">
         <h2 class="heading "><span>New features and improvements</span></h2>
-<ul class=" "><li class=" ">    <p>Introduced <strong class=" "><tt class=" ">has_internet_access</tt></strong> (boolean (true/false)) in the <tt class=" ">user_input.json</tt> file    </p>
+<ul class=" "><li class=" ">    <p>Introduced <strong class=" "> <tt class=" ">has_internet_access</tt> </strong> (boolean (true/false)) in the <tt class=" ">user_input.json</tt> file    </p>
 <ul class=" "><li class=" ">    <p>There are situations when MBS cannot accurately determine if a target cluster in an on-premise environment has Internet access. To remedy this issue, you can set <tt class=" ">has_internet_access</tt> to true if the cluster has full Internet access so that the installer can retrieve and install required software such as Docker. Otherwise, the cluster should be pre-installed with the following required software:    </p>
 <ul class=" "><li class=" ">    <p>nfs-utils    </p>
 </li><li class=" ">    <p>docker 17.06    </p>
 </li><li class=" ">    <p>nc (for port check)    </p>
 </li><li class=" ">    <p>lsof (for port check)    </p>
-</li></ul></li></ul></li><li class=" ">    <p>Introduced <strong class=" "><tt class=" ">swarm_manager_hosts</tt></strong> in the <tt class=" ">user_input.json</tt> file    </p>
+</li></ul></li></ul></li><li class=" ">    <p>Introduced <strong class=" "> <tt class=" ">swarm_manager_hosts</tt> </strong> in the <tt class=" ">user_input.json</tt> file    </p>
 <ul class=" "><li class=" ">    <p>For production deployment, we recommend at least three dedicated swarm manager hosts to ensure high availability of the cluster. The number of swarm managers should be an odd number equal to or less than three.    </p>
 </li><li class=" ">    <p>Note: if you don&apos;t set <tt class=" ">swarm_manager_hosts</tt> or it contains less than three hosts, you will receive a warning message to the effect of this:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">

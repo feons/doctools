@@ -44,7 +44,7 @@
 <ul class=" "><li class=" ">    <p>Organization <i class=" ">members</i> can create new Titanium applications in Appcelerator Studio or register an Android or iOS application in Dashboard. These applications belong to the organization the user designated during the app creation process.    </p>
 </li><li class=" ">    <p>Organization <i class=" ">admins</i> can create applications, invite users to join the organization, and assign organization members to <i class=" ">application teams</i>.    </p>
 </li></ul>    <p>A user can have different administrator rights:    </p>
-<ul class=" "><li class=" ">    <p><i class=" ">Org Admin<strong class=" "> </strong></i>gives the user access to manage the organization.    </p>
+<ul class=" "><li class=" ">    <p><i class=" ">Org Admin<strong class=" "> </strong> </i>gives the user access to manage the organization.    </p>
 </li><li class=" ">    <p><i class=" ">AMPLIFY Runtime Services Admin</i> gives the user access to manage AMPLIFY Runtime Services application associated with the organization using the <tt class=" ">appc acs</tt> CLI, including republishing or remove applications.    </p>
 </li></ul>    <p>A user can be a member of multiple organizations. In this case, the user will see an organization switcher in the Profile drop-down, located in top-right of the Appcelerator Dashboard.    </p>
     <p>An application team is a group of people working on a single application. Application team members can have different roles:    </p>
@@ -95,18 +95,14 @@
     <div class="section section-3 " id="src-43298778_ManagingOrganizations-Addanorganizationmember">
         <h3 class="heading "><span>Add an organization member</span></h3>
     <p>If you are an organization admin, you can add new members to an organization. An organization admin can only add as many members as the number of available seats in the organization.    </p>
-<ol class=" "><li class=" ">    <p>Sign into the <a class="external-link external-link" href="https://platform.axway.com/">AMPLIFY Platform</a><a class="external-link external-link" href="https://platform.axway.com">.</a>    </p>
+<ol class=" "><li class=" ">    <p>Sign into the <a class="external-link external-link" href="https://platform.axway.com/">AMPLIFY Platform</a> <a class="external-link external-link" href="https://platform.axway.com">.</a>    </p>
 </li><li class=" ">    <p>Click on the <strong class=" ">User</strong> menu and select the listed organization.    </p>
 </li><li class=" ">    <p>If you&apos;re a member of multiple organizations, select the organization you want to view by selecting <strong class=" ">Switch Org</strong> from the <strong class=" ">User</strong> menu.    </p>
 </li><li class=" ">    <p>Click the <strong class=" ">Members</strong> tab.    </p>
 </li><li class=" ">    <p>Click the <strong class=" ">+</strong> icon in the upper-right corner.    </p>
 </li><li class=" ">    <p>Enter the user&apos;s email address.    </p>
-</li><li class=" ">    <p>Select the user&apos;s role (Administrator, Developer, Collaborator, or Consumer) from the <strong class=" ">Role</strong> drop-down menu.     <span style="color: #343a40;">
-Administrators can manage all users and applications in the org    </span>
-anization.    </p>
-</li><li class=" ">    <p>If the user is to be an AMPLIFY Runtime Admin, select the <strong class=" ">AMPLIFY Runtime Admin</strong> checkbox. If the <strong class=" ">AMPLIFY Runtime Admin</strong> checkbox is selected,     <span style="color: #343a40;">
-the user can administer AMPLIFY Runtime applications created by other users.    </span>
-    </p>
+</li><li class=" ">    <p>Select the user&apos;s role (Administrator, Developer, Collaborator, or Consumer) from the <strong class=" ">Role</strong> drop-down menu. Administrators can manage all users and applications in the organization.    </p>
+</li><li class=" ">    <p>If the user is to be an AMPLIFY Runtime Admin, select the <strong class=" ">AMPLIFY Runtime Admin</strong> checkbox. If the <strong class=" ">AMPLIFY Runtime Admin</strong> checkbox is selected, the user can administer AMPLIFY Runtime applications created by other users.    </p>
 </li><li class=" ">    <p>In the <strong class=" ">Apps</strong> list, select the application teams, if any, the user should be added to.    </p>
 </li><li class=" ">    <p>Click <strong class=" ">Add Org Member</strong>.    </p>
     <img src="images/download/attachments/43298778/add_org_member.png" alt="images/download/attachments/43298778/add_org_member.png" class="confluence-embedded-image" width="700">
@@ -144,10 +140,8 @@ the user can administer AMPLIFY Runtime applications created by other users.    
 </li><li class=" ">    <p>Click on the <strong class=" ">User</strong> menu and select the listed organization.    </p>
 </li><li class=" ">    <p>If you&apos;re a member of multiple organizations, select the organization you want to view by selecting <strong class=" ">Switch Org</strong> from the <strong class=" ">User</strong> menu.    </p>
 </li><li class=" ">    <p>Click the <strong class=" ">Members</strong> tab.    </p>
-</li><li class=" ">    <p>To change a member&apos;s role, select a different role from the <strong class=" ">Role</strong> drop-menu menu.     <span style="color: #343a40;">
-Administrators can manage all users and applications in the organization. All other user roles can view only applications to which they belong.    </span>
-    </p>
-</li><li class=" ">    <p>To change a members administrator privileges, enable or disable the <strong class=" ">AMPLIFY Runtime Admin</strong> checkbox. Enabling the <strong class=" ">AMPLIFY Runtime </strong><strong class=" ">Admin</strong> checkbox makes the member an administrator of the AMPLIFY Runtime Services apps associated with the organization.    </p>
+</li><li class=" ">    <p>To change a member&apos;s role, select a different role from the <strong class=" ">Role</strong> drop-menu menu. Administrators can manage all users and applications in the organization. All other user roles can view only applications to which they belong.    </p>
+</li><li class=" ">    <p>To change a members administrator privileges, enable or disable the <strong class=" ">AMPLIFY Runtime Admin</strong> checkbox. Enabling the <strong class=" ">AMPLIFY Runtime </strong> <strong class=" ">Admin</strong> checkbox makes the member an administrator of the AMPLIFY Runtime Services apps associated with the organization.    </p>
 </li><li class=" ">    <p>To remove a member from the organization, select the <strong class=" ">Tools</strong> icon and select <strong class=" ">Remove Member</strong> and then confirm the removal.    </p>
 </li><li class=" ">    <p>To change a member&apos;s application team assignments, select the <strong class=" ">Tools</strong> icon and select <strong class=" ">App Teams</strong>. Refer to <a class="document-link " href="Managing_Organizations.html#src-43298778_ManagingOrganizations-Application">Add or remove application team members</a>.    </p>
     <img src="images/download/attachments/43298778/manage_members.png" alt="images/download/attachments/43298778/manage_members.png" class="confluence-embedded-image" width="700">
@@ -175,38 +169,16 @@ Administrators can manage all users and applications in the organization. All ot
     <p>    <img src="images/download/attachments/43298778/settings_tab.png" alt="images/download/attachments/43298778/settings_tab.png" class="confluence-embedded-image" width="700">
         </p>
     <p>To brand the Dashboard per your organization&apos;s branding requirements:    </p>
-<ol class=" "><li class=" ">    <p>Select your organization&apos;s logo.     <span style="color: #343a40;">
-The logo will be displayed at a maximum height of 45 pixels and the logo file must be less than 100KB.    </span>
-    </p>
-<ol class=" "><li class=" ">    <p>    <span style="color: #343a40;">
-Click <strong class=" ">Choose File</strong>.    </span>
-    </p>
-</li><li class=" ">    <p>    <span style="color: #343a40;">
-Select the logo file to upload. Once the logo file is selected, the <i class=" ">Branding Preview</i> will update to display the selected logo.    </span>
-    </p>
-</li><li class=" ">    <p>    <span style="color: #343a40;">
-To remove the selected icon file, click <strong class=" ">Remove</strong>.<br>    </span>
-    </p>
-</li></ol></li><li class=" ">    <p>    <span style="color: #343a40;">
-Select your catalog colors. As you select your catalog colors, the <i class=" ">Branding Preview</i> will update to display the selected colors.    </span>
-    <span style="color: #343a40;">
-<br>    </span>
-    </p>
-<ol class=" "><li class=" ">    <p>    <span style="color: #343a40;">
-Select or enter the <strong class=" ">Header Left</strong> color.    </span>
-    </p>
-</li><li class=" ">    <p>    <span style="color: #343a40;">
-Select or enter the <strong class=" ">Header Right</strong> color.    </span>
-    </p>
-</li><li class=" ">    <p>    <span style="color: #343a40;">
-Select or enter the <strong class=" ">Tile Border</strong> color.    </span>
-    </p>
-</li><li class=" ">    <p>    <span style="color: #343a40;">
-Select or enter the <strong class=" ">Tile Border on Hover</strong> color.    </span>
-    </p>
-</li></ol></li><li class=" ">    <p>    <span style="color: #343a40;">
-Click <strong class=" ">Save changes</strong>.<br>    </span>
-    </p>
+<ol class=" "><li class=" ">    <p>Select your organization&apos;s logo. The logo will be displayed at a maximum height of 45 pixels and the logo file must be less than 100KB.    </p>
+<ol class=" "><li class=" ">    <p>Click <strong class=" ">Choose File</strong>.    </p>
+</li><li class=" ">    <p>Select the logo file to upload. Once the logo file is selected, the <i class=" ">Branding Preview</i> will update to display the selected logo.    </p>
+</li><li class=" ">    <p>To remove the selected icon file, click <strong class=" ">Remove</strong>.    </p>
+</li></ol></li><li class=" ">    <p>Select your catalog colors. As you select your catalog colors, the <i class=" ">Branding Preview</i> will update to display the selected colors.    </p>
+<ol class=" "><li class=" ">    <p>Select or enter the <strong class=" ">Header Left</strong> color.    </p>
+</li><li class=" ">    <p>Select or enter the <strong class=" ">Header Right</strong> color.    </p>
+</li><li class=" ">    <p>Select or enter the <strong class=" ">Tile Border</strong> color.    </p>
+</li><li class=" ">    <p>Select or enter the <strong class=" ">Tile Border on Hover</strong> color.    </p>
+</li></ol></li><li class=" ">    <p>Click <strong class=" ">Save changes</strong>.    </p>
 </li></ol>    </div>
     <div class="section section-2 " id="src-43298778_ManagingOrganizations-Troubleshooting">
         <h2 class="heading "><span>Troubleshooting</span></h2>

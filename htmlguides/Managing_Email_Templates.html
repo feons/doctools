@@ -18,7 +18,7 @@
 
         <div id="src-37548619" class="content">
                         <h1>Managing Email Templates</h1>
-    <p>The Email Templates screen lets you create and edit plain text and HTML email templates. The email template&apos;s subject and body can contain <a class="document-link " href="Managing_Email_Templates.html#src-37548619_ManagingEmailTemplates-placeholder">placeholder values</a> that are dynamically replaced with values you specify when sending the email using the Mobile Backend Services (MBS) <a class="external-link external-link" href="http://docs.appcelerator.com/arrowdb/latest/#!/api/Emails-method-email_from_template">email_from_template</a>  REST API, Titanium.Cloud.Emails.send() method or equivalent native <a class="external-link external-link" href="http://docs.appcelerator.com/aps-sdk-apidoc/latest/ios/Classes/APSEmails.html#//api/name/send:withBlock:">iOS</a> or <a class="external-link external-link" href="http://docs.appcelerator.com/aps-sdk-apidoc/latest/android/com/appcelerator/aps/APSEmails.html">Android</a> method. The email can be sent as plain text, HTML, or multi-part using these methods.    </p>
+    <p>The Email Templates screen lets you create and edit plain text and HTML email templates. The email template&apos;s subject and body can contain <a class="document-link " href="Managing_Email_Templates.html#src-37548619_ManagingEmailTemplates-placeholder">placeholder values</a> that are dynamically replaced with values you specify when sending the email using the Mobile Backend Services (MBS)  <a class="external-link external-link" href="http://docs.appcelerator.com/arrowdb/latest/#!/api/Emails-method-email_from_template">email_from_template</a>  REST API, Titanium.Cloud.Emails.send() method or equivalent native <a class="external-link external-link" href="http://docs.appcelerator.com/aps-sdk-apidoc/latest/ios/Classes/APSEmails.html#//api/name/send:withBlock:">iOS</a> or <a class="external-link external-link" href="http://docs.appcelerator.com/aps-sdk-apidoc/latest/android/com/appcelerator/aps/APSEmails.html">Android</a> method. The email can be sent as plain text, HTML, or multi-part using these methods.    </p>
     <p>    </p>
 <ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="Managing_Email_Templates.html#src-37548619_ManagingEmailTemplates-Creatinganemailtemplate">Creating an email template</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="Managing_Email_Templates.html#src-37548619_ManagingEmailTemplates-Sendingemailbasedonatemplate">Sending email based on a template </a>    </p>
@@ -27,38 +27,18 @@
         <h2 class="heading "><span>Creating an email template</span></h2>
     <p>An email template specifies the email subject line and body, which may be HTML or plain-text. You specify the template name when calling <a class="external-link external-link" href="http://docs.appcelerator.com/arrowdb/latest/#!/api/Emails-method-email_from_template">email_from_template</a>, the recipients, and values for any <a class="document-link " href="Managing_Email_Templates.html#src-37548619_ManagingEmailTemplates-placeholder">placeholder values</a>.    </p>
     <p><strong class=" ">To create an email template</strong>:    </p>
-<ol class=" "><li class=" ">    <p>    <span style="color: #484848;">
-In Dashboard, select the Mobile Backend Services datasource to create the email template for.    </span>
-    </p>
-</li><li class=" ">    <p>    <span style="color: #484848;">
-Select <strong class=" ">Manage Data</strong>, then click <strong class=" ">Email Templates</strong>.    </span>
-    </p>
-</li><li class=" ">    <p>    <span style="color: #484848;">
-Click <strong class=" ">Create Email Template</strong>.    </span>
-    </p>
-</li><li class=" ">    <p>    <span style="color: #484848;">
-Click the <strong class=" ">Code </strong>tab, and provide values for the following fields:    </span>
-    </p>
+<ol class=" "><li class=" ">    <p>In Dashboard, select the Mobile Backend Services datasource to create the email template for.    </p>
+</li><li class=" ">    <p>Select <strong class=" ">Manage Data</strong>, then click <strong class=" ">Email Templates</strong>.    </p>
+</li><li class=" ">    <p>Click <strong class=" ">Create Email Template</strong>.    </p>
+</li><li class=" ">    <p>Click the <strong class=" ">Code </strong>tab, and provide values for the following fields:    </p>
 <ol class=" "><li class=" ">    <p><strong class=" ">Name</strong> &#x2013; Name of the email template. You will specify this name when <a class="external-link external-link" href="http://docs.appcelerator.com/platform/latest/#!/api/Modules.Cloud.Emails">sending</a> the email.    </p>
 </li><li class=" ">    <p><strong class=" ">Subject</strong> &#x2013; The email&apos;s subject. The subject can contain <a class="document-link " href="Managing_Email_Templates.html#src-37548619_ManagingEmailTemplates-placeholder">placeholder values</a> in double curly brackets.    </p>
-</li><li class=" ">    <p>    <span style="color: #484848;">
- <strong class=" ">Body (HTML)</strong> &#x2013; The email&apos;s HTML-formatted body text. The body can contain <a class="document-link " href="Managing_Email_Templates.html#src-37548619_ManagingEmailTemplates-placeholder">placeholder values</a> in double curly brackets.    </span>
-    </p>
-</li><li class=" ">    <p>    <span style="color: #484848;">
- <strong class=" ">Body (Plain Text)</strong> &#x2013; The email&apos;s plain text-formatted body text.     <span style="color: #484848;">
-The body can contain    </span>
- <a class="document-link " href="Managing_Email_Templates.html#src-37548619_ManagingEmailTemplates-placeholder">placeholder values</a>     <span style="color: #484848;">
-in double curly brackets.    </span>
-     </span>
-    </p>
+</li><li class=" ">    <p><strong class=" ">Body (HTML)</strong> &#x2013; The email&apos;s HTML-formatted body text. The body can contain <a class="document-link " href="Managing_Email_Templates.html#src-37548619_ManagingEmailTemplates-placeholder">placeholder values</a> in double curly brackets.    </p>
+</li><li class=" ">    <p><strong class=" ">Body (Plain Text)</strong> &#x2013; The email&apos;s plain text-formatted body text. The body can contain <a class="document-link " href="Managing_Email_Templates.html#src-37548619_ManagingEmailTemplates-placeholder">placeholder values</a> in double curly brackets.    </p>
 </li></ol></li><li class=" ">    <p>Click <strong class=" ">Preview</strong> to view a rendered version of the HTML body text.    </p>
     <img src="images/download/attachments/37548619/email_template_latest.png" alt="images/download/attachments/37548619/email_template_latest.png" class="confluence-embedded-image" width="700">
-    </li><li class=" ">    <p>    <span style="color: #484848;">
-Click <strong class=" ">Save Changes</strong>.    </span>
-    </p>
-</li></ol>    <p>    <span style="color: #484848;">
-Below is the sample HTML used in the above screenshot:    </span>
-    </p>
+    </li><li class=" ">    <p>Click <strong class=" ">Save Changes</strong>.    </p>
+</li></ol>    <p>Below is the sample HTML used in the above screenshot:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">&#xA0;&lt;!DOCTYPE html&gt;</code></div>
@@ -96,7 +76,7 @@ Below is the sample HTML used in the above screenshot:    </span>
 <div class="line"><code class="plain">    &lt;/</code><code class="keyword">style</code><code class="plain">&gt;</code></div>
 <div class="line"><code class="plain">    &lt;</code><code class="keyword">body</code><code class="plain">&gt;</code></div>
 <div class="line"><code class="plain">        &lt;</code><code class="keyword">div</code><code class="plain"> </code><code class="color1">id</code><code class="plain">=</code><code class="string">&quot;box&quot;</code><code class="plain">&gt;</code></div>
-<div class="line"><code class="plain">            &lt;</code><code class="keyword">span</code><code class="plain">&gt;Dear {{first_name}},&lt;/</code><code class="keyword">span</code><code class="plain">&gt;</code></div>
+<div class="line"><code class="plain">            Dear {{first_name}},</code></div>
 <div class="line"><code class="plain">            &lt;</code><code class="keyword">p</code><code class="plain">&gt;</code></div>
 <div class="line"><code class="plain">                Welcome to Mobile Backend Services! Build your mobile app without writing any server code.</code></div>
 <div class="line"><code class="plain">                Use our REST API and we&apos;ll take care of the rest.</code></div>
@@ -104,7 +84,7 @@ Below is the sample HTML used in the above screenshot:    </span>
 <div class="line"><code class="plain">            &lt;</code><code class="keyword">p</code><code class="plain"> </code><code class="color1">class</code><code class="plain">=</code><code class="string">&quot;foot&quot;</code><code class="plain">&gt;</code></div>
 <div class="line"><code class="plain">                thanks,</code></div>
 <div class="line"><code class="plain">                &lt;</code><code class="keyword">br</code><code class="plain"> /&gt;</code></div>
-<div class="line"><code class="plain">                &lt;</code><code class="keyword">span</code><code class="plain"> </code><code class="color1">class</code><code class="plain">=</code><code class="string">&quot;green&quot;</code><code class="plain">&gt;The Platform Team&lt;/</code><code class="keyword">span</code><code class="plain">&gt;</code></div>
+<div class="line"><code class="plain">                The Platform Team</code></div>
 <div class="line"><code class="plain">            &lt;/</code><code class="keyword">p</code><code class="plain">&gt;</code></div>
 <div class="line"><code class="plain">        &lt;/</code><code class="keyword">div</code><code class="plain">&gt;</code></div>
 <div class="line"><code class="plain">    &lt;/</code><code class="keyword">body</code><code class="plain">&gt;</code></div>

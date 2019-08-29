@@ -43,15 +43,33 @@
     <p>The <tt class=" ">MapView</tt> is the core UI component of the <tt class=" ">Ti.Map</tt> module. It allows Titanium to make use of a mobile device&apos;s underlying native maps to view geographic data and add annotations and routes. As it is a native UI component, users will also have access to features like scrolling and multi-touch zoom. In its most basic form, the <tt class=" ">MapView</tt> can simply display a basic map given a geographic position via latitude and longitude.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
-<div class="line"><code class="keyword">var</code><code class="plain"> win = Ti.UI.createWindow();</code></div>
-<div class="line"><code class="keyword">var</code><code class="plain"> mapview = Titanium.Map.createView({</code></div>
-<div class="line"><code class="plain">    mapType: Titanium.Map.STANDARD_TYPE,</code></div>
+<div class="line"><code class="plain">const Map = require(</code><code class="string">&apos;ti.map&apos;</code><code class="plain">);</code></div>
+<div class="line"><code class="plain">const win = Ti.UI.createWindow();</code></div>
+<div class="line"><code class="plain">const mapview = Map.createView({</code></div>
+<div class="line"><code class="plain">    mapType: Map.NORMAL_TYPE,</code></div>
 <div class="line"><code class="plain">    region: {latitude:37.389569, longitude:-122.050212,</code></div>
 <div class="line"><code class="plain">            latitudeDelta:0.1, longitudeDelta:0.1},</code></div>
 <div class="line"><code class="plain">    animate:</code><code class="keyword">true</code><code class="plain">,</code></div>
 <div class="line"><code class="plain">    regionFit:</code><code class="keyword">true</code><code class="plain">,</code></div>
 <div class="line"><code class="plain">    userLocation:</code><code class="keyword">false</code></div>
 <div class="line"><code class="plain">});</code></div>
+<div class="line"><code class="plain">mapview.addEventListener(</code><code class="string">&apos;complete&apos;</code><code class="plain">, </code><code class="keyword">function</code><code class="plain">(e) {</code></div>
+<div class="line"><code class="plain">    Ti.API.info(</code><code class="string">&apos;complete&apos;</code><code class="plain">);</code></div>
+<div class="line"><code class="plain">    Ti.API.info(e);</code></div>
+<div class="line"><code class="plain">});</code></div>
+<div class="line"><code class="plain">mapview.addEventListener(</code><code class="string">&apos;error&apos;</code><code class="plain">, </code><code class="keyword">function</code><code class="plain">(e) {</code></div>
+<div class="line"><code class="plain">    Ti.API.info(</code><code class="string">&apos;error&apos;</code><code class="plain">);</code></div>
+<div class="line"><code class="plain">    Ti.API.info(e);</code></div>
+<div class="line"><code class="plain">});</code></div>
+<div class="line"><code class="plain">mapview.addEventListener(</code><code class="string">&apos;loading&apos;</code><code class="plain">, </code><code class="keyword">function</code><code class="plain">(e) {</code></div>
+<div class="line"><code class="plain">    Ti.API.info(</code><code class="string">&apos;loading&apos;</code><code class="plain">);</code></div>
+<div class="line"><code class="plain">    Ti.API.info(e);</code></div>
+<div class="line"><code class="plain">});</code></div>
+<div class="line"><code class="plain">mapview.addEventListener(</code><code class="string">&apos;regionChanged&apos;</code><code class="plain">, </code><code class="keyword">function</code><code class="plain">(e) {</code></div>
+<div class="line"><code class="plain">    Ti.API.info(</code><code class="string">&apos;regionChanged&apos;</code><code class="plain">);</code></div>
+<div class="line"><code class="plain">    Ti.API.info(e);</code></div>
+<div class="line"><code class="plain">});</code></div>
+<div class="line"><code class="plain"> </code></div>
 <div class="line"><code class="plain">win.add(mapview);</code></div>
 <div class="line"><code class="plain">win.open();</code></div>
 </div>
@@ -60,7 +78,7 @@
               <img src="images/download/attachments/29004916/android_map.png" alt="images/download/attachments/29004916/android_map.png" class="confluence-embedded-image confluence-content-image-border" height="300">
     </p>
     <p>As seen above, those few lines of code generate native maps on both iOS and Android, respectively. Now that we have a basic map, let&apos;s discuss some of the properties of the <tt class=" ">Ti.Map.MapView</tt> in order to see how it can be manipulated.    </p>
-<ul class=" "><li class=" ">    <p><tt class=" ">mapType</tt> - Indicates what type of map should be displayed. Below we see the <tt class=" ">Ti.Map.STANDARD_TYPE</tt>, <tt class=" ">Ti.Map.SATELLITE_TYPE</tt>, and <tt class=" ">Ti.Map.HYBRID_TYPE</tt> respectively.<br>    <img src="images/download/attachments/29004916/stan.png" alt="images/download/attachments/29004916/stan.png" class="confluence-embedded-image confluence-content-image-border" height="300">
+<ul class=" "><li class=" ">    <p><tt class=" ">mapType</tt> - Indicates what type of map should be displayed. Below we see the <tt class=" ">Ti.Map.NORMAL_TYPE</tt>, <tt class=" ">Ti.Map.SATELLITE_TYPE</tt>, and <tt class=" ">Ti.Map.HYBRID_TYPE</tt> respectively.<br>    <img src="images/download/attachments/29004916/stan.png" alt="images/download/attachments/29004916/stan.png" class="confluence-embedded-image confluence-content-image-border" height="300">
      <img src="images/download/attachments/29004916/sate.png" alt="images/download/attachments/29004916/sate.png" class="confluence-embedded-image confluence-content-image-border" height="300">
      <img src="images/download/attachments/29004916/hybr.png" alt="images/download/attachments/29004916/hybr.png" class="confluence-embedded-image confluence-content-image-border" height="300">
     </p>
@@ -69,8 +87,8 @@
     </p>
 <ul class=" "><li class=" ">    <p><tt class=" ">latitude</tt>- The latitude of your map&apos;s target region    </p>
 </li><li class=" ">    <p><tt class=" ">longitude</tt> - The longitude of your map&apos;s target region    </p>
-</li><li class=" ">    <p><tt class=" ">latitudeDelta</tt> - The measure of latitude north and south from your target regions&apos;s latitude that will be visible in the <tt class=" ">MapView</tt>. The smaller the delta value, the closer the zoom on your map.    </p>
-</li><li class=" ">    <p><tt class=" ">longitudeDelta</tt> - The measure of longitude east and west from your target regions&apos;s longitude that will be visible in the <tt class=" ">MapView</tt>    </p>
+</li><li class=" ">    <p><tt class=" ">latitudeDelta</tt> - The measure of latitude north and south from your target region&apos;s latitude that will be visible in the <tt class=" ">MapView</tt>. The smaller the delta value, the closer the zoom on your map.    </p>
+</li><li class=" ">    <p><tt class=" ">longitudeDelta</tt> - The measure of longitude east and west from your target region&apos;s longitude that will be visible in the <tt class=" ">MapView</tt>    </p>
 </li></ul></li><li class=" ">    <p><tt class=" ">animate</tt> - A boolean that indicates whether or not map actions, like opening and adding annotations, should be animated    </p>
 </li><li class=" ">    <p><tt class=" ">regionFit</tt> - A boolean that indicates if the map should attempt to fit the <tt class=" ">MapView</tt> into the region in the visible view    </p>
 </li><li class=" ">    <p><tt class=" ">userLocation</tt> - A boolean that indicates if the map should show the user&apos;s current device location as a pin on the map    </p>
@@ -104,9 +122,10 @@
 </li></ul>    <p>As mentioned, the most common way to trigger the above events is through user interaction via scrolling and zooming. Let&apos;s change the <tt class=" ">MapView</tt> example code to handle all of the aforementioned events.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
-<div class="line"><code class="keyword">var</code><code class="plain"> win = Ti.UI.createWindow();</code></div>
-<div class="line"><code class="keyword">var</code><code class="plain"> mapview = Titanium.Map.createView({</code></div>
-<div class="line"><code class="plain">    mapType: Titanium.Map.STANDARD_TYPE,</code></div>
+<div class="line"><code class="plain">const Map = require(</code><code class="string">&apos;ti.map&apos;</code><code class="plain">);</code></div>
+<div class="line"><code class="plain">const win = Ti.UI.createWindow();</code></div>
+<div class="line"><code class="plain">const mapview = Titanium.Map.createView({</code></div>
+<div class="line"><code class="plain">    mapType: Titanium.Map.NORMAL_TYPE,</code></div>
 <div class="line"><code class="plain">    region: {latitude:37.389569, longitude:-122.050212,</code></div>
 <div class="line"><code class="plain">            latitudeDelta:0.1, longitudeDelta:0.1},</code></div>
 <div class="line"><code class="plain">    animate:</code><code class="keyword">true</code><code class="plain">,</code></div>
@@ -170,50 +189,50 @@
     <p>Adding an annotation to a <tt class=" ">MapView</tt> is simple. Let&apos;s modify the basic <tt class=" ">MapView</tt> example to see how we can add the Appcelerator headquarters, and a few other locations, as annotations. To make things more interesting, we&apos;ll use a number of the styling properties available to annotations through the Titanium API.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
-<div class="line"><code class="keyword">var</code><code class="plain"> win = Ti.UI.createWindow();</code></div>
-<div class="line">&#xA0;</div>
-<div class="line"><code class="keyword">var</code><code class="plain"> annotations = [</code></div>
-<div class="line"><code class="plain">	Ti.Map.createAnnotation({</code></div>
-<div class="line"><code class="plain">		latitude: 37.389569,</code></div>
-<div class="line"><code class="plain">		longitude: -122.050212,</code></div>
-<div class="line"><code class="plain">		title: </code><code class="string">&apos;Appcelerator HQ&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		subtitle: </code><code class="string">&apos;Mountain View, CA&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		pincolor: Ti.Map.ANNOTATION_GREEN,</code></div>
-<div class="line"><code class="plain">		leftButton: </code><code class="string">&apos;appcelerator.gif&apos;</code></div>
-<div class="line"><code class="plain">	}),</code></div>
-<div class="line"><code class="plain">	Ti.Map.createAnnotation({</code></div>
-<div class="line"><code class="plain">		latitude: 37.331689,</code></div>
-<div class="line"><code class="plain">		longitude: -122.030731,</code></div>
-<div class="line"><code class="plain">		title: </code><code class="string">&apos;Apple HQ&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		subtitle: </code><code class="string">&apos;Cupertino, CA&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		pincolor: Ti.Map.ANNOTATION_RED,</code></div>
-<div class="line"><code class="plain">		rightButton: </code><code class="string">&apos;apple.png&apos;</code></div>
-<div class="line"><code class="plain">	}),</code></div>
-<div class="line"><code class="plain">	Ti.Map.createAnnotation({</code></div>
-<div class="line"><code class="plain">		latitude: 37.422502,</code></div>
-<div class="line"><code class="plain">		longitude: -122.0855498,</code></div>
-<div class="line"><code class="plain">		title: </code><code class="string">&apos;Google HQ&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		subtitle: </code><code class="string">&apos;Mountain View, CA&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		image: </code><code class="string">&apos;google.png&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		leftView: Ti.UI.createButton({</code></div>
-<div class="line"><code class="plain">			title: </code><code class="string">&apos;leftView&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">			height: 32,</code></div>
-<div class="line"><code class="plain">			width: 70</code></div>
-<div class="line"><code class="plain">		}),</code></div>
-<div class="line"><code class="plain">		rightView: Ti.UI.createLabel({</code></div>
-<div class="line"><code class="plain">			text: </code><code class="string">&apos;rightView&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">			color: </code><code class="string">&apos;#fff&apos;</code></div>
-<div class="line"><code class="plain">		})</code></div>
-<div class="line"><code class="plain">	})</code></div>
+<div class="line"><code class="plain">const Map = require(</code><code class="string">&apos;ti.map&apos;</code><code class="plain">);</code></div>
+<div class="line"><code class="plain">const win = Ti.UI.createWindow();</code></div>
+<div class="line"><code class="plain">const annotations = [</code></div>
+<div class="line"><code class="plain">    Map.createAnnotation({</code></div>
+<div class="line"><code class="plain">        latitude: 37.389569,</code></div>
+<div class="line"><code class="plain">        longitude: -122.050212,</code></div>
+<div class="line"><code class="plain">        title: </code><code class="string">&apos;Appcelerator HQ&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        subtitle: </code><code class="string">&apos;Mountain View, CA&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        pincolor: Map.ANNOTATION_GREEN,</code></div>
+<div class="line"><code class="plain">        leftButton: </code><code class="string">&apos;appcelerator.gif&apos;</code></div>
+<div class="line"><code class="plain">    }),</code></div>
+<div class="line"><code class="plain">    Map.createAnnotation({</code></div>
+<div class="line"><code class="plain">        latitude: 37.331689,</code></div>
+<div class="line"><code class="plain">        longitude: -122.030731,</code></div>
+<div class="line"><code class="plain">        title: </code><code class="string">&apos;Apple HQ&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        subtitle: </code><code class="string">&apos;Cupertino, CA&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        pincolor: Map.ANNOTATION_RED,</code></div>
+<div class="line"><code class="plain">        rightButton: </code><code class="string">&apos;apple.png&apos;</code></div>
+<div class="line"><code class="plain">    }),</code></div>
+<div class="line"><code class="plain">    Map.createAnnotation({</code></div>
+<div class="line"><code class="plain">        latitude: 37.422502,</code></div>
+<div class="line"><code class="plain">        longitude: -122.0855498,</code></div>
+<div class="line"><code class="plain">        title: </code><code class="string">&apos;Google HQ&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        subtitle: </code><code class="string">&apos;Mountain View, CA&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        image: </code><code class="string">&apos;google.png&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        leftView: Ti.UI.createButton({</code></div>
+<div class="line"><code class="plain">            title: </code><code class="string">&apos;leftView&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">            height: 32,</code></div>
+<div class="line"><code class="plain">            width: 70</code></div>
+<div class="line"><code class="plain">        }),</code></div>
+<div class="line"><code class="plain">        rightView: Ti.UI.createLabel({</code></div>
+<div class="line"><code class="plain">            text: </code><code class="string">&apos;rightView&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">            color: </code><code class="string">&apos;#fff&apos;</code></div>
+<div class="line"><code class="plain">        })</code></div>
+<div class="line"><code class="plain">    })</code></div>
 <div class="line"><code class="plain">];</code></div>
-<div class="line"><code class="keyword">var</code><code class="plain"> mapview = Titanium.Map.createView({</code></div>
-<div class="line"><code class="plain">    mapType: Titanium.Map.STANDARD_TYPE,</code></div>
+<div class="line"><code class="plain">const mapview = Map.createView({</code></div>
+<div class="line"><code class="plain">    mapType: Map.NORMAL_TYPE,</code></div>
 <div class="line"><code class="plain">    region: {</code></div>
-<div class="line"><code class="plain">    	latitude:37.389569,</code></div>
-<div class="line"><code class="plain">    	longitude:-122.050212,</code></div>
+<div class="line"><code class="plain">        latitude:37.389569,</code></div>
+<div class="line"><code class="plain">        longitude:-122.050212,</code></div>
 <div class="line"><code class="plain">        latitudeDelta:.05,</code></div>
 <div class="line"><code class="plain">        longitudeDelta:.05</code></div>
 <div class="line"><code class="plain">    },</code></div>
@@ -222,6 +241,7 @@
 <div class="line"><code class="plain">    userLocation:</code><code class="keyword">false</code><code class="plain">,</code></div>
 <div class="line"><code class="plain">    annotations: annotations</code></div>
 <div class="line"><code class="plain">});</code></div>
+<div class="line">&#xA0;</div>
 <div class="line"><code class="plain">win.add(mapview);</code></div>
 <div class="line"><code class="plain">win.open();</code></div>
 </div>
@@ -266,50 +286,50 @@
     <p>So let&apos;s go back to our <tt class=" ">MapView</tt> example one more time and add a route to it. We&apos;ll create a route that connects the 3 locations we&apos;ve already annotated. The route will go from north to south, connecting each location with a red, 4 pixel wide line.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
-<div class="line"><code class="keyword">var</code><code class="plain"> win = Ti.UI.createWindow();</code></div>
-<div class="line">&#xA0;</div>
-<div class="line"><code class="keyword">var</code><code class="plain"> annotations = [</code></div>
-<div class="line"><code class="plain">	Ti.Map.createAnnotation({</code></div>
-<div class="line"><code class="plain">		latitude: 37.389569,</code></div>
-<div class="line"><code class="plain">		longitude: -122.050212,</code></div>
-<div class="line"><code class="plain">		title: </code><code class="string">&apos;Appcelerator HQ&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		subtitle: </code><code class="string">&apos;Mountain View, CA&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		pincolor: Ti.Map.ANNOTATION_GREEN,</code></div>
-<div class="line"><code class="plain">		leftButton: </code><code class="string">&apos;appcelerator.gif&apos;</code></div>
-<div class="line"><code class="plain">	}),</code></div>
-<div class="line"><code class="plain">	Ti.Map.createAnnotation({</code></div>
-<div class="line"><code class="plain">		latitude: 37.331689,</code></div>
-<div class="line"><code class="plain">		longitude: -122.030731,</code></div>
-<div class="line"><code class="plain">		title: </code><code class="string">&apos;Apple HQ&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		subtitle: </code><code class="string">&apos;Cupertino, CA&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		pincolor: Ti.Map.ANNOTATION_RED,</code></div>
-<div class="line"><code class="plain">		rightButton: </code><code class="string">&apos;apple.png&apos;</code></div>
-<div class="line"><code class="plain">	}),</code></div>
-<div class="line"><code class="plain">	Ti.Map.createAnnotation({</code></div>
-<div class="line"><code class="plain">		latitude: 37.422502,</code></div>
-<div class="line"><code class="plain">		longitude: -122.0855498,</code></div>
-<div class="line"><code class="plain">		title: </code><code class="string">&apos;Google HQ&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		subtitle: </code><code class="string">&apos;Mountain View, CA&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		image: </code><code class="string">&apos;google.png&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">		leftView: Ti.UI.createButton({</code></div>
-<div class="line"><code class="plain">			title: </code><code class="string">&apos;leftView&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">			height: 32,</code></div>
-<div class="line"><code class="plain">			width: 70</code></div>
-<div class="line"><code class="plain">		}),</code></div>
-<div class="line"><code class="plain">		rightView: Ti.UI.createLabel({</code></div>
-<div class="line"><code class="plain">			text: </code><code class="string">&apos;rightView&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">			color: </code><code class="string">&apos;#fff&apos;</code></div>
-<div class="line"><code class="plain">		})</code></div>
-<div class="line"><code class="plain">	})</code></div>
+<div class="line"><code class="plain">const Map = require(</code><code class="string">&apos;ti.map&apos;</code><code class="plain">);</code></div>
+<div class="line"><code class="plain">const win = Ti.UI.createWindow();</code></div>
+<div class="line"><code class="plain">const annotations = [</code></div>
+<div class="line"><code class="plain">    Map.createAnnotation({</code></div>
+<div class="line"><code class="plain">        latitude: 37.389569,</code></div>
+<div class="line"><code class="plain">        longitude: -122.050212,</code></div>
+<div class="line"><code class="plain">        title: </code><code class="string">&apos;Appcelerator HQ&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        subtitle: </code><code class="string">&apos;Mountain View, CA&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        pincolor: Map.ANNOTATION_GREEN,</code></div>
+<div class="line"><code class="plain">        leftButton: </code><code class="string">&apos;appcelerator.gif&apos;</code></div>
+<div class="line"><code class="plain">    }),</code></div>
+<div class="line"><code class="plain">    Map.createAnnotation({</code></div>
+<div class="line"><code class="plain">        latitude: 37.331689,</code></div>
+<div class="line"><code class="plain">        longitude: -122.030731,</code></div>
+<div class="line"><code class="plain">        title: </code><code class="string">&apos;Apple HQ&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        subtitle: </code><code class="string">&apos;Cupertino, CA&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        pincolor: Map.ANNOTATION_RED,</code></div>
+<div class="line"><code class="plain">        rightButton: </code><code class="string">&apos;apple.png&apos;</code></div>
+<div class="line"><code class="plain">    }),</code></div>
+<div class="line"><code class="plain">    Map.createAnnotation({</code></div>
+<div class="line"><code class="plain">        latitude: 37.422502,</code></div>
+<div class="line"><code class="plain">        longitude: -122.0855498,</code></div>
+<div class="line"><code class="plain">        title: </code><code class="string">&apos;Google HQ&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        subtitle: </code><code class="string">&apos;Mountain View, CA&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        animate: </code><code class="keyword">true</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        image: </code><code class="string">&apos;google.png&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">        leftView: Ti.UI.createButton({</code></div>
+<div class="line"><code class="plain">            title: </code><code class="string">&apos;leftView&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">            height: 32,</code></div>
+<div class="line"><code class="plain">            width: 70</code></div>
+<div class="line"><code class="plain">        }),</code></div>
+<div class="line"><code class="plain">        rightView: Ti.UI.createLabel({</code></div>
+<div class="line"><code class="plain">            text: </code><code class="string">&apos;rightView&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">            color: </code><code class="string">&apos;#fff&apos;</code></div>
+<div class="line"><code class="plain">        })</code></div>
+<div class="line"><code class="plain">    })</code></div>
 <div class="line"><code class="plain">];</code></div>
-<div class="line"><code class="keyword">var</code><code class="plain"> mapview = Titanium.Map.createView({</code></div>
-<div class="line"><code class="plain">    mapType: Titanium.Map.STANDARD_TYPE,</code></div>
+<div class="line"><code class="plain">const mapview = Map.createView({</code></div>
+<div class="line"><code class="plain">    mapType: Map.NORMAL_TYPE,</code></div>
 <div class="line"><code class="plain">    region: {</code></div>
-<div class="line"><code class="plain">    	latitude:37.389569,</code></div>
-<div class="line"><code class="plain">    	longitude:-122.050212,</code></div>
+<div class="line"><code class="plain">        latitude:37.389569,</code></div>
+<div class="line"><code class="plain">        longitude:-122.050212,</code></div>
 <div class="line"><code class="plain">        latitudeDelta:.05,</code></div>
 <div class="line"><code class="plain">        longitudeDelta:.05</code></div>
 <div class="line"><code class="plain">    },</code></div>
@@ -318,16 +338,18 @@
 <div class="line"><code class="plain">    userLocation:</code><code class="keyword">false</code><code class="plain">,</code></div>
 <div class="line"><code class="plain">    annotations: annotations</code></div>
 <div class="line"><code class="plain">});</code></div>
-<div class="line"><code class="plain">mapview.addRoute({</code></div>
-<div class="line"><code class="plain">	name: </code><code class="string">&apos;myroute&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">	width: 4,</code></div>
-<div class="line"><code class="plain">	color: </code><code class="string">&apos;#f00&apos;</code><code class="plain">,</code></div>
-<div class="line"><code class="plain">	points: [</code></div>
-<div class="line"><code class="plain">		{latitude:37.422502, longitude:-122.0855498},</code></div>
-<div class="line"><code class="plain">		{latitude:37.389569, longitude:-122.050212},</code></div>
-<div class="line"><code class="plain">		{latitude:37.331689, longitude:-122.030731}</code></div>
-<div class="line"><code class="plain">	]</code></div>
+<div class="line"><code class="keyword">var</code><code class="plain"> route = Map.createRoute({</code></div>
+<div class="line"><code class="plain">    name: </code><code class="string">&apos;myroute&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">    width: 4,</code></div>
+<div class="line"><code class="plain">    color: </code><code class="string">&apos;#f00&apos;</code><code class="plain">,</code></div>
+<div class="line"><code class="plain">    points: [</code></div>
+<div class="line"><code class="plain">        {latitude:37.422502, longitude:-122.0855498},</code></div>
+<div class="line"><code class="plain">        {latitude:37.389569, longitude:-122.050212},</code></div>
+<div class="line"><code class="plain">        {latitude:37.331689, longitude:-122.030731}</code></div>
+<div class="line"><code class="plain">    ]</code></div>
 <div class="line"><code class="plain">});</code></div>
+<div class="line">&#xA0;</div>
+<div class="line"><code class="plain">mapview.addRoute(route);</code></div>
 <div class="line"><code class="plain">win.add(mapview);</code></div>
 <div class="line"><code class="plain">win.open();</code></div>
 </div>
