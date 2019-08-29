@@ -8,7 +8,7 @@ const Nightmare = require("nightmare");
 const cheerio = require('cheerio');
 const request = require('request');
 const nightmare = Nightmare({
-    show: true // use false if you don't want to see Electron "jumping through all the hoops"
+    show: false // use false if you don't want to see Electron "jumping through all the hoops"
 });
 const program = require('commander');
 const jiraSelector = 'section.aui-page-panel-content'; // selector of where the list of Jira tickets can be found
