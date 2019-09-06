@@ -18,6 +18,7 @@
 
         <div id="src-49157246" class="content">
                         <h1>NodeJS Configuration</h1>
+    <p>    </p>
 <ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="NodeJS_Configuration.html#src-49157246_NodeJSConfiguration-Dependencies">Dependencies</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="NodeJS_Configuration.html#src-49157246_NodeJSConfiguration-Engines">Engines</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="NodeJS_Configuration.html#src-49157246_NodeJSConfiguration-Healthcheck">Health check</a>    </p>
@@ -106,28 +107,17 @@
 <div class="line"><code class="plain">}</code></div>
 </div>
     </div>
-    <p>    <span style="color: #222222;">
-When enabled, you must provide login credentials for the npm registry when calling    </span>
- <tt class=" ">appc acs publish</tt>    <span style="color: #222222;">
-. You can provide the credentials on the command line when calling the     </span>
- <tt class=" ">publish</tt>     <span style="color: #222222;">
- command:     </span>
-    </p>
+    <p>When enabled, you must provide login credentials for the npm registry when calling <tt class=" ">appc acs publish</tt> . You can provide the credentials on the command line when calling the  <tt class=" ">publish</tt>  command:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">$ appc cloud publish myuser mypwd</code></div>
 </div>
     </div>
-    <p>    <span style="color: #222222;">
-        </span>
-    </p>
+    <p>    </p>
     <div class="confbox admonition admonition-note aui-message warning shadowed information-macro">
             <p>If <tt class=" ">acs cli</tt> complains that npm is not found even though npm is in the path, ensure that the directory containing npm is in the <tt class=" ">NODE_PATH</tt> (for example, <tt class=" ">NODE_PATH=/usr/lib/node_modules</tt>).    </p>
     </div>
-        <p>    </p>
-    <p>    <span style="color: #222222;">
-If no credentials are provided on the command line, t    </span>
-he Appcelerator CLI will attempt to read the credentials from <tt class=" ">~/.npmrc</tt>. If no <tt class=" ">~/.npmrc</tt> file is found, or it does not contain any credentials, you are prompted for the npm username and password:    </p>
+        <p>If no credentials are provided on the command line, the Appcelerator CLI will attempt to read the credentials from <tt class=" ">~/.npmrc</tt>. If no <tt class=" ">~/.npmrc</tt> file is found, or it does not contain any credentials, you are prompted for the npm username and password:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">$ appc cloud publish</code></div>

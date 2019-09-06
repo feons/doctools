@@ -106,7 +106,7 @@
         </tr>
     <tr>
             <td class="confluenceTd" rowspan="1" colspan="1">
-        <p class="p1"><tt class=" ">validEmails</tt>    </p>
+        <p><tt class=" ">validEmails</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p>Array&lt;String&gt;    </p>
@@ -120,7 +120,7 @@
         </tr>
     <tr>
             <td class="confluenceTd" rowspan="1" colspan="1">
-        <p class="p1"><tt class=" ">validOrgs</tt>    </p>
+        <p><tt class=" ">validOrgs</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p>Array&lt;Number&gt;    </p>
@@ -176,20 +176,14 @@
     </div>
     <div class="section section-3 " id="src-49153257_safe-id-QVBJQnVpbGRlckNvbnNvbGUtQVBJRG9jJlRlc3Q">
         <h3 class="heading "><span>API Doc &amp; Test</span></h3>
-    <p>    <span style="color: #10181f;">
-On startup, API endpoints are automatically generated for all models as per their default configuration. An API provides a way for a client to access your application, such as <tt class=" ">GET &lt;SERVER_ADDRESS&gt;/api/users/query</tt>, execute custom logic, internally access the application&apos;s models and APIs, and return data back to the client application.     </span>
-    </p>
-    <p>The <strong class=" ">API Doc &amp; Test</strong> tab in the Admin Console contains generated docs of your application APIs including how to call the API, multiple examples and the ability to test the APIs. The generated docs use the information in the <tt class=" ">description</tt> fields of your JavaScript definition files to fill in some of the information. API definitions can also be imported by selecting the <strong class=" ">+ API</strong> button. You can     <span style="color: #10181f;">
-import an API from a Swagger definition by either selecting a file from your local filesystem or entering a URL. For additional information, refer <a class="document-link " href="#!/guide/Manage_Endpoints">Manage Endpoints</a>.    </span>
-    </p>
+    <p>On startup, API endpoints are automatically generated for all models as per their default configuration. An API provides a way for a client to access your application, such as <tt class=" ">GET &lt;SERVER_ADDRESS&gt;/api/users/query</tt>, execute custom logic, internally access the application&apos;s models and APIs, and return data back to the client application.    </p>
+    <p>The <strong class=" ">API Doc &amp; Test</strong> tab in the Admin Console contains generated docs of your application APIs including how to call the API, multiple examples and the ability to test the APIs. The generated docs use the information in the <tt class=" ">description</tt> fields of your JavaScript definition files to fill in some of the information. API definitions can also be imported by selecting the <strong class=" ">+ API</strong> button. You can import an API from a Swagger definition by either selecting a file from your local filesystem or entering a URL. For additional information, refer <a class="document-link " href="#!/guide/Manage_Endpoints">Manage Endpoints</a>.    </p>
     <p>    <img src="images/download/attachments/49153257/API_Doc_n_Test.png" alt="images/download/attachments/49153257/API_Doc_n_Test.png" class="confluence-embedded-image" width="800" height="317">
         </img></p>
     </div>
     <div class="section section-3 " id="src-49153257_APIBuilderConsole-Models">
         <h3 class="heading "><span>Models</span></h3>
-    <p>    <span style="color: #10181f;">
-A <strong class=" ">Model</strong> is the data model, backed by a connector, and exposed as an API endpoint. A model can consist of other models or fields from other models. Once again, API Builder will generate API endpoints for your models by default. Changes to models require a restart.    </span>
-    </p>
+    <p>A <strong class=" ">Model</strong> is the data model, backed by a connector, and exposed as an API endpoint. A model can consist of other models or fields from other models. Once again, API Builder will generate API endpoints for your models by default. Changes to models require a restart.    </p>
     <p>The <strong class=" ">Models </strong>tab lets you create new models. The model build process involves the following steps:    </p>
 <ol class=" "><li class=" ">    <p>Name your new model, select a connector, and add a description.    </p>
 </li><li class=" ">    <p>Add fields to your new model.    </p>
@@ -201,36 +195,24 @@ A <strong class=" ">Model</strong> is the data model, backed by a connector, and
     </div>
     <div class="section section-3 " id="src-49153257_APIBuilderConsole-Configurations">
         <h3 class="heading "><span>Configurations</span></h3>
-    <p>    <span style="color: #10181f;">
-The Configurations tab displays the list of configuration files on the API Builder instance. You can edit the configuration files here.    </span>
-    </p>
+    <p>The Configurations tab displays the list of configuration files on the API Builder instance. You can edit the configuration files here.    </p>
     <div class="confbox admonition admonition-note aui-message warning shadowed information-macro">
-            <p>    <span style="color: #10181f;">
-Edits to these files will trigger a server restart once the files have been saved.    </span>
-    </p>
+            <p>Edits to these files will trigger a server restart once the files have been saved.    </p>
     </div>
-        <p>    <span style="color: #10181f;">
-See <a class="document-link " href="#!/guide/Console_Configuration">Console Configuration</a> for an example and settings.    </span>
-    </p>
+        <p>See <a class="document-link " href="#!/guide/Console_Configuration">Console Configuration</a> for an example and settings.    </p>
     <p>    <img src="images/download/attachments/49153257/Configurations.png" alt="images/download/attachments/49153257/Configurations.png" class="confluence-embedded-image" width="800" height="317">
         </img></p>
     </div>
     <div class="section section-3 " id="src-49153257_APIBuilderConsole-Connectors">
         <h3 class="heading "><span>Connectors</span></h3>
-    <p>    <span style="color: #10181f;">
-Connectors are responsible for reading and writing data to a specific data source (for example, Salesforce, MySQL, MongoDB, Azure, MSSQL or your own backend system). Each model has one connector. There are a number of pre-built connectors in the    </span>
- <a class="external-link external-link" href="https://marketplace.axway.com/home" target="_blank">Platform Marketplace</a>     <span style="color: #10181f;">
-and you can also create your own custom connectors.    </span>
-    </p>
+    <p>Connectors are responsible for reading and writing data to a specific data source (for example, Salesforce, MySQL, MongoDB, Azure, MSSQL or your own backend system). Each model has one connector. There are a number of pre-built connectors in the <a class="external-link external-link" href="https://marketplace.axway.com/home" target="_blank">Platform Marketplace</a> and you can also create your own custom connectors.    </p>
     <p>See <a class="document-link " href="#!/guide/API_Builder_Connectors">API Builder Connectors</a> for details on how to get started, adding connectors, and connector projects.    </p>
     <p>    <img src="images/download/attachments/49153257/Connectors.png" alt="images/download/attachments/49153257/Connectors.png" class="confluence-embedded-image" width="800" height="317">
         </img></p>
     </div>
     <div class="section section-3 " id="src-49153257_APIBuilderConsole-Logs">
         <h3 class="heading "><span>Logs</span></h3>
-    <p>    <span style="color: #10181f;">
-The <strong class=" ">Logs</strong> tab displays a searchable and filterable list of logs generated from API Builder. When you invoke your API, their logs will be recorded locally, allowing you to test and debug your API. You can drill into the log entries to get more details about the event, such as response time and headers.    </span>
-    </p>
+    <p>The <strong class=" ">Logs</strong> tab displays a searchable and filterable list of logs generated from API Builder. When you invoke your API, their logs will be recorded locally, allowing you to test and debug your API. You can drill into the log entries to get more details about the event, such as response time and headers.    </p>
     <p>Logs can be filtered by many methods that include by time, method type, status, and user input in the search bar. In addition to filtering, logs can be sorted by clicking on the column headers of Time, Method, URL, Status, and Duration (ms).    </p>
     <p>    <img src="images/download/attachments/49153257/Logs.png" alt="images/download/attachments/49153257/Logs.png" class="confluence-embedded-image" width="800" height="317">
         </img></p>

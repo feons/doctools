@@ -98,7 +98,8 @@
         </tr>
     <tr>
             <td class="confluenceTd" rowspan="1" colspan="1">
-    <pre class=" ">codeblocks</pre>            </td>
+        <p><tt class=" ">codeblocks</tt>    </p>
+            </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p>Contains Codeblock, JSON, and Javascript files, used for defining custom functions for use in Flows.    </p>
             </td>
@@ -121,14 +122,16 @@
         </tr>
     <tr>
             <td class="confluenceTd" rowspan="1" colspan="1">
-    <pre class=" ">endpoints</pre>            </td>
+        <p><tt class=" ">endpoints</tt>    </p>
+            </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p>Contains Endpoint JSON files, these are OpenAPI 2.0 (Swagger) documents used to create custom entry points for the application, with execution logic defined by linked Flows    </p>
             </td>
         </tr>
     <tr>
             <td class="confluenceTd" rowspan="1" colspan="1">
-    <pre class=" ">flows</pre>            </td>
+        <p><tt class=" ">flows</tt>    </p>
+            </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p>Contains Flow JSON files, used for defining business logic for Endpoints.    </p>
             </td>
@@ -437,13 +440,7 @@
             <p>Prior to AMPLIFY Runtime Services 1.2.0, you could not use the following names for environment variables: &quot;appid&quot;, &quot;basedir&quot;, &quot;bodyParser&quot;, &quot;customConfig&quot;, &quot;dirname&quot;, &quot;framework&quot;, &quot;fullpath&quot;, &quot;name&quot;, &quot;serverId&quot;, &quot;port&quot;, &quot;version&quot;, &quot;NODE&quot;, &quot;NODE_PATH&quot;, &quot;PATH&quot;, &quot;PWD&quot;, &quot;PORT&quot;, &quot;TMPDIR&quot;, and &quot;USER&quot;.    </p>
     </div>
         <p>After changing an environment variable, you will be prompted to restart the application.    </p>
-    <p>    <span style="color: #222222;">
-The following example sets the     </span>
- <tt class=" ">foo</tt>     <span style="color: #222222;">
- environment variables, lists all set environment variables, then unsets the     </span>
- <tt class=" ">foo</tt>     <span style="color: #222222;">
- variable:    </span>
-    </p>
+    <p>The following example sets the  <tt class=" ">foo</tt>  environment variables, lists all set environment variables, then unsets the  <tt class=" ">foo</tt>  variable:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">appc cloud config --</code><code class="functions">set</code><code class="plain"> foo=abc</code></div>
@@ -454,12 +451,8 @@ The following example sets the     </span>
     </div>
     <div class="section section-2 " id="src-49153285_APIBuilderProject-Scaletheapplication">
         <h2 class="heading "><span>Scale the application</span></h2>
-    <p>    <span style="color: #222222;">
-To customize the number of cloud servers the application can enable the auto-scaling feature to automatically scale up and down the number of cloud servers based on the number of queued requests. You specify the maximum number of queued requests that should occur before the application is scaled up. AMPLIFY Runtime Services will increase the number of containers if the queue is too high for at least one minute. You can also specify the minimum and the maximum number of servers that should be used.    </span>
-    </p>
-    <p>    <span style="color: #222222;">
-The following example enables autoscaling, using a maximum of five servers when there are at least 20 queued requests. The application is also configured to automatically scale down the number of servers when the number of queued requests drops below 20.    </span>
-    </p>
+    <p>To customize the number of cloud servers the application can enable the auto-scaling feature to automatically scale up and down the number of cloud servers based on the number of queued requests. You specify the maximum number of queued requests that should occur before the application is scaled up. AMPLIFY Runtime Services will increase the number of containers if the queue is too high for at least one minute. You can also specify the minimum and the maximum number of servers that should be used.    </p>
+    <p>The following example enables autoscaling, using a maximum of five servers when there are at least 20 queued requests. The application is also configured to automatically scale down the number of servers when the number of queued requests drops below 20.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                     <div class="title">appc.json</div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code" data-title="appc.json">
@@ -472,11 +465,7 @@ The following example enables autoscaling, using a maximum of five servers when 
 <div class="line"><code class="plain">}</code></div>
 </div>
     </div>
-    <p>    <span style="color: #222222;">
-You can also use the     </span>
- <tt class=" ">appc cloud config</tt>     <span style="color: #222222;">
-command to configure autoscaling:    </span>
-    </p>
+    <p>You can also use the  <tt class=" ">appc cloud config</tt> command to configure autoscaling:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">appc cloud config --maxsize 5 MyFirstApp</code></div>
@@ -488,7 +477,7 @@ command to configure autoscaling:    </span>
     </div>
     <div class="section section-2 " id="src-49153285_APIBuilderProject-Accessaspecificcontainer">
         <h2 class="heading "><span>Access a specific container</span></h2>
-    <p>Starting with AMPLIFY Runtime Services 1.3.1, if you have scaled your application to use more than one server container, you can make a request to a specific container that your application is running on. To make a request to a specific server container, pass the <tt class=" ">_serverid</tt> parameter with the request and set it to the ID of the server container. To retrieve the server container ID, run the <tt class=" ">appc cloud </tt><tt class=" ">accesslog --show_serverid</tt> command.    </p>
+    <p>Starting with AMPLIFY Runtime Services 1.3.1, if you have scaled your application to use more than one server container, you can make a request to a specific container that your application is running on. To make a request to a specific server container, pass the <tt class=" ">_serverid</tt> parameter with the request and set it to the ID of the server container. To retrieve the server container ID, run the <tt class=" ">appc cloud </tt> <tt class=" ">accesslog --show_serverid</tt> command.    </p>
     <p>Example:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
@@ -517,25 +506,15 @@ command to configure autoscaling:    </span>
     </div>
     <p>You can also use the Appcelerator CLI to manage the domain and path.    </p>
     <p>To bind a domain to an application, use the <tt class=" ">appc cloud config --set &lt;domain_name&gt;</tt> command to bind a domain to the application. You can bind multiple domains to an application. Use the <tt class=" ">--set &lt;domain_name&gt;</tt> parameter to bind up to five additional domains to the application.    </p>
-    <p>If you need to remove a domain, use the <tt class=" ">--remove</tt> parameter. For applications with multiple domains, you will be prompted to select which domain to remove. You may optionally pass the domain name to remove with the <tt class=" ">--remove</tt> parameter.    <span style="color: #222222;">
-     </span>
-    </p>
+    <p>If you need to remove a domain, use the <tt class=" ">--remove</tt> parameter. For applications with multiple domains, you will be prompted to select which domain to remove. You may optionally pass the domain name to remove with the <tt class=" ">--remove</tt> parameter.    </p>
     <p>To route, an application based on a path with the domain name, use the <tt class=" ">appc cloud config --path &lt;path_name&gt;</tt> command to set a path for the application after setting a domain. For example, if you want to bind two applications to the same domain, specify a path for each to route a client to the correct application.    </p>
-    <p>    <span style="color: #222222;">
-The following example allows the application to be accessed from     </span>
- <tt class=" ">www.foo.com</tt>     <span style="color: #222222;">
-:    </span>
-     <span style="color: #222222;">
-     </span>
-    </p>
+    <p>The following example allows the application to be accessed from  <tt class=" ">www.foo.com</tt> :    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">appc cloud domain --</code><code class="functions">set</code><code class="plain"> www.foo.com</code></div>
 </div>
     </div>
-    <p>    <span style="color: #222222;">
- The following example allows the LegacyApp application to be accessed from  <tt class=" ">www.foo.com/v1</tt>  and the BrandNewApp application to be accessed from  <tt class=" ">www.foo.com/v2</tt> :     </span>
-    </p>
+    <p>The following example allows the LegacyApp application to be accessed from  <tt class=" ">www.foo.com/v1</tt>  and the BrandNewApp application to be accessed from  <tt class=" ">www.foo.com/v2</tt> :    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">appc cloud domain --</code><code class="functions">set</code><code class="plain"> www.foo.com LegacyApp</code></div>
@@ -628,9 +607,6 @@ The following example allows the application to be accessed from     </span>
 <div class="line"><code class="plain">}</code></div>
 </div>
     </div>
-    <p>    <span style="color: #222222;">
-     </span>
-    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                     <div class="title">child.js</div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code" data-title="child.js">
@@ -797,9 +773,7 @@ The following example allows the application to be accessed from     </span>
     </div>
     <div class="section section-3 " id="src-49153285_APIBuilderProject-ServerPorts">
         <h3 class="heading "><span>Server Ports</span></h3>
-    <p>Currently, AMPLIFY Runtime Services only supports applications opening one server listening port. There cannot be more than one TCP/HTTP server started in one application.    <span style="color: #222222;">
-     </span>
-    </p>
+    <p>Currently, AMPLIFY Runtime Services only supports applications opening one server listening port. There cannot be more than one TCP/HTTP server started in one application.    </p>
     </div>
     </div>
         </div>

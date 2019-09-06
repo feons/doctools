@@ -714,7 +714,9 @@
             <topic label="Application Structures and Core Building Blocks" href="Application_Structures_and_Core_Building_Blocks.html"></topic>
             <topic label="Layouts Positioning and the View Hierarchy" href="Layouts_Positioning_and_the_View_Hierarchy.html"></topic>
             <topic label="Event Handling" href="Event_Handling.html"></topic>
-            <topic label="Icons and Splash Screens" href="Icons_and_Splash_Screens.html"></topic>
+            <topic label="Icons and Splash Screens" href="Icons_and_Splash_Screens.html">
+              <topic label="iOS Launch Files" href="iOS_Launch_Files.html"></topic>
+            </topic>
         </topic>
         <topic label="Using Modules" href="Using_Modules.html">
             <topic label="Obtaining Modules" href="Obtaining_Modules.html"></topic>
@@ -767,6 +769,7 @@
       </topic>
       <topic label="Titanium SDK Release Notes" href="Titanium_SDK_Release_Notes.html">
         <topic label="Titanium SDK Release Notes 8.x" href="Titanium_SDK_Release_Notes_8.x.html">
+          <topic label="Titanium SDK 8.2.0.RC Release Note" href="Titanium_SDK_8.2.0.RC_Release_Note.html"></topic>
           <topic label="Titanium SDK 8.1.1.GA Release Note" href="Titanium_SDK_8.1.1.GA_Release_Note.html"></topic>
           <topic label="Titanium SDK 8.1.0.GA Release Note" href="Titanium_SDK_8.1.0.GA_Release_Note.html"></topic>
           <topic label="Titanium SDK 8.1.0.RC Release Note" href="Titanium_SDK_8.1.0.RC_Release_Note.html"></topic>
@@ -1008,6 +1011,7 @@
       <topic label="Appcelerator CLI FAQ" href="Appcelerator_CLI_FAQ.html"></topic>
       <topic label="Appcelerator CLI Release Notes" href="Appcelerator_CLI_Release_Notes.html">
         <topic label="Appcelerator CLI Release Notes 7.x" href="Appcelerator_CLI_Release_Notes_7.x.html">
+          <topic label="Appcelerator CLI 7.1.1.GA Release Note" href="Appcelerator_CLI_7.1.1.GA_Release_Note.html"></topic>
           <topic label="Appcelerator CLI 7.1.1.RC Release Note" href="Appcelerator_CLI_7.1.1.RC_Release_Note.html"></topic>
           <topic label="Appcelerator CLI 7.1.0.GA Release Note" href="Appcelerator_CLI_7.1.0.GA_Release_Note.html"></topic>
           <topic label="Appcelerator CLI 7.1.0.RC Release Note" href="Appcelerator_CLI_7.1.0.RC_Release_Note.html"></topic>

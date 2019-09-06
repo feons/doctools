@@ -50,9 +50,7 @@
 <div class="line"><code class="plain">}</code></div>
 </div>
     </div>
-    <p>    <span style="color: #333333;">
-Currently, Swagger documents with path references can be imported and the imported endpoint will be correctly displayed in API Lists, but a flow cannot be created and saved successfully. When the flow editor <strong class=" ">Save</strong> button is clicked, a Page Not Found error is displayed. The error occurs because the API Builder Console cannot find the method as it is not in an expected location.    </span>
-    </p>
+    <p>Currently, Swagger documents with path references can be imported and the imported endpoint will be correctly displayed in API Lists, but a flow cannot be created and saved successfully. When the flow editor <strong class=" ">Save</strong> button is clicked, a Page Not Found error is displayed. The error occurs because the API Builder Console cannot find the method as it is not in an expected location.    </p>
 </li><li class=" ">    <p>When rendering the flow editor, the API Builder Console may fail to render the Scalable Vector Graphics (SVG) icons correctly in the Firefox browser. The render failure may result in blank icons being displayed in the tool panel and in the flow diagram. This is due to a long-standing bug in Firefox that fails to scale SVG graphics correctly. To fix, edit the SVG icon and add height and width. For example:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
@@ -65,18 +63,14 @@ Currently, Swagger documents with path references can be imported and the import
 <div class="line"><code class="string">&quot;consumes&quot;</code><code class="plain">: [ </code><code class="string">&quot;multipart/form-data; charset=utf-8&quot;</code><code class="plain"> ],</code></div>
 </div>
     </div>
-    <p>    <span style="color: #333333;" class="issue-link">
-The appended character set (<tt class=" ">charset=utf-8</tt>) will cause the endpoint load to fail.    </span>
-    </p>
+    <p>The appended character set (<tt class=" ">charset=utf-8</tt>) will cause the endpoint load to fail.    </p>
 </li><li class=" ">    <p>When deleting endpoints which contain references within paths, a Page Not Found (404) error may be displayed in the API Builder Console. For example, a Swagger document with references within paths may look similar to this:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">{ </code><code class="string">&quot;swagger&quot;</code><code class="plain">: </code><code class="string">&quot;2.0&quot;</code><code class="plain">, </code><code class="string">&quot;paths&quot;</code><code class="plain"> { </code><code class="string">&quot;x-path&quot;</code><code class="plain">: { </code><code class="string">&quot;get&quot;</code><code class="plain">: {} }, </code><code class="string">&quot;/find&quot;</code><code class="plain">: { </code><code class="string">&quot;$ref&quot;</code><code class="plain">: </code><code class="string">&quot;#/paths/x-path&quot;</code><code class="plain"> }, </code><code class="string">&quot;/search&quot;</code><code class="plain">: { </code><code class="string">&quot;$ref&quot;</code><code class="plain">: </code><code class="string">&quot;#/paths/x-path&quot;</code><code class="plain"> } } }</code></div>
 </div>
     </div>
-    <p>    <span style="color: #333333;">
-The API Builder Console will fail to find GET /find since it is inside a <tt class=" ">$ref</tt>. If the API Builder Console has modified the referenced <tt class=" ">$ref</tt>, it could cause unexpected behavior for other paths referencing #/paths/x-path such as /search - deleting GET /find could unexpectedly delete GET /search too.    </span>
-    </p>
+    <p>The API Builder Console will fail to find GET /find since it is inside a <tt class=" ">$ref</tt>. If the API Builder Console has modified the referenced <tt class=" ">$ref</tt>, it could cause unexpected behavior for other paths referencing #/paths/x-path such as /search - deleting GET /find could unexpectedly delete GET /search too.    </p>
 </li><li class=" ">    <p>Endpoints named with special characters cannot be viewed in the API Builder Console. For example, if you attempt to view the <tt class=" ">[test].json</tt> endpoint, you will receive a Page Not Found error message.    </p>
 </li><li class=" ">    <p>Editing large object parameters on the API Orchestration page in the API Builder Console may cause multiple, confusing node configuration panel scrollbars to appear.    </p>
 </li><li class=" ">    <p>The inline object editor <strong class=" ">Expand</strong> button obscures text.    </p>
@@ -87,22 +81,10 @@ The API Builder Console will fail to find GET /find since it is inside a <tt cla
 </li></ul>    </div>
     <div class="section section-2 " id="src-43299747_APIBuilderReleaseNotes-Securityvulnerability">
         <h2 class="heading "><span>Security vulnerability</span></h2>
-<ul class=" "><li class=" ">    <p class="issue-link">bootstrap 20184    </p>
-<ul class=" "><li class=" ">    <p>    <span style="color: #333333;">
-<strong class=" ">Vulnerability</strong>: API Builder UI uses react-bootstrap which as a dependency on bootstrap@3.3.7, and it is 3.3.7 that contains the vulnerability. At the time of writing this ticket, bootstrap did not publish a 3.x version after 3.3.7, so no fix was ever released. The bootstrap library is now at 4.x. However, the react-bootstrap library that API Builder uses is actively working on a version compatible with bootstrap v4.x. The following issue is logged against bootstrap@3.3.7:    </span>
-    </p>
-<ul class=" "><li class=" ">    <p>    <span style="color: #333333;">
-<a class="external-link external-link" href="https://github.com/twbs/bootstrap/issues/20184" target="_blank">    <span style="color: #333333;">
-20184    </span>
-</a> - XSS in data-target attribute    </span>
-    </p>
-</li></ul></li><li class=" ">    <p>    <span style="color: #333333;">
-<strong class=" ">Analysis</strong>: The vulnerability and risk are documented <a class="external-link external-link" href="https://github.com/twbs/bootstrap/issues/20184" target="_blank">    <span style="color: #333333;">
-20184    </span>
-</a>. The API Builder UI only runs on the developer machine and is locked to localhost by default. The API Builder UI <strong class=" ">will not be installed in production</strong>. Furthermore, the UI bundled with API Builder does not use data-target attributes. The risk to API Builder is low.    </span>
-    <span style="color: #333333;">
-     </span>
-    </p>
+<ul class=" "><li class=" ">    <p>bootstrap 20184    </p>
+<ul class=" "><li class=" ">    <p><strong class=" ">Vulnerability</strong>: API Builder UI uses react-bootstrap which as a dependency on bootstrap@3.3.7, and it is 3.3.7 that contains the vulnerability. At the time of writing this ticket, bootstrap did not publish a 3.x version after 3.3.7, so no fix was ever released. The bootstrap library is now at 4.x. However, the react-bootstrap library that API Builder uses is actively working on a version compatible with bootstrap v4.x. The following issue is logged against bootstrap@3.3.7:    </p>
+<ul class=" "><li class=" ">    <p><a class="external-link external-link" href="https://github.com/twbs/bootstrap/issues/20184" target="_blank"> 20184 </a> - XSS in data-target attribute    </p>
+</li></ul></li><li class=" ">    <p><strong class=" ">Analysis</strong>: The vulnerability and risk are documented <a class="external-link external-link" href="https://github.com/twbs/bootstrap/issues/20184" target="_blank"> 20184 </a>. The API Builder UI only runs on the developer machine and is locked to localhost by default. The API Builder UI <strong class=" ">will not be installed in production</strong>. Furthermore, the UI bundled with API Builder does not use data-target attributes. The risk to API Builder is low.    </p>
 </li></ul></li></ul>    </div>
     <div class="section section-2 " id="src-43299747_APIBuilderReleaseNotes-RecentReleases">
         <h2 class="heading "><span>Recent Releases</span></h2>

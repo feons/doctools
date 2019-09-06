@@ -98,7 +98,7 @@
         <p><tt class=" ">logs</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>Contains generated log files when running your project locally. If you test the connector, the generated log files will get packaged with the application. You may want to disable logging by setting the <tt class=" ">transactionLogEnabled</tt>  property to  <tt class=" ">false</tt>  in the <tt class=" "> conf/default.js</tt> file.    </p>
+        <p>Contains generated log files when running your project locally. If you test the connector, the generated log files will get packaged with the application. You may want to disable logging by setting the <tt class=" ">transactionLogEnabled</tt> property to <tt class=" ">false</tt> in the <tt class=" "> conf/default.js</tt> file.    </p>
             </td>
         </tr>
     <tr>
@@ -342,7 +342,7 @@
         </tr>
     <tr>
             <td class="confluenceTd" rowspan="1" colspan="1">
-        <p class="p1"><tt class=" ">AuthenticatesThroughConnector</tt>    </p>
+        <p><tt class=" ">AuthenticatesThroughConnector</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p><tt class=" ">./lib/lifecycle</tt>    </p>
@@ -411,7 +411,7 @@
         </tr>
 </thead><tfoot class=" "></tfoot><tbody class=" ">    <tr>
             <td class="confluenceTd" rowspan="1" colspan="1">
-        <p class="p1"><tt class=" ">fetchMetadata(callback)</tt>    </p>
+        <p><tt class=" ">fetchMetadata(callback)</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p>ValidatesConfiguration    </p>
@@ -428,7 +428,7 @@
         </tr>
     <tr>
             <td class="confluenceTd" rowspan="1" colspan="1">
-        <p class="p1"><tt class=" ">fetchConfig(callback)</tt>    </p>
+        <p><tt class=" ">fetchConfig(callback)</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p>-    </p>
@@ -462,7 +462,7 @@
         </tr>
     <tr>
             <td class="confluenceTd" rowspan="1" colspan="1">
-        <p class="p1"><tt class=" ">fetchSchema(callback)</tt>    </p>
+        <p><tt class=" ">fetchSchema(callback)</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p>GenerateModels    </p>
@@ -694,7 +694,7 @@
     </div>
     <div class="section section-3 " id="src-49153271_APIBuilderConnectorProject-Requestlifecycle">
         <h3 class="heading "><span>Request lifecycle</span></h3>
-    <p class="p1">If a request requires a login or if you want to intercept the request before or after it completes, you can implement the following methods:    </p>
+    <p>If a request requires a login or if you want to intercept the request before or after it completes, you can implement the following methods:    </p>
     <div class="tablewrap">
         <table class="confluenceTable">
         <thead class=" ">    <tr>
@@ -722,7 +722,7 @@
         <p><tt class=" ">-</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p class="p1">Request interceptor invoked before the request is initiated and the login method is invoked. The method is passed the name of the method that started the request and the arguments passed to the method. Invoke the next function when the operation completes.    </p>
+        <p>Request interceptor invoked before the request is initiated and the login method is invoked. The method is passed the name of the method that started the request and the arguments passed to the method. Invoke the next function when the operation completes.    </p>
             </td>
         </tr>
     <tr>
@@ -730,7 +730,7 @@
         <p><tt class=" ">loginRequired(request, callback)</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p class="p1"><tt class=" ">AuthenticatesThroughConnector</tt>    </p>
+        <p><tt class=" ">AuthenticatesThroughConnector</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p><tt class=" ">./lib/lifecycle/loginRequired.js</tt>    </p>
@@ -744,7 +744,7 @@
         <p><tt class=" ">login(request, next)</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p class="p1"><tt class=" ">AuthenticatesThroughConnector</tt>    </p>
+        <p><tt class=" ">AuthenticatesThroughConnector</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p><tt class=" ">./lib/lifecycle/login.js</tt>    </p>

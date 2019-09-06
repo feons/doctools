@@ -94,7 +94,7 @@
         <p>false    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p><strong class=" ">Since Release 5.0.0. </strong>Determines whether to generate API documentation (<tt class=" ">true</tt>) or not (<tt class=" ">false</tt>). The default value is <tt class=" ">true</tt>.    </p>
+        <p><strong class=" ">Since Release 5.0.0. </strong> Determines whether to generate API documentation (<tt class=" ">true</tt>) or not (<tt class=" ">false</tt>). The default value is <tt class=" ">true</tt>.    </p>
             </td>
         </tr>
     <tr>
@@ -423,7 +423,7 @@
 </li></ul>    <p>There are different ways that a one-to-one join and a one-to-many join can work when merging (mapping) data from the main model into the primary model:    </p>
 <ul class=" "><li class=" ">    <p>Merge as object: This is a one-to-one relationship where the whole secondary model record will be mapped to a field in the main model.    </p>
 </li><li class=" ">    <p>Merge as an array: This is a one-to-many relation where multiple records from the secondary model will be mapped to an array field in the model definition.    </p>
-</li><li class=" ">    <p>Merge as the field: This is a field which comes directly from a joined model. The field in the model definition <i class=" "><strong class=" ">must</strong> </i>have a <tt class=" ">name</tt> property which refers to the field being joined from the secondary model. By default, this is a one-to-one relationship where the field will contain a single match. In the Join-Object Definition, <tt class=" ">multiple</tt> may be set to <tt class=" ">true</tt> for all of the matches to be mapped to the field. Since this returns multiple values, the field type must be Array if <tt class=" ">multiple</tt> is set to <tt class=" ">true</tt>.    </p>
+</li><li class=" ">    <p>Merge as the field: This is a field which comes directly from a joined model. The field in the model definition <i class=" "> <strong class=" ">must</strong> </i>have a <tt class=" ">name</tt> property which refers to the field being joined from the secondary model. By default, this is a one-to-one relationship where the field will contain a single match. In the Join-Object Definition, <tt class=" ">multiple</tt> may be set to <tt class=" ">true</tt> for all of the matches to be mapped to the field. Since this returns multiple values, the field type must be Array if <tt class=" ">multiple</tt> is set to <tt class=" ">true</tt>.    </p>
 </li></ul>    <p>The composite connector can be used to perform reduce functionality on a single model. This only requires the main model and does not require any joins. The API Builder Console offers its functionality using this method. Without any joins, a one-to-one merge as a field is the only functionality available.    </p>
     <p>To define the join operation, set the <tt class=" ">metadata</tt> property to the <tt class=" ">left_join</tt> key or <tt class=" ">inner_join</tt> key, either of which takes an array of objects defining the join. Each object in the <tt class=" ">left_join</tt> or <tt class=" ">inner_join</tt> property defines the model to join (<tt class=" ">model</tt> property), the key to join (<tt class=" ">join_properties</tt> property) and, optionally, if the join is a <tt class=" ">multiple</tt> property.    </p>
     <p><strong class=" ">Join object definition</strong>    </p>
@@ -786,7 +786,7 @@
 </div>
     </div>
     <p>    <span id="src-43299044_heading-restricting-crud-endpoints"><a name="src-43299044_heading-restricting-crud-endpoints"/></span>
-If none of these values are present in <tt class=" ">options</tt><strong class=" "><tt class=" ">,</tt> </strong>the <tt class=" ">options</tt> object is treated as a <tt class=" ">where</tt> statement.    </p>
+If none of these values are present in <tt class=" ">options</tt> <strong class=" "> <tt class=" ">,</tt> </strong>the <tt class=" ">options</tt> object is treated as a <tt class=" ">where</tt> statement.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="comments">// setup query options</code></div>
