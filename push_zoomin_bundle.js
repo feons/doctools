@@ -1,15 +1,20 @@
+/*
+    Purpose: To upload Zoomin bundles for publishing Confluence-based content to the Axway Docs site
+    Usage: node push_zoomin_bundle.js -s <server> -b "<bundle(s)>" -k <path/to/RSA_key>
+    Documentation: https://wiki.appcelerator.org/x/rsKVAw
+*/
 const program = require('commander');
 var SftpUpload = require('sftp-upload');
 var fs = require('fs');
 var arguments = {}; // object to hold the entered arguments
 
 program // set up flags
-  .version('0.0.1')
-  .usage('-release <#_#> -d <milliseconds>')
-  .option('-s, --server', '*required* Which server to update the bundle to. Options: "sandbox" or "prod".')
-  .option('-b, --bundle', '*required* Which bundle to upload.')
+  .version('0.0.2')
+  .usage('node push_zoomin_bundle.js -s <server> -b "<bundle(s)>" -k <path/to/RSA_key> -p <non-default/path/to/bundles>')
+  .option('-s, --server', '*Required* Which server to update the bundle to. Options: "sandbox" or "prod".')
+  .option('-b, --bundle', '*Required* Which bundle to upload.')
   .option('-p, --path', 'Which path to use for your bundle.')
-  .option('-k, --key', '*required* Path and filename of the RSA key.')
+  .option('-k, --key', '*Required* Path and filename of the RSA key.')
   .parse(process.argv);
 
 var flags = ['server','bundle','path','key']; // list of available flags
@@ -29,7 +34,7 @@ if (arguments.server) { // set up pathway for Zoomin server
         arguments.server = '/docs.axway.com/confluence/incoming';
     }
 } else {
-    console.log('Server is required. Select either "sandbox" or "prod". Quitting attempt.');
+    console.log('Server is required. Select either "sandbox" or "prod". End of line.');
 
     process.exit(1);  
 }
@@ -42,61 +47,72 @@ const bundleName = ['api builder','api runtime services','api runtime services s
 const bundleDirectory = ['API_Builder','API_Runtime_Services','API_Runtime_Services_self-install','Alloy','Amplify_CLI','Amplify_Dashboard','Amplify_Services','Amplify_Services_Overview','Appcelerator_CLI','Appcelerator_Dashboard','Appcelerator_Studio','Mobile_Backend_Services','Sphere','Syncplicity','Titanium_SDK']; // bundle directory end path
 
 if (arguments.bundle) { // set up pathway for bundle to be uploaded
-    var matches = false; // if the supplied argument isn't found in bundleName array, fail the attempt
+    var bundleList = []; // array to hold one or more bundle names
+    var bundleListPaths = []; // array to hold the path(s) of one or more bundle paths
+    var bundleCount = 0; // used to confirm that the right number of bundles are being sent
+    
+    if (arguments.bundle.indexOf(',') > -1) { // if there is a comma separated, assume this is a multiple bundle upload request
+        bundleList = arguments.bundle.split(',');
+    } else { // process a single bundle
+        bundleList.push(arguments.bundle);
+    }
 
-    for (i in bundleName) { // match the bundle name with the path to said bundle
-        if (arguments.bundle == bundleName[i]) {
-            arguments.bundle = arguments.path + bundleDirectory[i];
-            matches = true;
-            break;
+    for (i in bundleName) { // loop through the bundle names and obtain the correct path and bundle directory names bundle names is mistyped
+        for (k in bundleList) {
+            if (bundleList[k] == bundleName[i]) {
+                bundleListPaths.push(arguments.path + bundleDirectory[i]);
+                bundleCount++;
+            }
         }
     }
 
-    if (matches == false) {
-        console.log('A bundle name is required. Please use one of the following:');
+    if (bundleCount == bundleList.length) { // if the bundleList length doesn't match the bundleCount, then one or more of the 
+        console.log('Attempting to upload ' + bundleCount + ' bundles.');
+    } else {
+        console.log('One of the bundles isn\'t right. Please use one of the following:');
         
         for (i in bundleName) {
             console.log(bundleName[i]);
         }
 
-        console.log('Quitting attempt.');
+        console.log('End of line.');
 
-        process.exit(1);  
+        process.exit(1); 
     }
 }
 
 if (!arguments.key) {
-    console.log('A RSA key is required. Quitting attempt.');
+    console.log('A RSA key is required. End of line.');
 
     process.exit(1);
 }
 
 if (arguments.server && arguments.path && arguments.bundle && arguments.key) {
-    var options = { // set options for SFTP upload
-        host: 'upload.zoominsoftware.io', // zoomin host
-        username: 'axway', // our username
-        path: arguments.bundle, // path to the bundle to be uploaded
-        remoteDir: arguments.server, // path to the server
-        privateKey: fs.readFileSync(arguments.key) // RSA key
+    for (i in bundleListPaths) { // loop through all bundles and sftp them to the zoomin server
+        var options = { // set options for SFTP upload
+            host: 'upload.zoominsoftware.io', // zoomin host
+            username: 'axway', // our username
+            path: bundleListPaths[i], // path to the bundle to be uploaded
+            remoteDir: arguments.server, // path to the server
+            privateKey: fs.readFileSync(arguments.key) // RSA key
+        }
+
+        sftp = new SftpUpload(options);
+
+        sftp.on('error', function(err) {
+            throw err;
+            })
+            .on('uploading', function(progress) {
+                console.log('Uploading', progress.file);
+                console.log(progress.percent + '% completed');
+            })
+            .on('completed', function() {
+                console.log('Upload complete.');
+            })
+            .upload();
     }
-
-    sftp = new SftpUpload(options);
-
-    sftp.on('error', function(err) {
-        throw err;
-        })
-        .on('uploading', function(progress) {
-            console.log('Uploading', progress.file);
-            console.log(progress.percent + '% completed');
-        })
-        .on('completed', function() {
-            console.log('Upload complete.');
-        })
-        .upload();
-
 } else { // catch any missing required flags
-    console.log('You are missing one or more arguments. Quitting attempt.');
+    console.log('You are missing one or more arguments. End of line.');
 
     process.exit(1);
 }
-
