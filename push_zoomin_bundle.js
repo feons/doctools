@@ -1,4 +1,6 @@
 const program = require('commander');
+var SftpUpload = require('sftp-upload');
+var fs = require('fs');
 var arguments = {}; // object to hold the entered arguments
 
 program // set up flags
@@ -37,7 +39,7 @@ if (!arguments.path) { // set default path for product bundles
 }
 
 const bundleName = ['api builder','api runtime services','api runtime services self','alloy','amplify cli','amplify dashboard','amplify services','amplify services overview','appc cli','appc dashboard','studio','mbs','sphere','syncplicity','sdk']; // names of the various products or top-level documents
-const bundleDirectory = ['API_Builder','API_Runtime_Services','API_Runtime_Services_self-install','Alloy','Amplify_CLI','Amplify_Dashboard','Amplify_Services','Amplify_Services_Overview','Appcelerator_CLI','Appcelerator_Dashboard','Appcelerator_Studio','Mobile_Backend_Services','Sphere']; // bundle directory end path
+const bundleDirectory = ['API_Builder','API_Runtime_Services','API_Runtime_Services_self-install','Alloy','Amplify_CLI','Amplify_Dashboard','Amplify_Services','Amplify_Services_Overview','Appcelerator_CLI','Appcelerator_Dashboard','Appcelerator_Studio','Mobile_Backend_Services','Sphere','Syncplicity','Titanium_SDK']; // bundle directory end path
 
 if (arguments.bundle) { // set up pathway for bundle to be uploaded
     var matches = false; // if the supplied argument isn't found in bundleName array, fail the attempt
@@ -58,7 +60,7 @@ if (arguments.bundle) { // set up pathway for bundle to be uploaded
         }
 
         console.log('Quitting attempt.');
-        
+
         process.exit(1);  
     }
 }
@@ -70,8 +72,29 @@ if (!arguments.key) {
 }
 
 if (arguments.server && arguments.path && arguments.bundle && arguments.key) {
-    console.log(arguments)
-} else {
+    var options = { // set options for SFTP upload
+        host: 'upload.zoominsoftware.io', // zoomin host
+        username: 'axway', // our username
+        path: arguments.bundle, // path to the bundle to be uploaded
+        remoteDir: arguments.server, // path to the server
+        privateKey: fs.readFileSync(arguments.key) // RSA key
+    }
+
+    sftp = new SftpUpload(options);
+
+    sftp.on('error', function(err) {
+        throw err;
+        })
+        .on('uploading', function(progress) {
+            console.log('Uploading', progress.file);
+            console.log(progress.percent + '% completed');
+        })
+        .on('completed', function() {
+            console.log('Upload complete.');
+        })
+        .upload();
+
+} else { // catch any missing required flags
     console.log('You are missing one or more arguments. Quitting attempt.');
 
     process.exit(1);
