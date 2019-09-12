@@ -29,8 +29,8 @@
 </li></ul></li></ul>    <div class="section section-2 " id="src-46248454_WindowsModuleArchitecture-Introduction">
         <h2 class="heading "><span>Introduction</span></h2>
     <p>The Titanium SDK is based on a modular architecture, which can be utilized to extend the SDK by building modules.  The module architecture contains the following key interface components:    </p>
-<ul class=" "><li class=" ">    <p><strong class=" "><i class=" ">Module</i></strong>: A base class that represents the native binding between your JavaScript code and native code    </p>
-</li><li class=" ">    <p><strong class=" "><i class=" ">View</i></strong>: The visual representation of a UI component which Titanium can render    </p>
+<ul class=" "><li class=" ">    <p><strong class=" "> <i class=" ">Module</i> </strong>: A base class that represents the native binding between your JavaScript code and native code    </p>
+</li><li class=" ">    <p><strong class=" "> <i class=" ">View</i> </strong>: The visual representation of a UI component which Titanium can render    </p>
 </li></ul>    <p>To return <u class=" ">visual</u> data between JavaScript and native code, create a View. The View represents is responsible for exposing the APIs and events that the View supports.    </p>
     <p>To return <u class=" ">non-visual</u> data between JavaScript and native code, create a Module. The Module knows how to handle any method and property, and dispatching and firing events.    </p>
     <p>These components require special class names and method signatures.  Each components is described in further detail below.    </p>
@@ -74,7 +74,7 @@
     <div class="section section-3 " id="src-46248454_WindowsModuleArchitecture-ModuleLifecycleEvents">
         <h3 class="heading "><span>Module Lifecycle Events</span></h3>
     <p>The module provides several places for you to hook into the application&apos;s lifecycle.    </p>
-    <p class="line">Use <tt class=" ">postInitialize</tt> method to declare a method to be called when the module object is created. This is optional and is only required if you have any module specific initialization, such as initializing variables that is required by the module. This method is called after module object initialization. This method could be called multiple times, <i class=" ">after</i> your module object is actually created, and <i class=" ">before</i> module is called as a constructor.    </p>
+    <p>Use <tt class=" ">postInitialize</tt> method to declare a method to be called when the module object is created. This is optional and is only required if you have any module specific initialization, such as initializing variables that is required by the module. This method is called after module object initialization. This method could be called multiple times, <i class=" ">after</i> your module object is actually created, and <i class=" ">before</i> module is called as a constructor.    </p>
     <p>Declare <tt class=" ">postInitialize</tt> with <tt class=" ">override</tt> specifier in the header:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                     <div class="title">ComExampleTest.hpp</div>
@@ -104,7 +104,7 @@
 <div class="line"><code class="plain"> }</code></div>
 </div>
     </div>
-    <p class="c1">If you only need to hook JavaScript constructor, use <tt class=" ">postCallAsConstructor</tt> method to declare a method to be called when the module constructor is called. This is optional and is only required if you have any module instance specific initialization, such as initializing variables that is required by the instance. This method is called during module constructor. This method is called only once <i class=" ">after</i> module is called as a constructor.    </p>
+    <p>If you only need to hook JavaScript constructor, use <tt class=" ">postCallAsConstructor</tt> method to declare a method to be called when the module constructor is called. This is optional and is only required if you have any module instance specific initialization, such as initializing variables that is required by the instance. This method is called during module constructor. This method is called only once <i class=" ">after</i> module is called as a constructor.    </p>
     <p>Declare <tt class=" ">postCallAsConstructor</tt> with <tt class=" ">override</tt> specifier in the header:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                     <div class="title">ComExampleTest.hpp</div>
@@ -240,7 +240,7 @@
 <div class="line"><code class="plain">&#xA0;};</code></div>
 </div>
     </div>
-    <p>Second, implement <tt class=" ">exampleProp</tt> property getter/setter with <tt class=" ">TITANIUM_PROPERTY_GETTER/</tt><tt class=" ">TITANIUM_PROPERTY_SETTER</tt> and then register in <tt class=" ">JSExportInitialize</tt> with <tt class=" ">TITANIUM_ADD_PROPERTY:</tt>    </p>
+    <p>Second, implement <tt class=" ">exampleProp</tt> property getter/setter with <tt class=" ">TITANIUM_PROPERTY_GETTER/</tt> <tt class=" ">TITANIUM_PROPERTY_SETTER</tt> and then register in <tt class=" ">JSExportInitialize</tt> with <tt class=" ">TITANIUM_ADD_PROPERTY:</tt>    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                     <div class="title">ComExampleTest.cpp</div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code" data-title="ComExampleTest.cpp">
@@ -357,8 +357,8 @@
 <ul class=" "><li class=" ">    <p>source &#x2014; The source object (proxy) that fired the event    </p>
 </li><li class=" ">    <p>type &#x2014; The type of event    </p>
 </li></ul>    </div>
-    <div class="section section-3 line" id="src-46248454_WindowsModuleArchitecture-MoreExamples">
-        <h3 class="heading line"><span>More Examples</span></h3>
+    <div class="section section-3 " id="src-46248454_WindowsModuleArchitecture-MoreExamples">
+        <h3 class="heading "><span>More Examples</span></h3>
 <ul class=" "><li class=" ">    <p>For information about HAL API, see <a class="external-link external-link" href="https://github.com/appcelerator/HAL" target="_blank">github/appcelerator/HAL</a>    </p>
 </li><li class=" ">    <p>For information about TitaniumKit, see <a class="external-link external-link" href="https://github.com/appcelerator/titanium_mobile_windows" target="_blank">github/appcelerator/titanium_mobile_windows</a>    </p>
 </li><li class=" ">    <p>For more examples of using the module API, see working Titanium modules under <a class="external-link external-link" href="https://github.com/appcelerator/titanium_mobile_windows/tree/master/Source" target="_blank">github/appcelerator/titanium_mobile_windows/Source</a>    </p>

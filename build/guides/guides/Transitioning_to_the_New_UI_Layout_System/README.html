@@ -18,8 +18,6 @@
 
         <div id="src-30088148" class="content">
                         <h1>Transitioning to the New UI Layout System</h1>
-    <div class="section section-2 " id="src-30088148_TransitioningtotheNewUILayoutSystem-Contents">
-        <h2 class="heading "><span>Contents</span></h2>
     <p>    </p>
 <ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="#!/guide/Transitioning_to_the_New_UI_Layout_System-section-src-30088148_TransitioningtotheNewUILayoutSystem-Overview">Overview</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Transitioning_to_the_New_UI_Layout_System-section-src-30088148_TransitioningtotheNewUILayoutSystem-UnderstandingtheUILayoutSystemChanges">Understanding the UI Layout System Changes</a>    </p>
@@ -47,8 +45,7 @@
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Transitioning_to_the_New_UI_Layout_System-section-src-30088148_TransitioningtotheNewUILayoutSystem-PositioningPinsinAndroid">Positioning Pins in Android</a>    </p>
 </li></ul></li><li class=" ">    <p><a class="document-link " href="#!/guide/Transitioning_to_the_New_UI_Layout_System-section-src-30088148_TransitioningtotheNewUILayoutSystem-MobileWebLayoutBehavior">Mobile Web Layout Behavior</a>    </p>
 </li></ul></li><li class=" ">    <p><a class="document-link " href="#!/guide/Transitioning_to_the_New_UI_Layout_System-section-src-30088148_TransitioningtotheNewUILayoutSystem-MigratingApplicationstoRelease2.0">Migrating Applications to Release 2.0</a>    </p>
-</li></ul>    </div>
-    <div class="section section-2 " id="src-30088148_TransitioningtotheNewUILayoutSystem-Overview">
+</li></ul>    <div class="section section-2 " id="src-30088148_TransitioningtotheNewUILayoutSystem-Overview">
         <h2 class="heading "><span>Overview</span></h2>
     <p>Release 2.0 includes a set of changes to the layout system designed to provide more control over layout and improve the parity between platforms by having all platforms implement a single, well-defined set of behaviors.    </p>
     <p>These changes affect existing layout behavior on all platforms, so you may see UI changes in your application. This document details:    </p>
@@ -93,7 +90,7 @@
         <p><tt class=" ">left</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>Pins the left side of a UI component relative to its parent. Measured from the parent&apos;s left bound.<br><br>Acts as padding between UI siblings in horizontal layouts.    </br></br></p>
+        <p>Pins the left side of a UI component relative to its parent. Measured from the parent&apos;s left bound.<br>Acts as padding between UI siblings in horizontal layouts.    </br></p>
             </td>
         </tr>
     <tr>
@@ -101,7 +98,7 @@
         <p><tt class=" ">right</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>Pins the right side of a UI component relative to its parent. Measured from the parent&apos;s right bound.<br><br>Acts as padding between UI siblings in horizontal layouts.    </br></br></p>
+        <p>Pins the right side of a UI component relative to its parent. Measured from the parent&apos;s right bound.<br>Acts as padding between UI siblings in horizontal layouts.    </br></p>
             </td>
         </tr>
     <tr>
@@ -109,7 +106,7 @@
         <p><tt class=" ">top</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>Pins the top of a UI component relative to its parent. Measured from the parent&apos;s top bound.<br><br>Acts as padding between UI siblings in vertical layouts.    </br></br></p>
+        <p>Pins the top of a UI component relative to its parent. Measured from the parent&apos;s top bound.<br>Acts as padding between UI siblings in vertical layouts.    </br></p>
             </td>
         </tr>
     <tr>
@@ -117,7 +114,7 @@
         <p><tt class=" ">bottom</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>Pins the bottom of a UI component relative to its parent. Measured from the parent&apos;s bottom bound.<br><br>Acts as padding between UI siblings in vertical layouts.    </br></br></p>
+        <p>Pins the bottom of a UI component relative to its parent. Measured from the parent&apos;s bottom bound.<br>Acts as padding between UI siblings in vertical layouts.    </br></p>
             </td>
         </tr>
     <tr>
@@ -133,7 +130,7 @@
         <p><tt class=" ">layout</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>Defines how the component lays out its children. One of &quot;vertical&quot;, &quot;horizontal&quot; or &quot;composite&quot;.<br><br>Default is &quot;composite&quot;. The value &quot;absolute&quot; is a synonym for &quot;composite&quot;.    </br></br></p>
+        <p>Defines how the component lays out its children. One of &quot;vertical&quot;, &quot;horizontal&quot; or &quot;composite&quot;.<br>Default is &quot;composite&quot;. The value &quot;absolute&quot; is a synonym for &quot;composite&quot;.    </br></p>
             </td>
         </tr>
     <tr>
@@ -141,7 +138,7 @@
         <p><tt class=" ">zIndex</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>Stack order of UI component in its parent. Higher values are rendered towards the top, in front of components with lower values.<br><br>If no <tt class=" ">zIndex</tt> value is set, components stack in the order in which they are added to the parent, with the last child added displayed on top of earlier children. Any component with a defined <tt class=" ">zIndex</tt> value is displayed in front of any components with undefined <tt class=" ">zIndex</tt>.<br>Does not affect the actual layout of this component.    </br></br></br></p>
+        <p>Stack order of UI component in its parent. Higher values are rendered towards the top, in front of components with lower values.<br>If no <tt class=" ">zIndex</tt> value is set, components stack in the order in which they are added to the parent, with the last child added displayed on top of earlier children. Any component with a defined <tt class=" ">zIndex</tt> value is displayed in front of any components with undefined <tt class=" ">zIndex</tt>. Does not affect the actual layout of this component.    </br></p>
             </td>
         </tr>
     <tr>
@@ -233,7 +230,7 @@
         <p><tt class=" ">width</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>If <tt class=" ">width</tt> is defined, it takes precedence and the positioning pins are not used to determine the view&apos;s width.<br><br>If <tt class=" ">width</tt> is not defined, and at least two horizontal positioning pins are defined, the width is calculated implicitly from the pins. For example, <tt class=" ">left</tt> and <tt class=" ">right</tt> or <tt class=" ">left</tt> and <tt class=" ">center.x</tt>. If all three horizontal pins are defined, the width is determined by the <tt class=" ">left</tt> and <tt class=" ">center.x</tt> pins. If width cannot be implicitly calculated it follows the view&apos;s default sizing behavior.    </br></br></p>
+        <p>If <tt class=" ">width</tt> is defined, it takes precedence and the positioning pins are not used to determine the view&apos;s width.<br>If <tt class=" ">width</tt> is not defined, and at least two horizontal positioning pins are defined, the width is calculated implicitly from the pins. For example, <tt class=" ">left</tt> and <tt class=" ">right</tt> or <tt class=" ">left</tt> and <tt class=" ">center.x</tt>. If all three horizontal pins are defined, the width is determined by the <tt class=" ">left</tt> and <tt class=" ">center.x</tt> pins. If width cannot be implicitly calculated it follows the view&apos;s default sizing behavior.    </br></p>
             </td>
         </tr>
     <tr>
@@ -255,7 +252,7 @@
         <p><tt class=" ">center.x</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>Used to position the view horizontally if <tt class=" ">left</tt> is not set.<br><br>If <tt class=" ">left</tt> is set, this property is not used to position the view, although it may be used to determine its width.    </br></br></p>
+        <p>Used to position the view horizontally if <tt class=" ">left</tt> is not set.<br>If <tt class=" ">left</tt> is set, this property is not used to position the view, although it may be used to determine its width.    </br></p>
             </td>
         </tr>
     <tr>
@@ -266,7 +263,7 @@
         <p><tt class=" ">right</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>Used to position the view horizontally when neither <tt class=" ">left</tt> or <tt class=" ">center.x</tt> is set.<br><br>If either <tt class=" ">left</tt> or <tt class=" ">center.x</tt> is set, this property is not used to position the view, although it may be used to determine its width.    </br></br></p>
+        <p>Used to position the view horizontally when neither <tt class=" ">left</tt> or <tt class=" ">center.x</tt> is set.<br>If either <tt class=" ">left</tt> or <tt class=" ">center.x</tt> is set, this property is not used to position the view, although it may be used to determine its width.    </br></p>
             </td>
         </tr>
     <tr>
@@ -277,7 +274,7 @@
         <p><tt class=" ">height</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>If <tt class=" ">height</tt> is defined, it takes precedence and the positioning pins are not used to determine the view&apos;s height.<br><br>If <tt class=" ">height</tt> is not defined, and at least two vertical positioning pins are defined, the height is determined implicitly from the pins. If all three vertical pins are defined, the height is determined by the <tt class=" ">top</tt> and <tt class=" ">center.y</tt> pins. If height cannot be implicitly calculated it follows the view&apos;s default sizing behavior.    </br></br></p>
+        <p>If <tt class=" ">height</tt> is defined, it takes precedence and the positioning pins are not used to determine the view&apos;s height.<br>If <tt class=" ">height</tt> is not defined, and at least two vertical positioning pins are defined, the height is determined implicitly from the pins. If all three vertical pins are defined, the height is determined by the <tt class=" ">top</tt> and <tt class=" ">center.y</tt> pins. If height cannot be implicitly calculated it follows the view&apos;s default sizing behavior.    </br></p>
             </td>
         </tr>
     <tr>
@@ -299,7 +296,7 @@
         <p><tt class=" ">center.y</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>Used to position the view vertically if <tt class=" ">top</tt> is not set.<br><br>If <tt class=" ">top</tt> is defined, this property is not used to position the view, although it may be used to determine its height.    </br></br></p>
+        <p>Used to position the view vertically if <tt class=" ">top</tt> is not set.<br>If <tt class=" ">top</tt> is defined, this property is not used to position the view, although it may be used to determine its height.    </br></p>
             </td>
         </tr>
     <tr>
@@ -310,7 +307,7 @@
         <p><tt class=" ">bottom</tt>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>Used to position the view vertically if neither <tt class=" ">top</tt> or <tt class=" ">center.y</tt> is set.<br><br>If either <tt class=" ">top</tt> or <tt class=" ">center.y</tt> is set, this property is ignored. this property is not used to position the view, although it may be used to determine its height.    </br></br></p>
+        <p>Used to position the view vertically if neither <tt class=" ">top</tt> or <tt class=" ">center.y</tt> is set.<br>If either <tt class=" ">top</tt> or <tt class=" ">center.y</tt> is set, this property is ignored. this property is not used to position the view, although it may be used to determine its height.    </br></p>
             </td>
         </tr>
 </tbody>        </table>

@@ -23,9 +23,7 @@
             <div class="title">Example App Source Location</div>
             <p>You can find this example app in the Alloy repository under <a class="external-link external-link" href="https://github.com/appcelerator/alloy/tree/master/samples/apps/ui/navwindow" target="_blank">samples/apps/ui/navwindow</a>. Check the <a class="document-link " href="#!/guide/Alloy_Test_Apps">instructions</a> how to run these sample projects.    </p>
     </div>
-        <p>A <a class="external-link external-link" href="#!/api/Titanium.UI.iOS.NavigationWindow">NavigationWindow</a> implements a specialized view that manages the navigation of hierarchical content. You call the NavigationWindow object&apos;s <a class="external-link external-link" href="#!/api/Titanium.UI.iOS.NavigationWindow-method-openWindow">openWindow()</a> method to open     <span style="color: #222222;">
-a new window in the navigation group, <a class="external-link external-link" href="#!/api/Titanium.UI.iOS.NavigationWindow-method-closeWindow">closeWindow()</a> to remove it.    </span>
-    </p>
+        <p>A <a class="external-link external-link" href="#!/api/Titanium.UI.iOS.NavigationWindow">NavigationWindow</a> implements a specialized view that manages the navigation of hierarchical content. You call the NavigationWindow object&apos;s <a class="external-link external-link" href="#!/api/Titanium.UI.iOS.NavigationWindow-method-openWindow">openWindow()</a> method to open a new window in the navigation group, <a class="external-link external-link" href="#!/api/Titanium.UI.iOS.NavigationWindow-method-closeWindow">closeWindow()</a> to remove it.    </p>
     <p>    <img src="images/download/attachments/41845759/image.gif" alt="images/download/attachments/41845759/image.gif" class="confluence-embedded-image confluence-content-image-border" width="250" height="392">
         </img></p>
     <p>The sample&apos;s main index.xml view declares a NavigationWindow element named <tt class=" ">navWindow</tt>.    </p>
@@ -45,7 +43,7 @@ a new window in the navigation group, <a class="external-link external-link" hre
     <div class="confbox admonition admonition-note aui-message warning shadowed information-macro">
             <p>As of Titanium 8.0.0, you don&apos;t need to specify the platform type (e.g. <tt class=" ">&lt;NavigationWindow platform=&quot;ios&quot;&gt;</tt>).    </p>
     </div>
-        <p>When the &quot;Push&quot; button is clicked, it invokes the <tt class=" ">Alloy.Globals.openWindow()</tt> function. This function is defined in the application&apos;s alloy.js file, and calls the <tt class=" ">navWindow&apos;s</tt> <a class="external-link external-link" href="#!/api/Titanium.UI.iOS.NavigationWindow-method-openWindow">openWindow()</a> method, passing it a new window created from the <tt class=" ">app/views/win.xml</tt> view. It also initializes a global counter variable named <tt class=" ">ctr</tt> that&apos;s displayed by each window added to the navigation stack.    </p>
+        <p>When the &quot;Push&quot; button is clicked, it invokes the  <tt class=" ">Alloy.Globals.openWindow()</tt>  function. This function is defined in the application&apos;s alloy.js file, and calls the <tt class=" ">navWindow&apos;s</tt> <a class="external-link external-link" href="#!/api/Titanium.UI.iOS.NavigationWindow-method-openWindow">openWindow()</a> method, passing it a new window created from the <tt class=" ">app/views/win.xml</tt> view. It also initializes a global counter variable named <tt class=" ">ctr</tt> that&apos;s displayed by each window added to the navigation stack.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                     <div class="title">app/alloy.js</div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code" data-title="app/alloy.js">

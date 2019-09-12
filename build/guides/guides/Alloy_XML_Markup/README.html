@@ -367,7 +367,7 @@
     </div>
     <div class="section section-2 " id="src-46248608_AlloyXMLMarkup-Moduleelement">
         <h2 class="heading "><span>Module element</span></h2>
-    <p>You can also include a view from a native module using the  <tt class=" ">Module</tt>  XML element. To use the Module tag:    </p>
+    <p>You can also include a view from a native module using the  <tt class=" ">Module</tt> XML element. To use the Module tag:    </p>
 <ol class=" "><li class=" ">    <p>Add the module to your project. For instructions on adding a module to your project, see <a class="document-link " href="#!/guide/Using_Titanium_Modules">Using Titanium Modules</a>.    </p>
 </li><li class=" ">    <p>Add the <tt class=" ">Module</tt> tag in to an Alloy view as a child of a window or another parent object depending on the view object returned by the module.    </p>
 </li><li class=" ">    <p>Set the <tt class=" ">module</tt> attribute to the name of the module.    </p>
@@ -534,7 +534,7 @@
 <div class="line"><code class="keyword">var</code><code class="plain"> image = $.args.customImage || </code><code class="string">&apos;default.png&apos;</code><code class="plain">;</code></div>
 </div>
     </div>
-    <p>See <a class="document-link " href="#!/guide/Alloy_Controllers-section-src-34636384_AlloyControllers-Passingarguments">Alloy Controllers: Passing Arguments</a> for more details.    </p>
+    <p>See <a class="document-link " href="#!/guide/Alloy_Controllers-section-src-34636384_AlloyControllers-Passingarguments">Alloy Controllers: Passing Arguments</a>  for more details.    </p>
     </div>
     <div class="section section-3 " id="src-46248608_AlloyXMLMarkup-Bindingevents">
         <h3 class="heading "><span>Binding events</span></h3>
@@ -750,7 +750,7 @@
     <p>Add the <tt class=" ">platform</tt>, <tt class=" ">formFactor</tt> and <tt class=" ">if</tt> attributes to apply XML elements based on conditionals.    </p>
 <ul class=" "><li class=" ">    <p>To specify a platform-specific element, use the <tt class=" ">platform</tt> attribute and assign it a platform, such as, <tt class=" ">android</tt>, <tt class=" ">ios</tt>, <tt class=" ">mobileweb</tt>, or<tt class=" "> windows</tt>.<br>Comma separate the values to logically OR the values together, for example, <tt class=" ">platform=&apos;ios,android&apos;</tt> indicates both Android and iOS.<br>Prepend the value with an exclamation point (<tt class=" ">!</tt>) to negate the value, for example, <tt class=" ">platform=&apos;!ios&apos;</tt> indicates all platforms except iOS.    </br></br></p>
 </li><li class=" ">    <p>To specify a device-size-specific element, use the <tt class=" ">formFactor</tt> attribute and assign it a device size&#x2013;either <tt class=" ">handheld</tt> or <tt class=" ">tablet</tt>.    </p>
-</li><li class=" ">    <p>To use a custom query, assign the <tt class=" ">if</tt> attribute to a conditional statement in the <tt class=" ">Alloy.Globals</tt> namespace. This conditional statement must return a boolean value. You may only assign <u class=" "><strong class=" ">one</strong></u> query to the <tt class=" ">if</tt> attribute.    </p>
+</li><li class=" ">    <p>To use a custom query, assign the <tt class=" ">if</tt> attribute to a conditional statement in the <tt class=" ">Alloy.Globals</tt> namespace. This conditional statement must return a boolean value. You may only assign <u class=" "> <strong class=" ">one</strong> </u> query to the <tt class=" ">if</tt> attribute.    </p>
 </li><li class=" ">    <p>The application can also pass custom Boolean properties with the <tt class=" ">Alloy.createController()</tt> method, which can be accessed by the XML. Assign the <tt class=" ">if</tt> attribute to the name of the property prefixed with the <tt class=" ">$.args</tt> namespace, for example, <tt class=" ">$.args.someProperty</tt>.    </p>
 </li></ul>    <p>You can use all the attributes in any combination.    </p>
     <p>In the example below, different Annotation objects are displayed in the view based on the platform and device size.    </p>
@@ -769,7 +769,7 @@
 <div class="line"><code class="plain">&lt;/</code><code class="keyword">Alloy</code><code class="plain">&gt;</code></div>
 </div>
     </div>
-    <p>You can also create subfolders, named as the platform, in the <tt class=" ">views</tt> directory as another way to create platform-specific views. Refer to <a class="document-link " href="#!/guide/Alloy_Concepts-section-src-34636240_AlloyConcepts-Platform-specificresources">Alloy Concepts: Platform-Specific Resources</a>.    </p>
+    <p>You can also create subfolders, named as the platform, in the  <tt class=" ">views</tt>  directory as another way to create platform-specific views. Refer to  <a class="document-link " href="#!/guide/Alloy_Concepts-section-src-34636240_AlloyConcepts-Platform-specificresources">Alloy Concepts: Platform-Specific Resources</a>.    </p>
     </div>
     <div class="section section-2 " id="src-46248608_AlloyXMLMarkup-Propertymapping">
         <h2 class="heading "><span>Property mapping</span></h2>
@@ -991,7 +991,7 @@
         <p><a class="external-link external-link" href="https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.Window-property-leftNavButton" target="_blank">leftNavButton</a>    </p>
     <p><a class="external-link external-link" href="https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.Window-property-rightNavButton" target="_blank">rightNavButton</a>    </p>
     <p><a class="external-link external-link" href="https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.Window-property-titleControl" target="_blank">titleControl</a>    </p>
-    <p><a class="external-link external-link" href="https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.Window-property-toolbar" target="_blank">toolbar</a><a class="external-link external-link" href="#!/api/Titanium.UI.Window-property-"/>    </p>
+    <p><a class="external-link external-link" href="https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.Window-property-toolbar" target="_blank">toolbar</a> <a class="external-link external-link" href="#!/api/Titanium.UI.Window-property-"/>    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
         <p>&lt;LeftNavButton&gt;    </p>
@@ -1008,7 +1008,7 @@
     </div>
     <div class="section section-3 " id="src-46248608_AlloyXMLMarkup-AndroidActionBar">
         <h3 class="heading "><span>Android ActionBar</span></h3>
-    <p>You can set <a class="external-link external-link" href="https://docs.appcelerator.com/platform/latest/#!/api/Titanium.Android.ActionBar" target="_blank">ActionBar properties</a> in the <tt class=" ">ActionBar</tt> element to modify the application&apos;s action bar. Add the <tt class=" ">ActionBar</tt> element as a child of either a <tt class=" ">Window</tt> or <tt class=" ">TabGroup</tt>, then set <tt class=" ">ActionBar</tt> attributes in the XML or TSS file. To add action items to the action bar, add the <tt class=" ">Menu</tt> element as a child of either a <tt class=" ">Window</tt> or <tt class=" ">TabGroup</tt>, then add <tt class=" ">MenuItem</tt> elements as children of the <tt class=" ">Menu</tt> element. Set <tt class=" ">MenuItem</tt> attributes in either the XML or TSS file.    </p>
+    <p>You can set <a class="external-link external-link" href="https://docs.appcelerator.com/platform/latest/#!/api/Titanium.Android.ActionBar" target="_blank">ActionBar properties</a> in the <tt class=" ">ActionBar</tt> element to modify the application&apos;s action bar. Add the <tt class=" ">ActionBar</tt> element as a child of either  a <tt class=" ">Window</tt> or <tt class=" ">TabGroup</tt>, then set <tt class=" ">ActionBar</tt> attributes in the XML or TSS file. To add action items to the action bar, add the <tt class=" ">Menu</tt> element as a child of either  a <tt class=" ">Window</tt> or <tt class=" ">TabGroup</tt> , then add <tt class=" ">MenuItem</tt> elements as children of the <tt class=" ">Menu</tt> element. S et <tt class=" ">MenuItem</tt> attributes in either the XML or TSS file.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                     <div class="title">app/views/index.xml</div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code" data-title="app/views/index.xml">
@@ -1061,7 +1061,7 @@
     </div>
     <div class="section section-3 " id="src-46248608_AlloyXMLMarkup-iOSsystemButtonshorthand">
         <h3 class="heading "><span>iOS systemButton shorthand</span></h3>
-    <p>When specifying the <a class="external-link external-link" href="https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.Button-property-systemButton" target="_blank"><tt class=" ">systemButton</tt> attribute</a> for a Button object, you do not need to use the <tt class=" ">Ti.UI.iOS.SystemButton</tt> namespace. For example, the following markup creates the iOS camera button:    </p>
+    <p>When specifying the <a class="external-link external-link" href="https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.Button-property-systemButton" target="_blank"> <tt class=" ">systemButton</tt> attribute</a> for a Button object, you do not need to use the <tt class=" ">Ti.UI.iOS.SystemButton</tt> namespace. For example, the following markup creates the iOS camera button:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="plain">&lt;</code><code class="keyword">Button</code><code class="plain"> </code><code class="color1">systemButton</code><code class="plain">=</code><code class="string">&quot;CAMERA&quot;</code><code class="plain">/&gt;</code></div>

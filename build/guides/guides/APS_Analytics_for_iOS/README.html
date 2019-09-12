@@ -45,7 +45,7 @@
     </div>
     <div class="section section-2 " id="src-43298730_APSAnalyticsforiOS-Introduction">
         <h2 class="heading "><span>Introduction</span></h2>
-    <p>Appcelerator Analytics collects real-time data about your application&apos;s usage which can then be viewed in the <strong class=" "><a class="document-link " href="#!/guide/Managing_Client_Applications-section-src-43298774_ManagingClientApplications-AnalyticsViewingReal-timeandAggregatedAnalytics">Analytics dashboard</a></strong>. By default, the Analytics dashboard provides information about app installs, number of sessions, and average app session length (organized by app name, platform, and geography). Your app can also utilize custom analytic events and event funnels.    </p>
+    <p>Appcelerator Analytics collects real-time data about your application&apos;s usage which can then be viewed in the  <strong class=" "> <a class="document-link " href="#!/guide/Managing_Client_Applications-section-src-43298774_ManagingClientApplications-AnalyticsViewingReal-timeandAggregatedAnalytics">Analytics dashboard</a> </strong>. By default, the Analytics dashboard provides information about app installs, number of sessions, and average app session length (organized by app name, platform, and geography). Your app can also utilize custom analytic events and event funnels.    </p>
     <div class="confbox admonition admonition-note aui-message warning shadowed information-macro has-no-icon">
             <p>This document provides an overview of the features provided by Analytics, and how to use them using the Titanium SDK. <strong class=" ">If you are developing an iOS application with Objective-C or Swift or an Android application with Java</strong>, see <a class="document-link " href="#!/guide/APS_Analytics_for_iOS">APS Analytics for iOS</a> or <a class="document-link " href="#!/guide/APS_Analytics_for_Android">APS Analytics for Android</a> for details on using Analytics.    </p>
     </div>
@@ -91,12 +91,12 @@
 </div>
     </div>
     <div class="confbox admonition admonition-tip aui-message success shadowed information-macro">
-            <p class="diff-block-target diff-block-context">To get your APS App key:    </p>
-<ol class=" "><li class="diff-block-target diff-block-context ">    <p>Go to the <a class="external-link external-link" href="https://platform.axway.com/" target="_blank">Dashboard</a>.    </p>
-</li><li class="diff-block-target diff-block-context ">    <p>Select your application from the <strong class=" ">Apps</strong> drop-down menu.    </p>
-</li><li class="diff-block-target diff-block-context ">    <p>Click the <strong class=" ">Overview</strong> tab.    </p>
-</li><li class="diff-block-target diff-block-context ">    <p>Click the <strong class=" ">Services</strong> button.    </p>
-</li><li class="diff-block-target diff-block-context ">    <p>Click <strong class=" ">Show Key</strong> under the Analytics, Performance and Cloud section.    </p>
+            <p>To get your APS App key:    </p>
+<ol class=" "><li class=" ">    <p>Go to the <a class="external-link external-link" href="https://platform.axway.com/" target="_blank">Dashboard</a>.    </p>
+</li><li class=" ">    <p>Select your application from the <strong class=" ">Apps</strong> drop-down menu.    </p>
+</li><li class=" ">    <p>Click the <strong class=" ">Overview</strong> tab.    </p>
+</li><li class=" ">    <p>Click the <strong class=" ">Services</strong> button.    </p>
+</li><li class=" ">    <p>Click <strong class=" ">Show Key</strong> under the Analytics, Performance and Cloud section.    </p>
 </li></ol>    </div>
     </li></ol>    <p>The iOS application can now send user session events and make additional method calls using the <a class="external-link external-link" href="http://docs.appcelerator.com/aps-sdk-apidoc/latest/ios/Classes/APSAnalytics.html" target="_blank"> <tt class=" ">APSAnalytics</tt> class </a> .    </p>
     <div class="section section-3 " id="src-43298730_APSAnalyticsforiOS-AdvancedInitializationOptions">
@@ -115,7 +115,7 @@
     </div>
     <div class="section section-2 " id="src-43298730_APSAnalyticsforiOS-CreatingCustomEvents">
         <h2 class="heading "><span>Creating Custom Events</span></h2>
-    <p>You use the <a class="external-link external-link" href="#!/api/Titanium.Analytics">A</a><a class="external-link external-link" href="http://docs.appcelerator.com/aps-sdk-apidoc/latest/ios/Classes/APSAnalytics.html" target="_blank">PSAnalytics API </a>  to log and report custom events. <a class="document-link " href="#!/guide/APS_Analytics_for_iOS-section-src-43298730_APSAnalyticsforiOS-FeatureEvents">Feature Events</a> are for capturing a user action, such as selecting a specific menu option or launching a video.    </p>
+    <p>You use the <a class="external-link external-link" href="#!/api/Titanium.Analytics">A</a> <a class="external-link external-link" href="http://docs.appcelerator.com/aps-sdk-apidoc/latest/ios/Classes/APSAnalytics.html" target="_blank">PSAnalytics API </a> to log and report custom events. <a class="document-link " href="#!/guide/APS_Analytics_for_iOS-section-src-43298730_APSAnalyticsforiOS-FeatureEvents">Feature Events</a>  are for capturing a user action, such as selecting a specific menu option or launching a video.    </p>
     <div class="confbox admonition admonition-note aui-message warning shadowed information-macro">
             <p>Currently, the optional <tt class=" ">data</tt> parameter of the Titanium.Analytics methods, which is used to log a dictionary object, cannot be accessed through the Dashboard.    </p>
     </div>
@@ -123,13 +123,7 @@
         <h3 class="heading "><span>Feature Events</span></h3>
     <p>You use the <tt class=" ">sendAppFeatureEvent:payload</tt> method to generate a feature event that captures a specific application or user activity. A feature event should represent an action, such as launching a video, or &apos;new item&apos;, &apos;launch video&apos;, and so forth. The name you assign to a feature event should incorporate the application state into the event name, rather than long descriptive names. The following naming convention is suggested, where <i class=" ">group.event</i> refers to the parent event:    </p>
     <p><tt class=" ">group.event.sub-event</tt>    </p>
-    <p>Feature event names should be as generic as possible. For instance, if you want to track when users select a certain menu option, use a name like <strong class=" ">     <span style="color: #000000;">
-&quot;user.menu.selection&quot;,    </span>
- </strong>     <span style="color: #000000;">
- not <strong class=" ">&quot;joeuser.menu.selection&quot;</strong>. The first option is better because it groups all the same types of an event into a single metric that&apos;s easy to view on Dashboard. The person analyzing the data only has to look at a single number to get an overview of how many users have selected that menu option. The second might be fine for very small user bases, but if you have more than 100 users it means that the person analyzing the data would have to look through 100 different event names to be able to generate any useful data.    </span>
-    <span style="color: #000000;">
-     </span>
-    </p>
+    <p>Feature event names should be as generic as possible. For instance, if you want to track when users select a certain menu option, use a name like <strong class=" "> &quot;user.menu.selection&quot;, </strong>  not <strong class=" ">&quot;joeuser.menu.selection&quot;</strong>. The first option is better because it groups all the same types of an event into a single metric that&apos;s easy to view on Dashboard. The person analyzing the data only has to look at a single number to get an overview of how many users have selected that menu option. The second might be fine for very small user bases, but if you have more than 100 users it means that the person analyzing the data would have to look through 100 different event names to be able to generate any useful data.    </p>
     <p>For example, to track a user&apos;s menu selection you might use the following code, where the 10 digit number uniquely identifies the selection in your code:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                     <div class="title">Good Practice: Track the State with the Naming Syntax</div>

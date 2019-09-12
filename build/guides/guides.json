@@ -5338,6 +5338,10 @@
                         "title": "Studio Release Notes 5.x",
                         "items": [
                             {
+                                "name": "Studio_5.1.4.GA_Release_Note",
+                                "title": "Studio 5.1.4.GA Release Note"
+                            },
+                            {
                                 "name": "Studio_5.1.3.GA_Release_Note",
                                 "title": "Studio 5.1.3.GA Release Note"
                             },

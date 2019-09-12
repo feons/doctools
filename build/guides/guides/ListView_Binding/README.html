@@ -26,7 +26,7 @@
         <p>The application defines three list item templates: one with just a title, one with a title and subtitle, and one with a title, subtitle and image.    </p>
     <p>    <img src="images/download/attachments/41845706/screenshot.png" alt="images/download/attachments/41845706/screenshot.png" class="confluence-embedded-image confluence-content-image-border" width="240">
         </img></p>
-    <p>The main index.xml view defines three <tt class=" ">&lt;ItemTemplate/&gt;</tt> elements &#x2013; &quot;fullItem&quot;, &quot;titleAndSub&quot;, and &quot;title&quot; &#x2013; that define the various UI elements. The <tt class=" ">bindId</tt> attribute assigned to each UI element specifies the name used to assign data to it at runtime. The <tt class=" ">&lt;ListSection/&gt;</tt> element contains a single <tt class=" ">&lt;ListItem/&gt;</tt> element whose <tt class=" ">template</tt> attribute is set to the value &quot;{{<tt class=" ">template</tt>}}&quot;. It includes attributes whose names correspond to the three possible template UI elements: &quot;title&quot;, &quot;subtitle&quot; and &quot;image&quot;. The <tt class=" ">ListSection</tt> element is bound to the <tt class=" ">info</tt> collection and specifies a <tt class=" ">dataTransform</tt> function named <tt class=" ">doTransform()</tt>.    </p>
+    <p>The main index.xml view defines three <tt class=" ">&lt;ItemTemplate/&gt;</tt>  elements &#x2013; &quot;fullItem&quot;, &quot;titleAndSub&quot;, and &quot;title&quot; &#x2013; that define the various UI elements. The  <tt class=" ">bindId</tt> attribute assigned to each UI element specifies the name used to assign data to it at runtime. The <tt class=" ">&lt;ListSection/&gt;</tt>  element contains a single <tt class=" ">&lt;ListItem/&gt;</tt>  element whose  <tt class=" ">template</tt>  attribute is set to the value &quot;{{ <tt class=" ">template</tt> }}&quot;. It includes attributes whose names correspond to the three possible template  UI elements: &quot;title&quot;, &quot;subtitle&quot; and &quot;image&quot;. The  <tt class=" ">ListSection</tt>  element is bound to the  <tt class=" ">info</tt>  collection and specifies a <tt class=" ">dataTransform</tt> function named <tt class=" ">doTransform()</tt>.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                     <div class="title">app/views/index.xml</div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code" data-title="app/views/index.xml">
@@ -116,10 +116,8 @@
     <div class="section section-2 " id="src-41845706_ListViewBinding-SeeAlso">
         <h2 class="heading "><span>See Also</span></h2>
 <ul class=" "><li class=" ">    <p><a class="document-link unresolved" href="#!/guide/ListView_Binding-section-src-41845706">Alloy ListView Guide</a>    </p>
-</li><li class=" ">    <p><a class="external-link external-link" href="#!/api/Titanium.UI.ListView">Titanium.UI.ListView API reference</a>    </p>
-</li></ul>    <p>    </p>
-    <p>    </p>
-    </div>
+</li><li class=" ">    <p><a class="external-link external-link" href="https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.ListView" target="_blank">Titanium.UI.ListView API reference</a>    </p>
+</li></ul>    </div>
         </div><a id="editButton" href="https://wiki.appcelerator.org/pages/editpage.action?pageId=41845706"><span>Edit</span></a>
     
         
