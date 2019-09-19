@@ -2792,6 +2792,10 @@
                         "title": "Titanium SDK Release Notes 8.x",
                         "items": [
                             {
+                                "name": "Titanium_SDK_8.2.0.GA_Release_Note",
+                                "title": "Titanium SDK 8.2.0.GA Release Note"
+                            },
+                            {
                                 "name": "Titanium_SDK_8.2.0.RC_Release_Note",
                                 "title": "Titanium SDK 8.2.0.RC Release Note"
                             },

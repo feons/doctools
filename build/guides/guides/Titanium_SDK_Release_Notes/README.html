@@ -18,15 +18,14 @@
 
         <div id="src-43316487" class="content">
                         <h1>Titanium SDK Release Notes</h1>
-    <div class="section section-2 " id="src-43316487_TitaniumSDKReleaseNotes-TitaniumSDK8.2.0.RC-6September2019">
-        <h2 class="heading "><span>Titanium SDK 8.2.0.RC - 6 September 2019</span></h2>
+    <div class="section section-2 " id="src-43316487_TitaniumSDKReleaseNotes-TitaniumSDK8.2.0.GA-19September2019">
+        <h2 class="heading "><span>Titanium SDK 8.2.0.GA - 19 September 2019</span></h2>
 <ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="#!/guide/Titanium_SDK_Release_Notes-section-src-43316487_TitaniumSDKReleaseNotes-Aboutthisrelease">About this release</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Titanium_SDK_Release_Notes-section-src-43316487_TitaniumSDKReleaseNotes-NoticeoffeatureandbehaviorChanges">Notice of feature and behavior Changes</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Titanium_SDK_Release_Notes-section-src-43316487_TitaniumSDKReleaseNotes-Newfeatures">New features</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Titanium_SDK_Release_Notes-section-src-43316487_TitaniumSDKReleaseNotes-Communitycredits">Community credits</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Titanium_SDK_Release_Notes-section-src-43316487_TitaniumSDKReleaseNotes-Fixedissues">Fixed issues</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Titanium_SDK_Release_Notes-section-src-43316487_TitaniumSDKReleaseNotes-Improvements">Improvements</a>    </p>
-</li><li class=" ">    <p><a class="document-link " href="#!/guide/Titanium_SDK_Release_Notes-section-src-43316487_TitaniumSDKReleaseNotes-Knownissues">Known issues</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Titanium_SDK_Release_Notes-section-src-43316487_TitaniumSDKReleaseNotes-APIchanges">API changes</a>    </p>
 <ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="#!/guide/Titanium_SDK_Release_Notes-section-src-43316487_TitaniumSDKReleaseNotes-NewAPIs">New APIs</a>    </p>
 </li></ul></li><li class=" ">    <p><a class="document-link " href="#!/guide/Titanium_SDK_Release_Notes-section-src-43316487_TitaniumSDKReleaseNotes-SDKmodulesversions">SDK modules versions</a>    </p>
@@ -35,8 +34,8 @@
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Titanium_SDK_Release_Notes-section-src-43316487_TitaniumSDKReleaseNotes-Hyperloop">Hyperloop</a>    </p>
 </li></ul></li></ul>    <div class="section section-3 " id="src-43316487_TitaniumSDKReleaseNotes-Aboutthisrelease">
         <h3 class="heading "><span>About this release</span></h3>
-    <p>Titanium SDK 8.2.0 is a minor release of the SDK, addressing high-priority issues from previous releases.    </p>
-    <p>As of this release, Titanium SDK 8.1.x.x will not receive updates more than six months after the release of 8.2.0 (current) (2020-03-06). Any needed fixes will be in 8.2.x or later supported releases within the 8.x branch. See <a class="document-link " href="#!/guide/Axway_Appcelerator_Deprecation_Policy">Axway Appcelerator Deprecation Policy</a> and <a class="document-link " href="#!/guide/Axway_Appcelerator_Product_Lifecycle-section-src-50725170_AxwayAppceleratorProductLifecycle-NominalLifetimes">Nominal Lifetimes</a> documents for details.    </p>
+    <p>Titanium SDK 8.2.0 is a minor release of the SDK, addressing high-priority issues from previous releases.This release is geared towards supporting iOS 13.    </p>
+    <p>As of this release, Titanium SDK 8.1.x.x will not receive updates more than six months after the release of 8.2.0 (current) (2020-03-19). Any needed fixes will be in 8.2.x or later supported releases within the 8.x branch. See <a class="document-link " href="#!/guide/Axway_Appcelerator_Deprecation_Policy">Axway Appcelerator Deprecation Policy</a> and <a class="document-link " href="#!/guide/Axway_Appcelerator_Product_Lifecycle-section-src-50725170_AxwayAppceleratorProductLifecycle-NominalLifetimes">Nominal Lifetimes</a> documents for details.    </p>
     <div class="confbox admonition admonition-warning aui-message problem shadowed information-macro">
             <p>With the release of Titanium SDK 9.0.0, we will no longer support Node.js 8.X. Node 10.2.0 will be the new minimum supported version with SDK 9.0.0.    </p>
     </div>
@@ -51,10 +50,10 @@
 <div class="line"><code class="plain">{</code></div>
 <div class="line"><code class="plain">  </code><code class="string">&quot;textColor&quot;</code><code class="plain">: { </code><code class="comments">// the name for your color</code></div>
 <div class="line"><code class="plain">    </code><code class="string">&quot;dark&quot;</code><code class="plain">: {</code></div>
-<div class="line"><code class="plain">    	</code><code class="string">&quot;color&quot;</code><code class="plain">: </code><code class="string">&quot;#ff85e2&quot;</code><code class="plain">, </code><code class="comments">// hex color code to be set</code></div>
-<div class="line"><code class="plain">    	</code><code class="string">&quot;alpha&quot;</code><code class="plain">: </code><code class="string">&quot;50.0&quot;</code><code class="plain"> </code><code class="comments">// can be set from a range of 0-100</code></div>
-<div class="line"><code class="plain">  	},</code></div>
-<div class="line"><code class="plain">  	</code><code class="string">&quot;light&quot;</code><code class="plain">: </code><code class="string">&quot;#ff1f1f&quot;</code></div>
+<div class="line"><code class="plain">    </code><code class="string">&quot;color&quot;</code><code class="plain">: </code><code class="string">&quot;#ff85e2&quot;</code><code class="plain">, </code><code class="comments">// hex color code to be set</code></div>
+<div class="line"><code class="plain">    </code><code class="string">&quot;alpha&quot;</code><code class="plain">: </code><code class="string">&quot;50.0&quot;</code><code class="plain"> </code><code class="comments">// can be set from a range of 0-100</code></div>
+<div class="line"><code class="plain">  },</code></div>
+<div class="line"><code class="plain">  </code><code class="string">&quot;light&quot;</code><code class="plain">: </code><code class="string">&quot;#ff1f1f&quot;</code></div>
 <div class="line"><code class="plain">  }</code></div>
 <div class="line"><code class="plain">}</code></div>
 </div>
@@ -70,7 +69,10 @@
 </li></ul></li></ul>    </div>
     <div class="section section-3 " id="src-43316487_TitaniumSDKReleaseNotes-Newfeatures">
         <h3 class="heading "><span>New features</span></h3>
-<ul class=" "><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-26566" target="_blank">TIMOB-26566</a> - iOS: Add ability to remove previously added motion effects    </p>
+<ul class=" "><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/MOD-2534" target="_blank">MOD-2534</a> - TiAPI: Update Facebook SDK&apos;s to latest (iOS 5.5.0, Android 5.4.0) to support iOS 13    </p>
+<ul class=" "><li class=" ">    <p>Updated Facebook SDK&apos;s to 5.5.0 for iOS and 5.4.0 for Android    </p>
+</li><li class=" ">    <p>Facebook has removed support for Share to Messenger SDK. See <a class="external-link external-link" href="https://developers.facebook.com/docs/sharing/messenger" target="_blank">Sharing to Messenger for iOS and Android</a> for more details.    </p>
+</li></ul></li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-26566" target="_blank">TIMOB-26566</a> - iOS: Add ability to remove previously added motion effects    </p>
 <ul class=" "><li class=" ">    <p>Added <tt class=" ">clearMotionEffects()</tt> method    </p>
 </li></ul></li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27127" target="_blank">TIMOB-27127</a> - iOS 13 : Expose new APIs to support Apple login    </p>
 <ul class=" "><li class=" ">    <p>Added <a class="external-link external-link" href="https://docs.appcelerator.com/platform/latest/#!/api/Modules.Applesignin" target="_blank">ti.applesignin 1.1.0</a> module    </p>
@@ -184,14 +186,15 @@
 <div class="line"><code class="plain">nav.open();</code></div>
 </div>
     </div>
+</li></ul></li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27376" target="_blank">TIMOB-27376</a> - iOS: Malformed Xcode project warning printed on every build    </p>
+<ul class=" "><li class=" ">    <p>Fixed duplicate reference warnings    </p>
 </li></ul></li></ul>    </div>
     <div class="section section-3 " id="src-43316487_TitaniumSDKReleaseNotes-Communitycredits">
         <h3 class="heading "><span>Community credits</span></h3>
-<ul class=" "><li class=" ">    <p>VDLP - <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27207" target="_blank">TIMOB-27207</a>    </p>
-</li><li class=" ">    <p>Christy Thomas - <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-24171" target="_blank">TIMOB-24171</a>    </p>
+<ul class=" "><li class=" ">    <p>Christy Thomas - <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-24171" target="_blank">TIMOB-24171</a>    </p>
 </li><li class=" ">    <p>Fabian Martinez - <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27205" target="_blank">TIMOB-27205</a>    </p>
 </li><li class=" ">    <p>Sergey Volkov - <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27234" target="_blank">TIMOB-27234</a>    </p>
-</li><li class=" ">    <p>Hans Kn&#xF6;chel - <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27263" target="_blank">TIMOB-27263</a>, <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27367" target="_blank">TIMOB-27367</a>, <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27169" target="_blank">TIMOB-27169</a>, <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27171" target="_blank">TIMOB-27171</a>, <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27209" target="_blank">TIMOB-27209</a>    </p>
+</li><li class=" ">    <p>Hans Kn&#xF6;chel - <a class="external-link external-link" href="https://jira.appcelerator.org/browse/MOD-2534" target="_blank">MOD-2534</a>, <a class="external-link external-link" href="https://jira.appcelerator.org/browse/MOD-2537" target="_blank">MOD-2537</a>, <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27263" target="_blank">TIMOB-27263</a>, <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27367" target="_blank">TIMOB-27367</a>, <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27169" target="_blank">TIMOB-27169</a>, <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27171" target="_blank">TIMOB-27171</a>, <a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27209" target="_blank">TIMOB-27209</a>    </p>
 </li></ul>    </div>
     <div class="section section-3 " id="src-43316487_TitaniumSDKReleaseNotes-Fixedissues">
         <h3 class="heading "><span>Fixed issues</span></h3>
@@ -202,10 +205,10 @@
 </li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27263" target="_blank">TIMOB-27263</a> - iOS 13: Modal windows with large titles do not honor barColor    </p>
 </li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27292" target="_blank">TIMOB-27292</a> - iOS: App crashes on startup on iOS 9    </p>
 </li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27351" target="_blank">TIMOB-27351</a> - iOS: Unit tests failing on Xcode 11 / iOS 13    </p>
-</li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27360" target="_blank">TIMOB-27360</a> - Watch app does not get installed on the watch with watch OS 6.0 &amp; IOS 13    <span style="color: #ffcc00;">
-<br>    </br></span>
-    </p>
+</li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27360" target="_blank">TIMOB-27360</a> - Watch app does not get installed on the watch with watch OS 6.0 &amp; IOS 13    </p>
+</li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27362" target="_blank">TIMOB-27362</a> - Hyperloop example with Xcode 11 throws error on pod    </p>
 </li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27367" target="_blank">TIMOB-27367</a> - iOS: Apps can be rejected when including UIWebView refs    </p>
+</li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27386" target="_blank">TIMOB-27386</a> - iOS: Correctly decode push notification token    </p>
 </li></ul>    </div>
     <div class="section section-3 " id="src-43316487_TitaniumSDKReleaseNotes-Improvements">
         <h3 class="heading "><span>Improvements</span></h3>
@@ -318,11 +321,8 @@
 <ul class=" "><li class=" ">    <p>Updated Swift to version 5 for Apple watch template    </p>
 </li></ul></li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27358" target="_blank">TIMOB-27358</a> - iOS: Support Apple Developer certificates    </p>
 <ul class=" "><li class=" ">    <p>Added support for generic Apple certificates    </p>
-</li></ul></li></ul>    </div>
-    <div class="section section-3 " id="src-43316487_TitaniumSDKReleaseNotes-Knownissues">
-        <h3 class="heading "><span>Known issues</span></h3>
-<ul class=" "><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27362" target="_blank">TIMOB-27362</a> - Hyperloop example with Xcode 11 throws error on pod    </p>
-<ul class=" "><li class=" ">    <p>Building the Pods project with <tt class=" ">xcodebuild</tt> from Xcode 11 fails if <tt class=" ">project.xcworkspace/contents.xcworkspacedata</tt> is not present    </p>
+</li></ul></li><li class=" ">    <p><a class="external-link external-link" href="https://jira.appcelerator.org/browse/TIMOB-27395" target="_blank">TIMOB-27395</a> - iOS: Support new devices in os.cpus()    </p>
+<ul class=" "><li class=" ">    <p>Included new iPhone models into <tt class=" ">os</tt> extension    </p>
 </li></ul></li></ul>    </div>
     <div class="section section-3 " id="src-43316487_TitaniumSDKReleaseNotes-APIchanges">
         <h3 class="heading "><span>API changes</span></h3>
@@ -833,7 +833,7 @@
         <p>8.0.0    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>6.0.0    </p>
+        <p>7.0.0    </p>
             </td>
         </tr>
     <tr>
@@ -967,7 +967,7 @@
         <p>Hyperloop    </p>
             </td>
                 <td class="confluenceTd" rowspan="1" colspan="1">
-        <p>4.0.3    </p>
+        <p>4.0.4    </p>
             </td>
         </tr>
 </tbody>        </table>
