@@ -34,7 +34,12 @@ if (!arguments.release) { // user id is required
     show: false // use false if you don't want to see Electron "jumping through all the hoops"
     });
     const selector = 'div.Box-body.p-0.blob-wrapper.data.type-json table'; // selector of the SDK module version content
-    var site = 'https://github.com/appcelerator/titanium_mobile/blob/' + arguments.release + '_X/support/module/packaged/modules.json';
+
+    if (arguments.release == 'master') { // if the user submitted the master branch, remove the '_X' from the path
+      var site = 'https://github.com/appcelerator/titanium_mobile/blob/' + arguments.release + '/support/module/packaged/modules.json';
+    } else {
+      var site = 'https://github.com/appcelerator/titanium_mobile/blob/' + arguments.release + '_X/support/module/packaged/modules.json';
+    }
 
     var modules = {
     module: {
@@ -87,7 +92,8 @@ if (!arguments.release) { // user id is required
     }
     }
 
-    console.log('Getting SDK module version information for "' + arguments.release + '" release.')
+    console.log('Getting SDK module version information for "' + arguments.release + '" branch.');
+    
     nightmare
     .goto(site) // go to the required document.
     .evaluate(selector => { // grab html content from browser
