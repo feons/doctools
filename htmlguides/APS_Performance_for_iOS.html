@@ -65,10 +65,10 @@
 </li><li class=" ">    <p>Drag the <tt class=" ">Appcelerator.framework</tt> folder into your Xcode project&apos;s root folder if you are using Xcode 6 and above, or the  <tt class=" ">Frameworks</tt>  folder if you are using Xcode 5 or below.    </p>
 </li><li class=" ">    <p>Select <strong class=" ">Copy items into destination&#x2026;</strong> and click <strong class=" ">Finish</strong>.    </p>
 </li><li class=" ">    <p>Select your project in the Project Navigator and click the <strong class=" ">Build Phases</strong> tab.    </p>
-</li><li class=" ">    <p>Expand the <strong class=" ">Link Binary With Libraries</strong> section and add the <tt class=" ">libsqlite3.dylib</tt> and <tt class=" ">libz.dylib</tt> frameworks.    </p>
+</li><li class=" ">    <p>Expand the <strong class=" ">Link Binary With Libraries</strong> section and add the <tt class=" ">libsqlite3.dylib</tt> and <tt class=" ">libz.dylib</tt>  frameworks.    </p>
 </li><li class=" ">    <p>Click the <strong class=" ">Build Settings</strong> tab, then click the <strong class=" ">All</strong> button in the top-left corner of the tab.    </p>
-</li><li class=" ">    <p>Expand the <strong class=" ">Linking</strong> section and add <tt class=" ">-ObjC</tt>  to <strong class=" ">Other Linker Flags</strong>.    </p>
-</li><li class=" ">    <p>In your application delegate implementation file, import <tt class=" ">Appcelerator/Appcelerator.h.</tt>    </p>
+</li><li class=" ">    <p>Expand the <strong class=" ">Linking</strong> section and add <tt class=" ">-ObjC</tt>  to <strong class=" ">Other Linker Flags</strong> .    </p>
+</li><li class=" ">    <p>In your application delegate implementation file, import <tt class=" ">Appcelerator/Appcelerator.h . </tt>    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                     <div class="title">AppDelegate.m</div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code" data-title="AppDelegate.m">
@@ -136,9 +136,7 @@
     </div>
     <div class="section section-3 " id="src-43298732_APSPerformanceforiOS-AddUserMetadata">
         <h3 class="heading "><span>Add User Metadata</span></h3>
-    <p>To differentiate users of your application when viewing reports on the Appcelerator Performance dashboard, use the <tt class=" ">username</tt> property to set the username of the session and use the <tt class=" ">[]</tt>     <span style="color: #222220;">
-subscription operator to leave custom metadata    </span>
-. For example:    </p>
+    <p>To differentiate users of your application when viewing reports on the Appcelerator Performance dashboard, use the <tt class=" ">username</tt> property to set the username of the session and use the <tt class=" ">[]</tt> subscription operator to leave custom metadata. For example:    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="keyword">boolean</code><code class="plain"> status = [self login:username];</code></div>
@@ -188,13 +186,7 @@ subscription operator to leave custom metadata    </span>
     </div>
     <div class="section section-3 " id="src-43298732_APSPerformanceforiOS-CheckforaCrash">
         <h3 class="heading "><span>Check for a Crash</span></h3>
-    <p>    <span style="color: #484848;">
-Use the     </span>
-<tt class=" ">didCrashOnLastAppLoad</tt>    <span style="color: #484848;">
- property to check if the application crashed in a previous session. If the property returns     </span>
-YES    <span style="color: #484848;">
-, the application crashed on the last session. Note that if <tt class=" ">optOutStatus</tt> is set to YES, this method always returns NO.    </span>
-    </p>
+    <p>Use the  <tt class=" ">didCrashOnLastAppLoad</tt> property to check if the application crashed in a previous session. If the property returns YES, the application crashed on the last session. Note that if <tt class=" ">optOutStatus</tt> is set to YES, this method always returns NO.    </p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code">
 <div class="line"><code class="keyword">if</code><code class="plain"> ([APSPerformance sharedInstance].didCrashOnLastAppLoad){</code></div>

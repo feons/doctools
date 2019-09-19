@@ -90,7 +90,7 @@
     <div class="section section-3 " id="src-43298703_IntegratingTestwithJenkins-SetuptheTestComposition">
         <h3 class="heading "><span>Setup the Test Composition</span></h3>
     <p>For each device in your test farm, you need to create a test composition that runs on that device. Note that to select a device for a composition it needs to be connected to Appcelerator Test.    </p>
-    <p>Before creating a test composition, you need to create a test clip for each device type, that is, Android, iPhone, and iPad. For information on creating a test composition, see <a class="document-link unresolved" href="Integrating_Test_with_Jenkins.html#src-43298703">Test</a>.    </p>
+    <p>Before creating a test composition, you need to create a test clip for each device type, that is, Android, iPhone, and iPad. For information on creating a test composition, see Test.    </p>
     <p>Remember the name of the test composition and the device used to run the test composition. You need this information for the build script.    </p>
     </div>
     <div class="section section-3 " id="src-43298703_IntegratingTestwithJenkins-SetupJenkinstoUseAppceleratorTest">
@@ -110,7 +110,7 @@
     <div class="section section-4 " id="src-43298703_IntegratingTestwithJenkins-InstallandConfiguretheSOASTAPlugin">
         <h4 class="heading "><span>Install and Configure the SOASTA Plugin</span></h4>
 <ol class=" "><li class=" ">    <p>From the Jenkins start page, click <strong class=" ">Manage Jenkins.</strong>    </p>
-</li><li class=" ">    <p>Click <strong class=" ">Manage Plugin</strong><strong class=" ">s</strong>.    </p>
+</li><li class=" ">    <p>Click <strong class=" ">Manage Plugin</strong> <strong class=" ">s</strong>.    </p>
 </li><li class=" ">    <p>Click the <strong class=" ">Available</strong> tab.    </p>
 </li><li class=" ">    <p>Search for <strong class=" ">SOASTA CloudTest Plugin</strong> and enable it for installation.    </p>
 </li><li class=" ">    <p>Click <strong class=" ">Install without Restart</strong>.    </p>
@@ -155,7 +155,7 @@
     <p>Finally, create a CI job that calls a script to run your test composition after it has been successfully built and installed to the device. The sample scripts below shows how to build the application, install it to an Android or iOS device, then call Appcelerator Test to execute the test composition. The script creates an XML file with the results of the command. This script assumes that the application is built and installed to the device on the same node.    </p>
 <ol class=" "><li class=" ">    <p>From the Jenkins start page, click <strong class=" ">New Job</strong>.    </p>
 </li><li class=" ">    <p>Enter a name for your job in the <strong class=" ">Job name</strong> textbox.    </p>
-</li><li class=" ">    <p>Select <strong class=" ">Build a free-style software project</strong><strong class=" "> </strong>from the list of job options.    </p>
+</li><li class=" ">    <p>Select <strong class=" ">Build a free-style software project</strong> <strong class=" "> </strong>from the list of job options.    </p>
 </li><li class=" ">    <p>Click <strong class=" ">OK.</strong>    </p>
 </li><li class=" ">    <p>Enter a description for your job and configure the <strong class=" ">Source Code Management</strong> and <strong class=" ">Build Trigger</strong> sections for your setup and tools.    </p>
 </li><li class=" ">    <p>Under the <strong class=" ">Build</strong> section, click the <strong class=" ">Add build step</strong> drop-down and select <strong class=" ">Execute shell</strong>.    </p>

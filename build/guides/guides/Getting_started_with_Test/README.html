@@ -38,7 +38,6 @@
 </li></ul></li><li class=" ">    <p><a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-Testingbasics">Testing basics</a>    </p>
 <ul class="toc-indentation "><li class=" ">    <p><a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-InstallingtheTouchTest-enabledapplication">Installing the TouchTest-enabled application</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-RecordingaTestCliprecord_test_clip">Recording a Test Clip </a>    </p>
-</li><li class=" ">    <p><a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-Creatingatestcomposition">Creating a test composition</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-Playingacomposition">Playing a composition</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-ResultDetailsdashboard">Result Details dashboard</a>    </p>
 </li><li class=" ">    <p><a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-LocatingUIelements">Locating UI elements</a>    </p>
@@ -53,12 +52,12 @@
     <p>To use the Test service to test an application, you must enable Appcelerator Services in your project. This adds the TouchTest module to your project, and the code required to load and initialize it. (For specific code and configuration changes, see <a class="document-link " href="#!/guide/Platform_Services">Platform Services</a>). Do not modify these changes or you may disable the Test service in your application.    </p>
     <p>For native Android and iOS applications, use the <tt class=" ">appcelerator-test</tt> utility to enable the Appcelerator Test service. For instructions, see <a class="document-link " href="#!/guide/Appcelerator_Test_CLI_Reference">Appcelerator Test CLI Reference</a>.    </p>
     <p>For Titanium applications, use Appcelerator Studio to enable Appcelerator Services when creating a new project by selecting an option in the new project dialog, or in an existing project. If you have an existing Titanium Studio application, you&apos;ll first need to import that application into Appcelerator Studio.    </p>
-    <p><strong class=" ">    <img src="images/download/attachments/43298707/enable_services.png" alt="images/download/attachments/43298707/enable_services.png" class="confluence-embedded-image confluence-content-image-border" width="502" height="149">
-</img></strong>    </p>
+    <p><strong class=" ">     <img src="images/download/attachments/43298707/enable_services.png" alt="images/download/attachments/43298707/enable_services.png" class="confluence-embedded-image confluence-content-image-border" width="502" height="149">
+ </img></strong>    </p>
     <p><strong class=" ">To enable Appcelerator Services in a new project:</strong>    </p>
 <ol class=" "><li class=" ">    <p>In Appcelerator Studio, create a new Mobile App Project (<strong class=" ">File </strong>&gt;<strong class=" "> New </strong>&gt;<strong class=" "> Mobile App Project</strong>).    </p>
 </li><li class=" ">    <p>Check the <strong class=" ">Appcelerator Services</strong> check box in the Mobile App Project wizard dialog.    </p>
-</li></ol>    <p><strong class=" ">To enable Appcelerator Services in an existing Appcelerator Studio project</strong>:    </p>
+</li></ol>    <p><strong class=" ">To enable Appcelerator Services in an existing Appcelerator Studio project</strong> :    </p>
 <ol class=" "><li class=" ">    <p>Open the project&apos;s tiapp.xml file.    </p>
 </li><li class=" ">    <p>Click <strong class=" ">Enable...</strong> in the Appcelerator Services section,    </p>
     <img src="images/download/attachments/43298707/services_not_enabled.png" alt="images/download/attachments/43298707/services_not_enabled.png" class="confluence-embedded-image confluence-content-image-border" width="446" height="92">
@@ -72,12 +71,8 @@
         <h3 class="heading "><span>Device and OS requirements</span></h3>
     <p>TouchTest Agent is supported on the following platforms:    </p>
 <ul class=" "><li class=" ">    <p>iOS devices and simulators running iOS 5.0 and later    </p>
-</li><li class=" ">    <p>    <span style="color: #484848;">
-Android devices running Android 2.3.3 and later    </span>
-    </p>
-</li><li class=" ">    <p>    <span style="color: #484848;">
-Android emulators running Android 2.3.5 and later    </span>
-    </p>
+</li><li class=" ">    <p>Android devices running Android 2.3.3 and later    </p>
+</li><li class=" ">    <p>Android emulators running Android 2.3.5 and later    </p>
 </li></ul>    </div>
     <div class="section section-3 " id="src-43298707_GettingStartedwithTest-TouchTestAgentURL">
         <h3 class="heading "><span>TouchTest Agent URL</span></h3>
@@ -95,16 +90,12 @@ Android emulators running Android 2.3.5 and later    </span>
         <h3 class="heading "><span>Installing TouchTest Agent on an Android device or emulator</span></h3>
     <p>The TouchTest Agent application supports devices running Android 2.3.3 and later, and Android emulators running 2.3.5 and later. The install steps are the same for Android devices and emulators.    </p>
     <p><strong class=" ">To install TouchTest Agent on an Android device or emulator</strong>:    </p>
-<ol class=" "><li class=" ">    <p>Point your device&apos;s or emulator&apos;s web browser to the <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-anchorurl">TouchTest Agent URL</a> (    <span style="color: #000000;">
- <strong class=" ">   http://appctest-2.appcelerator.com/concerto/touchtest   </strong>).    </span>
-    </p>
+<ol class=" "><li class=" ">    <p>Point your device&apos;s or emulator&apos;s web browser to the <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-anchorurl">TouchTest Agent URL</a> ( <strong class=" "> http://appctest-2.appcelerator.com/concerto/touchtest </strong>).    </p>
 </li><li class=" ">    <p>In the login form enter your enter AMPLIFY Appcelerator Services credentials. You must append your organization ID to your login name (see <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-loggingin">Logging into TouchTest Agent</a>).    </p>
 </li><li class=" ">    <p>Click <strong class=" ">Tap Here to Download TouchTest Agent.</strong>    </p>
 </li><li class=" ">    <p>Open the APK file that was downloaded to install the TouchTest Agent.    </p>
 </li><li class=" ">    <p>Open the TouchTest Agent application.    </p>
-</li><li class=" ">    <p>In the  <strong class=" ">TouchTest Agent URL</strong>  field enter the <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-agenturl">TouchTest Agent URL</a> and click    <span style="color: #000000;">
-     </span>
-  Go.    </p>
+</li><li class=" ">    <p>In the <strong class=" ">TouchTest Agent URL</strong> field enter the <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-agenturl">TouchTest Agent URL</a> and click Go.    </p>
 </li><li class=" ">    <p>Enter your AMPLIFY Appcelerator Services credentials. You must append your organization ID to your login name (see <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-loggingin">Logging into TouchTest Agent</a>).    </p>
 </li><li class=" ">    <p>On successful login, enter a name for your device and click <strong class=" ">Submit for Approval</strong>.    </p>
 </li><li class=" ">    <p>Once the device <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-approval">has been approved</a>, the TouchTest Agent displays its current connection status to the Test web service, as well as the current TouchTest URL, user name, and the TouchTest Agent build number.    </p>
@@ -114,18 +105,14 @@ Android emulators running Android 2.3.5 and later    </span>
         <h3 class="heading "><span>Installing TouchTest Agent on an iOS device or simulator</span></h3>
     <p>On iOS, the TouchTest Agent runs as a web application in mobile Safari. The steps for installing TouchTest Agent on an iOS device and simulator are slightly different. Also, installing TouchTest Agent on a simulator running iOS 6 or earlier requires providing the Mac system&apos;s hardware UUID.    </p>
     <p><strong class=" ">To install on an iOS device:</strong>    </p>
-<ol class=" "><li class=" ">    <p>Point the device&apos;s Safari browser at the <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-anchorurl">TouchTest Agent URL</a> (    <span style="color: #000000;">
- <strong class=" ">    http://appctest-2.appcelerator.com/concerto/touchtest    </strong>).    </span>
-    </p>
+<ol class=" "><li class=" ">    <p>Point the device&apos;s Safari browser at the <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-anchorurl">TouchTest Agent URL</a> ( <strong class=" "> http://appctest-2.appcelerator.com/concerto/touchtest </strong>).    </p>
 </li><li class=" ">    <p>Enter your AMPLIFY Appcelerator Services credentials and log in.    </p>
 </li><li class=" ">    <p>Click <strong class=" ">Register Device</strong>. The Install Profile dialog opens asking you to install the <strong class=" ">TouchTest Device Registration</strong> profile.    </p>
 </li><li class=" ">    <p>Click <strong class=" ">Install</strong> in the Install Profile dialog, then click <strong class=" ">Install Now</strong> in the confirmation dialog. (You may also be prompted for a passcode by the device if that security feature is enabled.)    </p>
 </li><li class=" ">    <p>Enter a name for your device and click <strong class=" ">Submit for Approval</strong>.    </p>
 </li><li class=" ">    <p>Once the device <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-approval">has been approved</a>, the TouchTest Agent displays the current connection status to the Test web service, TouchTest URL, user name, and TouchTest Agent build number.    </p>
 </li></ol>    <p><strong class=" ">To install on an iOS simulator:</strong>    </p>
-<ol class=" "><li class=" ">    <p>Point the simulator&apos;s web browser at the <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-anchorurl">TouchTest Agent URL</a> (    <span style="color: #000000;">
- <strong class=" ">     http://appctest-2.appcelerator.com/concerto/touchtest     </strong>).    </span>
-    </p>
+<ol class=" "><li class=" ">    <p>Point the simulator&apos;s web browser at the <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-anchorurl">TouchTest Agent URL</a> ( <strong class=" "> http://appctest-2.appcelerator.com/concerto/touchtest </strong>).    </p>
 </li><li class=" ">    <p>Click <strong class=" ">Tap here if this is a simulator</strong>.    </p>
 </li><li class=" ">    <p>Enter your AMPLIFY Appcelerator Services credentials and log in.    </p>
 </li><li class=" ">    <p>Click <strong class=" ">Register </strong> <strong class=" ">Simulator</strong>.    </p>
@@ -207,8 +194,8 @@ Android emulators running Android 2.3.5 and later    </span>
         <h3 class="heading "><span id="src-43298707_GettingStartedwithTest-record_test_clip" class="confluence-anchor-link"/><span>Recording a Test Clip</span></h3>
     <p>A <strong class=" ">clip</strong> is the basic building block of a test. You create clips in the <strong class=" ">Clip Editor</strong>. Clips are composed of App Actions &#x2013; taps, gestures, text inputs, and so forth &#x2013; that simulate actions a user takes in an application. When you record a test clip, the actions you take on a device are automatically added as App Actions in the test clip.    </p>
     <p>For example, the following screenshot shows a test clip containing four recorded actions: a <strong class=" ">tap</strong> operation, followed a <strong class=" ">type</strong> operation, followed by two more <strong class=" ">tap</strong> operations.    </p>
-    <p>     <img src="images/download/attachments/43298707/image2014-3-4_16_46_47.png" alt="images/download/attachments/43298707/image2014-3-4_16_46_47.png" class="confluence-embedded-image confluence-content-image-border" width="519" height="174">
-    </img></p>
+    <p>    <img src="images/download/attachments/43298707/image2014-3-4_16_46_47.png" alt="images/download/attachments/43298707/image2014-3-4_16_46_47.png" class="confluence-embedded-image confluence-content-image-border" width="519" height="174">
+        </img></p>
     <p>Typically a recorded test clip is a starting point for you to refine, add validations, inputs, outputs and so forth.    </p>
     <p><strong class=" ">To record a test clip</strong>:    </p>
 <ol class=" "><li class=" ">    <p>On the test device, open the TouchTest Agent and ensure its connected to the Test service (see <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-LaunchingtheTouchTestAgent">Launching the TouchTest Agent</a>).    </p>
@@ -224,15 +211,12 @@ Android emulators running Android 2.3.5 and later    </span>
 </li><li class=" ">    <p>In the <strong class=" ">Choose a Device Agent and Mobile App </strong>dialog select the test device from the upper pane, and the application to test, and click <strong class=" ">Record</strong>.<br>    <img src="images/download/attachments/43298707/choose_agent_app.png" alt="images/download/attachments/43298707/choose_agent_app.png" class="confluence-embedded-image confluence-content-image-border" width="500" height="338">
         </img></br></p>
 </li><li class=" ">    <p>The test application launches on the device. Perform actions on the device according to your test scenario &#x2013; tap buttons, input text, perform gestures, and so forth. Your actions are recorded as App Actions in the Clip Editor.    </p>
-    <img src="images/download/attachments/43298707/image2014-3-4_16_46_470.png" alt="images/download/attachments/43298707/image2014-3-4_16_46_470.png" class="confluence-embedded-image confluence-content-image-border" width="519" height="174">
+    <img src="images/download/attachments/43298707/image2014-3-4_16_46_47.png" alt="images/download/attachments/43298707/image2014-3-4_16_46_47.png" class="confluence-embedded-image confluence-content-image-border" width="519" height="174">
     </img></li><li class=" ">    <p>When finished recording, click the <strong class=" ">Record</strong> button in the Test tab in Dashboard again to stop recording.    </p>
 </li><li class=" ">    <p>Click <strong class=" ">Save</strong> or <strong class=" ">Save As</strong> in the toolbar, give the clip a name or accept the default, and click <strong class=" ">Save</strong>.    </p>
 </li></ol>    <p>To playback a test clip that you&apos;ve recorded, it needs to be added to a <strong class=" ">test composition</strong>. See <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-Creatingacomposition">Creating a composition</a>.    </p>
     <p>    </p>
-    </div>
-    <div class="section section-3 column" id="src-43298707_GettingStartedwithTest-Creatingatestcomposition">
-        <h3 class="heading column"><span>Creating a test composition</span></h3>
-    <p>A test composition is an actual test that&apos;s executed on the device. A composition consists of one or more clips arranged on <i class=" ">tracks</i>. You<i class=" "> </i>edit compositions in the Composition Editor. You can organize tracks in the desired sequence, select target devices on a per-track or per-clip basis, and other settings.The Composition Editor is also the player, debugger, and dashboard where test results are displayed. Each of these functions is presented in separate tabs named <strong class=" ">Edit</strong>, <strong class=" ">Debug</strong>, <strong class=" ">Play</strong>, and <strong class=" ">Results</strong>, as shown below.    </p>
+    <p>A test composition is an actual test that&apos;s executed on the device. A composition consists of one or more clips arranged on <i class=" ">tracks</i>. You<i class=" "> </i>edit compositions in the Composition Editor. You can organize tracks in the desired sequence, select target devices on a per-track or per-clip basis, and other settings. The Composition Editor is also the player, debugger, and dashboard where test results are displayed. Each of these functions is presented in separate tabs named <strong class=" ">Edit</strong>, <strong class=" ">Debug</strong>, <strong class=" ">Play</strong>, and <strong class=" ">Results</strong>, as shown below.    </p>
     <p>    <img src="images/download/attachments/43298707/image2014-3-18_16_13_21.png" alt="images/download/attachments/43298707/image2014-3-18_16_13_21.png" class="confluence-embedded-image">
         </img></p>
     <p><strong class=" ">To create a composition from the Clip Editor:</strong>    </p>
@@ -242,14 +226,14 @@ Android emulators running Android 2.3.5 and later    </span>
 <ul class=" "><li class=" ">    <p><strong class=" ">Open in Test Composition</strong> &#x2013; Adds the clip to a new draft composition where additional composition parameters can be set before proceeding to play.    </p>
 </li><li class=" ">    <p><strong class=" ">Play in Test Composition</strong> &#x2013; Adds this clip to a new draft composition that immediately begins playback.    </p>
 </li><li class=" ">    <p><strong class=" ">Debug in Test Composition</strong> &#x2013; Adds this clip to a new draft composition where it can be debugged.    </p>
-</li></ul></li><li class=" ">    <p>The Composition Editor opens with a draft test composition that has the recorded test clip in <strong class=" ">Track 1</strong>. <strong class=" ">Tip</strong>: Double-click the track name to edit it.    </p>
+</li></ul></li><li class=" ">    <p>The Composition Editor opens with a draft test composition that has the recorded test clip in <strong class=" ">Track 1</strong>.<strong class=" ">Tip</strong>: Double-click the track name to edit it.    </p>
     <p>    <img src="images/download/attachments/43298707/image2014-3-17_13_8_59.png" alt="images/download/attachments/43298707/image2014-3-17_13_8_59.png" class="confluence-embedded-image confluence-content-image-border" width="432" height="132">
         </img></p>
     <p>By default, the device that was used to record the clip is automatically selected as the playback device (<strong class=" ">iPhone 7 simulator</strong>, in the above screenshot). You can select a connected device by clicking the Device pop-up menu.    </p>
     <p>    <img src="images/download/attachments/43298707/image2014-3-17_13_6_6.png" alt="images/download/attachments/43298707/image2014-3-17_13_6_6.png" class="confluence-embedded-image confluence-content-image-border" width="406" height="153">
-     </img></p>
+        </img></p>
 </li><li class=" ">    <p>Click <strong class=" ">Save</strong> or <strong class=" ">Save As </strong>Composition Editor toolbar and give the test composition a name or accept the default name.    </p>
-</li></ol>    <p>You can also create an empty test composition and add existing test clips to it.<strong class=" "> <br>To create an empty test composition</br></strong>:    </p>
+</li></ol>    <p>You can also create an empty test composition and add existing test clips to it. <strong class=" "> <br>To create an empty test composition</br></strong>:    </p>
 <ol class=" "><li class=" ">    <p>On the <strong class=" ">Central</strong> tab select <strong class=" ">Composition</strong> from the left navigation and then click the <strong class=" ">New</strong> button. The Composition Editor opens a new untitled composition.    </p>
 </li><li class=" ">    <p>Click the Composition Builder tab to open it, if not already open.    </p>
 </li><li class=" ">    <p>Drag a test clip from the Composition Builder panel and drop it on the existing Track 1. Repeat to add more test clips.    </p>
@@ -262,8 +246,7 @@ Android emulators running Android 2.3.5 and later    </span>
     <p><strong class=" ">To play a test composition open in the Composition Editor</strong>:    </p>
 <ol class=" "><li class=" ">    <p>Make sure the TouchTest Agent is open on your test device and its status is &#x201C;Connected&#x201D;.    </p>
 </li><li class=" ">    <p>In the Composition Editor, click <strong class=" ">Play</strong> to run the test composition. The app actions performed when the clip was created are played back on the device. Once playback has started on the device, the <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-ResultDetailsdashboard">Result Details dashboard</a> opens.    </p>
-</li></ol>    <p>    </p>
-    </div>
+</li></ol>    </div>
     <div class="section section-3 " id="src-43298707_GettingStartedwithTest-ResultDetailsdashboard">
         <h3 class="heading "><span>Result Details dashboard</span></h3>
     <p>The Result Details dashboard displays the results from playback of a test composition. Results are posted continuously as playback progresses. If the composition fails for any reason, the dashboard clearly indicates the error and provides details as to what caused it. Results are displayed in a cover-flow view and in an expandable tree control on the left. As play continues, the focus is set to the last executed element. Clicking an element during play will pin the focus on that element.    </p>
@@ -277,15 +260,12 @@ Android emulators running Android 2.3.5 and later    </span>
     <p>To locate this element you can use the <strong class=" ">placeholder</strong> locator, which returns the element whose placeholder text matches the provided string.    </p>
     <p>    <img src="images/download/attachments/43298707/image2014-3-12_15_19_7.png" alt="images/download/attachments/43298707/image2014-3-12_15_19_7.png" class="confluence-embedded-image confluence-content-image-border" width="460" height="87">
         </img></p>
-    <p>    <span style="color: #000000;">
-Using touchTestIDs     </span>
-     <span id="src-43298707_GettingStartedwithTest-using_touchtestids"><a class="confluence-anchor-link" name="src-43298707_GettingStartedwithTest-using_touchtestids"/></span>
+    <p>Using touchTestIDs      <span id="src-43298707_GettingStartedwithTest-using_touchtestids"><a class="confluence-anchor-link" name="src-43298707_GettingStartedwithTest-using_touchtestids"/></span>
     </p>
     <p>TouchTestIds are strings set by the developer to identify views in the application for testing. Using touchTestIDs makes tests easier to create and maintain since you&apos;re not relying on class names or text strings that may change. They also improve playback performance of your tests.    </p>
     <p>As an example, consider a test clip that uses an input text field&apos;s placeholder text to locate it for a <strong class=" ">type</strong> action.    </p>
-    <img src="images/download/attachments/43298707/image2014-3-12_15_19_7.png" alt="images/download/attachments/43298707/image2014-3-12_15_19_7.png" class="confluence-embedded-image confluence-content-image-border" width="460" height="87">
-        <p>This approach will continue to work unless the placeholder text is changed to another string (&quot;What to do?&quot;). Of course, you can always update the locator to match the new placeholder value. A better approach is for the developer to assign a <tt class=" ">touchTestId</tt> property to the view. For example:    </p>
-    <p>    </p>
+    <p>    <img src="images/download/attachments/43298707/image2014-3-12_15_19_70.png" alt="images/download/attachments/43298707/image2014-3-12_15_19_70.png" class="confluence-embedded-image confluence-content-image-border" width="460" height="87">
+ This approach will continue to work unless the placeholder text is changed to another string (&quot;What to do?&quot;). Of course, you can always update the locator to match the new placeholder value. A better approach is for the developer to assign a <tt class=" ">touchTestId</tt> property to the view. For example:    </img></p>
     <div class="confbox programlisting defaultnew syntaxhighlighter scroll-html-formatted-code">
                     <div class="title">Alloy app</div>
                 <div xmlns="http://www.w3.org/1999/xhtml" class="defaultnew syntaxhighlighter scroll-html-formatted-code" data-title="Alloy app">
@@ -303,7 +283,7 @@ Using touchTestIDs     </span>
     </div>
     <p>When creating the test, you can specify the <tt class=" ">TextField</tt> element with the locator <tt class=" ">id=todo</tt> Input.    </p>
     <p>    <img src="images/download/attachments/43298707/image2014-3-19_15_5_48.png" alt="images/download/attachments/43298707/image2014-3-19_15_5_48.png" class="confluence-embedded-image confluence-content-image-border" width="478" height="80">
-    </img></p>
+        </img></p>
     <p>You can use the <a class="document-link " href="#!/guide/Getting_Started_with_Test-section-src-43298707_GettingStartedwithTest-locator_tool">Locator tool</a> to determine an element&apos;s touchTestIDs if any.    </p>
     <div class="section section-4 " id="src-43298707_GettingStartedwithTest-UsingtheLocatortoollocator_tool">
         <h4 class="heading "><span id="src-43298707_GettingStartedwithTest-locator_tool" class="confluence-anchor-link"/><span>Using the Locator tool</span></h4>
@@ -322,9 +302,7 @@ Using touchTestIDs     </span>
     </img></li></ol>    </div>
     <div class="section section-4 " id="src-43298707_GettingStartedwithTest-Locatorreference">
         <h4 class="heading "><span>Locator reference</span></h4>
-    <p>    <span style="color: #333333;">
-The following table lists the different types of locators you can use to identify UI elements in your application.     </span>
-    </p>
+    <p>The following table lists the different types of locators you can use to identify UI elements in your application.    </p>
     <div class="tablewrap">
         <table class="confluenceTable">
         <thead class=" ">    <tr>
@@ -443,7 +421,7 @@ The following table lists the different types of locators you can use to identif
 </tbody>        </table>
             </div>
     </div>
-    </img></div>
+    </div>
     <div class="section section-3 " id="src-43298707_GettingStartedwithTest-EditingAppActionproperties">
         <h3 class="heading "><span>Editing App Action properties</span></h3>
     <p>During a recording, your actions are recorded as App Actions in the Clip Editor. After recording, you can edit properties of the recorded actions to modify their behavior, timing, and output.    </p>
