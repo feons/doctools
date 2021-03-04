@@ -50,6 +50,6 @@
 	"devDependencies": {
 		"commander": "^6.2.1",
 		"eslint": "^7.20.0",
-		"eslint-config-axway": "^5.0.0"
+		"eslint-config-axway": "^6.0.0"
 	}
 }
