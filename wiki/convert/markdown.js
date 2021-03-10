@@ -288,7 +288,7 @@ function sniffLanguage(codeDiv, code) {
  * @param {Page} thisDocPage the current page
  * @returns {string}
  */
-function wikiLinkToMarkdown(href, lookupTable, parentDir, thisDocPage) {
+function wikiLinkToMarkdown(href, lookupTable, tocParent, parentDir, thisDocPage) {
 	let anchor;
 	const endPath = href.replace('#!/guide/', '');
 	let pageName = endPath;
@@ -362,7 +362,10 @@ function wikiLinkToMarkdown(href, lookupTable, parentDir, thisDocPage) {
 		result += `#${anchor}`;
 	}
 
-    result = result.replace(`/${parentDir.toLowerCase()}/`, '/');
+    if (tocParent === 'Home') {
+        result = result.replace(`/${parentDir.toLowerCase()}/`, '/');
+    }
+
 	return result;
 }
 
@@ -486,8 +489,8 @@ class Converter {
 		    this.toc = topics;
 		    this.tocParent = parent;
 
-		    console.log(this.toc);
-		    console.log(this.tocParent);
+//		    console.log(this.toc);
+//		    console.log(this.tocParent);
 		}
 
 		return this.toc;
@@ -746,10 +749,10 @@ class Converter {
 					&& node.getAttribute('href')
 				);
 			},
-			replacement: function (content, node) {
+			replacement: (content, node) => {
 				let href = node.getAttribute('href');
 				if (href.startsWith('#!/guide/')) {
-					href = wikiLinkToMarkdown(href, lookupTable, parentDir, thisDocPage);
+					href = wikiLinkToMarkdown(href, lookupTable, this.tocParent, parentDir, thisDocPage);
 				}
 
 				const title = node.title ? ' "' + node.title + '"' : '';
