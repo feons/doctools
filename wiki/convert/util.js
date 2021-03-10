@@ -156,7 +156,7 @@ function htmlMinify(node, filepath) {
  * @param {string} filepath path of input file (used to track bad links)
  * @returns {CheerioStatic}
  */
-function fixLinks(dom, filepath) {
+function fixLinks(dom, filepath, anchorMap) {
 	dom('a').each(function (i, elem) {
 		let href = elem.attribs.href;
 		if (href) {
@@ -221,7 +221,23 @@ function fixLinks(dom, filepath) {
 				// relative path to an attachment file
 				href = './' + href;
 			} else {
-				// Replace internal guide links to JSDuck style links
+
+				const parts = href.split('#');
+				let anchorContent;
+				if (parts && parts.length > 1) {
+				    const anchor = parts[1];
+				    const selector = `.heading #${anchor}`;
+                    try {
+				        if (dom(selector) && dom(selector).next() && dom(selector).next().text()) {
+				            anchorContent = dom(selector).next().text().trim().toLowerCase().replace(/[^\w\- ]+/g, '').replace(/\s/g, '-').replace(/\-+$/, '');
+				            if (anchorMap) {
+				                anchorMap.set(anchor, anchorContent);
+				            }
+				        }
+				    } catch (e) {}
+				}
+
+                // Replace internal guide links to JSDuck style links
 				href = href.replace(' ', '_');
 				href = '#!/guide/' + href.replace('.html', '').replace('#', '-section-');
 			}
@@ -332,7 +348,10 @@ function addRedirects(dom, filepath) {
 async function parseTOC(tocFilepath) {
 	const contents = await fs.readFile(tocFilepath, 'utf8');
 	const result = await xml2js(contents);
-	return parse(result.toc.topic);
+
+	const topics = parse(result.toc.topic);
+	const parent = result.toc.$.label;
+	return { topics, parent };
 }
 
 /**

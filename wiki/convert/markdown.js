@@ -13,8 +13,10 @@ const path = require('path');
 const jsYaml = require('js-yaml');
 
 const TurndownService = require('turndown');
-const tables = require('turndown-plugin-gfm').tables;
+const tables = require('./markdown/tables').tables;
 const removeTrailingSpaces = require('remove-trailing-spaces');
+
+const dayjs = require('dayjs');
 
 const utils = require('./util');
 
@@ -32,6 +34,33 @@ const relevantTopics = new Map([
 	[ 'Axway Appcelerator Studio', 'Axway Appcelerator Studio' ],
 	// TODO: What about Dashboard? Appc Services? MBAAS?
 ]);
+
+const skipTopics = new Set([
+    'Quick_Start',
+    'Home',
+    'Axway_API_Builder',
+    'Alloy_Framework',
+    'Titanium_SDK',
+    'Appcelerator_CLI',
+    'Axway_Appcelerator_Studio'
+]);
+
+// Replace produce name with shortcode variable
+const stMap = new Map([
+    [/AMPLIFY Platform/gi, '{{% variables/platform_prod_name %}}'],
+    [/AMPLIFY Dashboard/gi, '{{% variables/dashboard_prod_name %}}'],
+    [/API Builder/g, '{{% variables/apibuilder_prod_name %}}'],
+    [/AMPLIFY /g, 'Amplify '],
+]);
+
+const replaceTexts = new Map([
+    // Rename API Builder Getting Started Guide page title and filename
+    ['API Builder Getting Started Guide', 'Getting Started With API Builder'],
+    ['API_Builder_Getting_Started_Guide.md', 'Getting_Started_With_API_Builder.md'],
+    ['api_builder_getting_started_guide', 'getting_started_with_api_builder']
+]);
+
+const anchorMap = new Map();
 
 class Page {
 	/**
@@ -55,7 +84,7 @@ function fixHTML(html, filepath) {
 	let dom = utils.generateDOM(html);
 	dom = utils.stripFooter(dom);
 	dom = utils.addRedirects(dom, filepath);
-	dom = utils.fixLinks(dom, filepath);
+	dom = utils.fixLinks(dom, filepath, anchorMap);
 	dom = fixCodeBlocks(dom, filepath);
 	dom = convertTT2Code(dom, filepath);
 	return dom.html();
@@ -77,6 +106,25 @@ function convertTT2Code(node, filepath) {
 	return node;
 }
 
+function getCodeBlockTitle(domNode) {
+    let title = domNode.data('data-title');
+    if (!title) {
+        const titleDiv = domNode.prev('div.title');
+        if (titleDiv) {
+            title = titleDiv.text().trim();
+        }
+    }
+
+    return title;
+}
+
+function removeCodeBlockTitle(domNode) {
+    const titleDiv = domNode.prev('div.title');
+    if (titleDiv) {
+        titleDiv.remove();
+    }
+}
+
 /**
  * Replaces div code sample blocks with <pre><code class="language-whatever"></code></pre>
  * that retain proper spacing and can be converted by turndown into correctly exported fenced markdown blocks
@@ -90,7 +138,19 @@ function fixCodeBlocks(node, filepath) {
 			try {
 				const domNode = node(elem);
 				const origCode = domNode.text();
-				const code = `<pre><code${sniffLanguage(domNode, origCode)}>${origCode.trim()}</code></pre>`.replace(/\t/g, '  ');
+
+                // add code block title as comment instead of having it floating outside the code block.
+				let title = getCodeBlockTitle(domNode);
+                if (title) {
+                    title = `\/\/ ${title} \n\n`;
+                }
+
+                const newCode = sniffLanguage(domNode, origCode);
+
+                // remove code block title from dom, it has been moved into the code block as comment.
+                removeCodeBlockTitle(domNode);
+
+				const code = `<pre><code${newCode}>${title}${origCode.trim()}</code></pre>`.replace(/\t/g, '  ');
 				// console.log(`Replacing div with pre-formatted tags: ${code}`);
 				domNode.replaceWith(code);
 			} catch (error) {
@@ -228,7 +288,7 @@ function sniffLanguage(codeDiv, code) {
  * @param {Page} thisDocPage the current page
  * @returns {string}
  */
-function wikiLinkToMarkdown(href, lookupTable, thisDocPage) {
+function wikiLinkToMarkdown(href, lookupTable, parentDir, thisDocPage) {
 	let anchor;
 	const endPath = href.replace('#!/guide/', '');
 	let pageName = endPath;
@@ -254,6 +314,11 @@ function wikiLinkToMarkdown(href, lookupTable, thisDocPage) {
 		}
 	}
 
+    // THIS FIX MAILTO LINK
+    if (pageName.startsWith('mailto:')) {
+        return pageName;
+    }
+
 	if (!pageName || pageName.startsWith('mailto:')) {
 		// couldn't extract the page name, so return the link as it was
 		return href;
@@ -271,19 +336,33 @@ function wikiLinkToMarkdown(href, lookupTable, thisDocPage) {
 		if (possible) {
 			anchor = possible;
 		}
+
+        // In case we managed to grab the actual anchor header from dom, use it.
+		if (anchorMap.get(legacyId)) {
+		    anchor = anchorMap.get(legacyId);
+		}
 	}
+
+//    console.log('**[', anchor, pageName);
 
 	// We're linking to another section of the page!
 	if (docPage.docsyPath === thisDocPage.docsyPath) {
 		// Drop the doc path and just return the anchor!
-		return `#${anchor}`;
+		return `#${anchor ? anchor : ''}`;
 	}
+
 
 	// TODO: try to use relative links? Or not because the _index.md thing breaks then?
 	let result = `${docPage.docsyPath}`; // FIXME: What the fuck is going on here, this is pointing to the input html file in my repo, not the docsy filepath!
+
+	// THIS FIX BROKEN LINKS!!!!
+    result = result.toLowerCase().replace(/[()]+/g, '');
+
 	if (anchor) {
 		result += `#${anchor}`;
 	}
+
+    result = result.replace(`/${parentDir.toLowerCase()}/`, '/');
 	return result;
 }
 
@@ -300,6 +379,7 @@ class Converter {
 		this.outputDir = program.output;
 		this.target = program.target || HUGO_TARGET;
 		this.imgMap = new Map();
+		this.imageRefMap = new Map();
 	}
 
 	async convert() {
@@ -310,10 +390,9 @@ class Converter {
 		await this.lookupTable(); // force it to generate our image mappings!
 
 		await fs.ensureDir(this.outputDir);
-		return Promise.all([
-			this.convertHTMLFiles(),
-			this.copyImages()
-		]);
+
+        await this.convertHTMLFiles();
+        await this.copyImages();
 	}
 
 	/**
@@ -370,6 +449,9 @@ class Converter {
 	 * @returns {string|object}
 	 */
 	sidebarEntry(prefix, entry, lookupTable) {
+
+	    console.log(prefix);
+
 		let title = entry.title;
 		// lop off the common prefix from the parent name/title (i.e. "Alloy ", "Appcelerator CLI ")
 		if (title.startsWith(prefix)) {
@@ -400,8 +482,14 @@ class Converter {
 	 */
 	async tableOfContents() {
 		if (!this.toc) {
-			this.toc = await utils.parseTOC(path.join(this.inputDir, 'toc.xml'));
+			let { topics, parent } = await utils.parseTOC(path.join(this.inputDir, 'toc.xml'));
+		    this.toc = topics;
+		    this.tocParent = parent;
+
+		    console.log(this.toc);
+		    console.log(this.tocParent);
 		}
+
 		return this.toc;
 	}
 
@@ -437,7 +525,14 @@ class Converter {
 
 		await fs.ensureDir(this.docsDir);
 		console.log('Converting HTML pages to markdown...');
-		return Promise.all(toc.map((entry, index) => this.handleEntry(entry, index, this.docsDir, lookupTable)));
+
+        // Most likely a bulk export of multiple topics
+        if (this.tocParent === 'Home') {
+            return Promise.all(toc.map((entry, index) => this.handleEntry(entry, 0, path.join(this.docsDir, entry.name, 'content', 'en', 'docs'), entry.name, lookupTable)));
+        } else {
+            // likely a single topic export
+            return Promise.all(toc.map((entry, index) => this.handleEntry(entry, index, this.docsDir, entry.name, lookupTable)));
+        }
 	}
 
 	/**
@@ -506,6 +601,15 @@ class Converter {
 						const value = this.imgMap.get(src) || new Set();
 						value.add(page);
 						this.imgMap.set(src, value);
+
+                        // Images are flatten under appc-open-docs/static/Images
+                        // some images in different page have the same name
+                        // prefix pageId for these images
+						const imgName = path.basename(decodeURIComponent(src));
+						const pageId = path.basename(path.dirname(src));
+						const imgPageSet = this.imageRefMap.get(imgName) || new Set();
+						imgPageSet.add(pageId);
+						this.imageRefMap.set(imgName, imgPageSet);
 					}
 				}
 				return false;
@@ -526,17 +630,23 @@ class Converter {
 	 * @param {Map<string, Page>} lookupTable lookup table from the unique entry name in the TOC to the Page metadata for that entry
 	 * @returns {Promise<void>}
 	 */
-	async handleEntry(entry, index, outDir, lookupTable) {
+	async handleEntry(entry, index, outDir, parentDir, lookupTable) {
+
+	    if (skipTopics.has(entry.name)) return;
+
 		// TODO: do filtering for vuepress to not go into the sections we don't want!
 		let outputName;
 		// if the entry has 'items' property, it's a parent! Need to recurse, and change filename to _index
 		if (entry.items) {
-			outDir = path.join(outDir, entry.name);
+		    if (this.tocParent !== 'Home' || entry.name !== parentDir) {
+			    outDir = path.join(outDir, entry.name);
+			}
+
 			outputName = this.target === HUGO_TARGET ? '_index.md' : 'README.md';
-			await fs.ensureDir(outDir);
+
 			// recurse
-			await Promise.all(entry.items.map((child, childIndex) => this.handleEntry(child, childIndex, outDir, lookupTable)));
-		} else if (entry.name === 'Home') { // Treat top-level 'Home' page as index for all appc content
+			await Promise.all(entry.items.map((child, childIndex) => this.handleEntry(child, childIndex, outDir, parentDir, lookupTable)));
+		} else if (entry.name === 'Home' || entry.name === 'Quick_Start' || entry.name === 'AMPLIFY_Dashboard' || entry.name === 'API_Builder') { // Treat top-level 'Home' page as index for all appc content
 			outputName = this.target === HUGO_TARGET ? '_index.md' : 'README.md';
 		} else {
 			outputName = `${entry.name}.md`;
@@ -546,11 +656,27 @@ class Converter {
 
 		const modified = fixHTML(content, filepath);
 
+
+        // API_Builder_Getting_Started_Guide.md => Getting_Started_With_API_Builder.md
+        // update frontmatter title to: Getting Started With API Builder
+        if (replaceTexts.get(outputName)) {
+            outputName = replaceTexts.get(outputName);
+            entry.title = path.basename(outputName, '.md').replace(/_/g, ' ');
+        }
+        // remove product name
+        // internal links need changing too.
+        outputName = outputName.replace(/^API_Builder_/, '');
+        entry.title = entry.title.replace(/^API Builder/g, '').trim();
+        outDir = outDir.replace(/API_Builder_/g, '');
+
 		// Convert the html -> markdown prepend the frontmatter
 		const frontmatter = {
 			title: entry.title,
-			weight: ((index + 1) * 10).toString() // Make the weight the (index + 1) * 10 as string
+			linkTitle: entry.title,
+			weight: ((index + 1) * 10), // Make the weight the (index + 1) * 10 as string
+			date: dayjs().format('YYYY-MM-DD####')
 		};
+
 		if (this.target === HUGO_TARGET && outputName === '_index.md') {
 			// add no_list: true to frontmatter to avoid re-listing children pages!
 			frontmatter.no_list = true;
@@ -576,7 +702,7 @@ class Converter {
 			[ /\[/g, '\\[' ],
 			[ /\]/g, '\\]' ],
 			[ /^>/g, '\\>' ],
-			[ /_/g, '\\_' ],
+//			[ /_/g, '\\_' ],
 			[ /^(\d+)\. /g, '$1\\. ' ],
 			[ /&lt;/g, '&amp;lt;' ] // Added by cwilliams - to escape < in non-code
 		];
@@ -593,8 +719,19 @@ class Converter {
 		// We should strip that (it ends up being duplicated)
 		if (this.target === HUGO_TARGET) {
 			turndownService.addRule('duplicate header', {
-				filter: node => node.nodeName === 'H1' && node.textContent === entry.title,
-				replacement: () => ''
+				filter: node => node.nodeName === 'H1',
+				replacement: (content, node) => {
+                    let title = content;
+                    // don't show 'API Builder Getting Started Guide'
+				    if (replaceTexts.get(content)) {
+                        return '';
+				    }
+
+                    title = content.replace(/^API Builder/, '').trim();
+				    if (title === entry.title) return '';
+
+				    return title;
+				}
 			});
 		}
 
@@ -612,16 +749,44 @@ class Converter {
 			replacement: function (content, node) {
 				let href = node.getAttribute('href');
 				if (href.startsWith('#!/guide/')) {
-					href = wikiLinkToMarkdown(href, lookupTable, thisDocPage);
+					href = wikiLinkToMarkdown(href, lookupTable, parentDir, thisDocPage);
 				}
+
 				const title = node.title ? ' "' + node.title + '"' : '';
+
+				// THIS FIX SOME EXPORT WERIDNESS
+				if (content.length == 0) {
+				    return '';
+				}
+
+                //    ['API_Builder_Getting_Started_Guide.md', 'Getting_Started_With_API_Builder.md']
+                //
+                if (href.startsWith('/docs/')) {
+                    const parts = href.split('/');
+                    // replace 'api_builder_getting_started_guide' ==> 'getting_started_with_api_builder'
+                    if (replaceTexts.get(parts[parts.length - 2])) {
+                        parts[parts.length - 2] = replaceTexts.get(parts[parts.length - 2]);
+                        href = parts.join('/');
+                    } else {
+                        for (let i = 0; i < parts.length; i++) {
+                            parts[i] = parts[i].replace(/^api_builder_/, '');
+                        }
+                    }
+                    href = parts.join('/');
+                }
+                // 'API Builder Getting Started Guide' ==> 'Getting Started with API Builder'
+                if (replaceTexts.get(content)) {
+                    content = replaceTexts.get(content);
+                }
 				return '[' + content + '](' + href + title + ')';
 			}
 		});
 
 		// Convert images to point at correct place!
 		// images/download/attachments/30083145/TabbedApplicationMain.png
-		// -> /images/download/attachments/30083145/TabbedApplicationMain.png
+		// -> static/images/TabbedApplicationMain.png
+		// if there multiple images with the same name
+		// -> static/images/30083145_TabbedApplicationMain.png
 		turndownService.addRule('images', {
 			filter: 'img',
 			replacement: (content, node) => {
@@ -633,6 +798,8 @@ class Converter {
 					alt = path.basename(alt, path.extname(alt));
 				}
 				if (src.startsWith('images/')) {
+				    const originalSrc = src;
+
 					// if this is the only reference to this image, make relative!
 					if (this.imgMap.get(src).size === 1 && !src.endsWith('.bmp')) { // not bitmaps!
 						src = `./${path.basename(src)}`;
@@ -649,7 +816,21 @@ class Converter {
 						// .dat file is actually a png found in 8.3.0.GA release notes page
 						src = src.slice(0, -3) + 'png';
 					}
+
+					////////////////////////////////////////
+					const imgName = path.basename(decodeURIComponent(originalSrc));
+                    const pageId = path.basename(path.dirname(originalSrc));
+                    if (this.imageRefMap.get(imgName) && this.imageRefMap.get(imgName).size > 1) {
+                        src = `${pageId}_${imgName}`;
+                    } else {
+                        src = path.basename(src);
+                    }
+
+                    // IMAGES SHOULD BE /IMAGES/IMAGENAME.EXT
+                    src = path.join('/Images', src);
 				}
+
+
 				const title = node.title || '';
 				const titlePart = title ? ' "' + title + '"' : '';
 				return src ? `![${alt}](${src}${titlePart})` : '';
@@ -692,6 +873,36 @@ class Converter {
 			}
 		});
 
+        // FIX TABLES WITHOUT HEADING
+		turndownService.addRule('empty table head', {
+	        filter: node => node.nodeName === 'TABLE',
+	        replacement: function (content, node) {
+
+                // Ensure there are no blank lines
+                content = content.replace(/\n+/g, '\n')
+
+                // If table has no heading, add an empty one so as to get a valid Markdown table
+                let secondLine = content.trim().split('\n');
+                if (secondLine.length >= 2) secondLine = secondLine[1];
+                let secondLineIsDivider = secondLine.indexOf('| ---') === 0
+
+                // count table col
+                let columnCount = 0;
+                for (let i = 0; i < node.rows.length; i++) {
+                    const row = node.rows[i];
+                    const colCount = row.childNodes.length;
+                    if (colCount > columnCount) columnCount = colCount;
+                }
+
+                let emptyHeader = '';
+                if (columnCount && !secondLineIsDivider) {
+                    emptyHeader = '|' + '     |'.repeat(columnCount) + '\n' + '|' + ' --- |'.repeat(columnCount);
+                }
+
+                return '\n\n' + emptyHeader + content + '\n\n'
+	        }
+		});
+
 		// Hack together something workable for tables
 		// Start with the plugin that does tables
 		turndownService.use(tables);
@@ -710,7 +921,50 @@ class Converter {
 			if (index === 0) {
 				prefix = '| ';
 			}
-			return prefix + content.replace(/\n/g, '<br />') + ' |';
+
+			let newContent = content.replace(/\n/g, '<br />');
+
+            // On very rare occasion, || appears in code block which breaks markdown table.
+            // escape || so it's correctly shown and table is not broken.
+            if (newContent.indexOf('```' === 0)) {
+                const lines = newContent.split('<br />');
+                if (lines[0].indexOf('```') === 0) {
+                    // to show the pipe '|' symbol in table, use html entity
+                    newContent = `<pre> ${lines.splice(1, lines.length - 2).join('<br />').replace(/\|/g, '&#x7c;')} </pre>`;
+                }
+            }
+			return prefix + newContent + ' |';
+
+            // TURN NEWLINES TO A NEW ROW
+//            if (content.indexOf('\n') === -1) {
+//                return prefix + content + ' |';
+//            }
+//
+//            const columnCount = node.parentNode.childNodes.length;
+//
+//			if (content.indexOf('\n') !== -1) {
+//		        console.log(path.join(outDir, outputName));
+//			    console.log(node.parentNode.childNodes.length, index, content);
+//
+//		        const list = content.split('\n');
+//		        let newContent = '';
+//		        let suffix = '';
+//		        const backCount = columnCount - index;
+//		        if (backCount === 0) {
+//		            suffix = ' |';
+//		        }
+//
+//		        for (let i = 0; i < list.length; i++) {
+//		            const line = list[i].trim();
+//		           if (line.length == 0) continue;
+//		           if (newContent.length == 0) {
+//		               newContent = prefix + line + '     |'.repeat(backCount) + suffix;
+//		               continue;
+//		           }
+//			       newContent += '\n|' + '     |'.repeat(index) + ' ' + line + '     |'.repeat(backCount) + suffix;
+//                }
+//                return newContent;
+//            }
 		}
 
 		// Add special conversion of the warning/problem/info/hint
@@ -733,22 +987,19 @@ class Converter {
 				}
 
 				let prefix = '';
-				let color = 'info';
+                let color = 'primary';
 				let macro = 'tip'; // for Vuepress
 				// color can be 'primary', 'info', 'warning' or 'danger'. I think warning/danger are equivalent by default in our theme
 				if (node.classList.contains('problem')) {
 					prefix = '❗️ ';
-					title = title || 'Warning';
+                    title = title || 'Caution';
 					color = 'danger';
 					macro = 'danger';
-				} else if (node.classList.contains('warning')) {
+				} else if (node.classList.contains('warning') || node.classList.contains('hint') || title == 'Note') {
 					prefix = '⚠️ ';
-					title = title || 'Warning';
+                    title = title || 'Note';
 					color = 'primary';
 					macro = 'warning';
-				} else if (node.classList.contains('hint')) {
-					prefix = '💡 ';
-					title = title || 'Hint';
 				} else if (node.classList.contains('success')) {
 					prefix = '✅ ';
 					title = title || '';
@@ -808,21 +1059,38 @@ class Converter {
 			replacement: () => ''
 		});
 
-		const markdown = turndownService.turndown(modified);
+		turndownService.addRule('strip in-page TOC meta', {
+		    filter: node => node.nodeName === 'H2' && node.classList.contains('heading') && node.nextSibling && node.nextSibling.classList.contains('toc-indentation'),
+		    replacement: () => ''
+		});
+
+        let markdown = turndownService.turndown(modified);
+        stMap.forEach((value, key) => {
+            markdown = markdown.replace(key, value);
+        });
+
 		// Use YAML frontmatter! It's supported by Hugo/Docsy *and* Vuepress
-		const converted = `---\n${jsYaml.dump(frontmatter)}---\n${markdown}\n`;
+		const converted = `---\n${jsYaml.dump(frontmatter).replace('####', '')}---\n${markdown}\n`;
+
 		// Next we remove trailing spaces on lines and then merge multiple blank newlines into a single one
+        await fs.ensureDir(outDir);
 		return fs.writeFile(path.join(outDir, outputName), removeTrailingSpaces(converted).replace(/(\n){3,}/gm, '\n\n'));
 	}
 
 	get imagesDir() {
-		return path.join(this.outputDir, this.target === HUGO_TARGET
-			? 'static/images' : 'docs/.vuepress/public/images/guide');
+	    if (this.tocParent === 'Home') {
+	        return this.outputDir;
+	    }
+
+	    return path.join(this.outputDir, this.target === HUGO_TARGET ? 'static/images' : 'docs/.vuepress/public/images/guide');
 	}
 
 	get docsDir() {
-		return path.join(this.outputDir, this.target === HUGO_TARGET
-			? 'content/en/docs' : 'docs/guide'); // if pushing to axway-open-docs, should be 'content/en/docs/appc'
+	    if (this.tocParent === 'Home') {
+	        return this.outputDir;
+	    }
+
+    	return path.join(this.outputDir, this.target === HUGO_TARGET ? 'content/en/docs' : 'docs/guide'); // if pushing to axway-open-docs, should be 'content/en/docs/appc'
 	}
 
 	/**
@@ -859,20 +1127,39 @@ class Converter {
 		} else if (destImage.endsWith('.dat')) { // handle special case .dat file which is really a png
 			destImage = destImage.slice(0, -3) + 'png';
 		}
-		// copy images with single reference to live side-by-side with page
-		if (referencesSet.size === 1 && !destImage.endsWith('.bmp')) { // But not bitmap! Vuepress can't handle that!
-			const page = referencesSet.values().next().value;
-			// Strip last page path segment, we want it to live next to the page, not in a folder whose name matches the page
-			let outDir = page.docsyPath;
-			if (!page.isParent) {
-				outDir = path.dirname(outDir);
-			}
-			const dir = path.join(docsDirPrefix, outDir);
-			await fs.ensureDir(dir);
-			return fs.copy(path.join(this.inputDir, decoded), path.join(dir, path.basename(destImage)), { overwrite: false });
-		}
-		// Referenced by 2+ pages, so stick in as "static" image asset
-		return fs.copy(path.join(this.inputDir, decoded), path.join(this.imagesDir, ...destImage.split('/').slice(1))); // Drop first segment
+//		// copy images with single reference to live side-by-side with page
+//		if (referencesSet.size === 1 && !destImage.endsWith('.bmp')) { // But not bitmap! Vuepress can't handle that!
+//			const page = referencesSet.values().next().value;
+//			// Strip last page path segment, we want it to live next to the page, not in a folder whose name matches the page
+//			let outDir = page.docsyPath;
+//			if (!page.isParent) {
+//				outDir = path.dirname(outDir)=-07
+//			}
+//			const dir = path.join(docsDirPrefix, outDir);
+//			await fs.ensureDir(dir);
+//			return fs.copy(path.join(this.inputDir, decoded), path.join(dir, path.basename(destImage)), { overwrite: false });
+//		}
+//		// Referenced by 2+ pages, so stick in as "static" image asset
+//		return fs.copy(path.join(this.inputDir, decoded), path.join(this.imagesDir, ...destImage.split('/').slice(1))); // Drop first segment
+
+        const imgName = path.basename(destImage);
+        const pageId = path.basename(path.dirname(destImage));
+        if (this.imageRefMap.get(imgName) && this.imageRefMap.get(imgName).size > 1) {
+            destImage = `${pageId}_${imgName}`;
+        } else {
+            destImage = imgName;
+        }
+
+
+        if (this.tocParent !== 'Home') {
+            return fs.copy(path.join(this.inputDir, decoded), path.join(this.outputDir, 'static', 'Images', destImage));
+        }
+
+        for (let page of referencesSet) {
+            const parentDir = page.docsyPath.split('/')[2];
+            if (skipTopics.has(parentDir)) continue;
+            await fs.copy(path.join(this.inputDir, decoded), path.join(this.outputDir, parentDir, 'static', 'Images', destImage));
+        }
 	}
 }
 
