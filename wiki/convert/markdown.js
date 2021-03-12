@@ -60,6 +60,29 @@ const replaceTexts = new Map([
     ['api_builder_getting_started_guide', 'getting_started_with_api_builder']
 ]);
 
+const keyWordsWhitelist = new Set([
+    'APIBuilder.Model.reduce',
+    'AMPLIFY',
+    'API',
+    'APIs',
+    'Builder',
+    'CA',
+    'Content-Type',
+    'Endpoints',
+    'Gmail',
+    'HTTPS',
+    'IDs',
+    'Model',
+    'Models',
+    'Manager',
+    'Microsoft',
+    'OneDrive',
+    'REST',
+    'Runtime',
+    'Swagger',
+    'URI'
+]);
+
 const anchorMap = new Map();
 
 class Page {
@@ -488,9 +511,6 @@ class Converter {
 			let { topics, parent } = await utils.parseTOC(path.join(this.inputDir, 'toc.xml'));
 		    this.toc = topics;
 		    this.tocParent = parent;
-
-//		    console.log(this.toc);
-//		    console.log(this.tocParent);
 		}
 
 		return this.toc;
@@ -672,10 +692,21 @@ class Converter {
         entry.title = entry.title.replace(/^API Builder/g, '').trim();
         outDir = outDir.replace(/API_Builder_/g, '');
 
+
+        const frontMatterLlinkTitle = entry.title.split(' ').map((value, index) => {
+            if (keyWordsWhitelist.has(value)) return value;
+
+            if (index == 0) {
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            }
+
+            return value.toLowerCase();
+        });
+
 		// Convert the html -> markdown prepend the frontmatter
 		const frontmatter = {
 			title: entry.title,
-			linkTitle: entry.title,
+			linkTitle: frontMatterLlinkTitle.join(' '), // use sentence case
 			weight: ((index + 1) * 10), // Make the weight the (index + 1) * 10 as string
 			date: dayjs().format('YYYY-MM-DD####')
 		};
