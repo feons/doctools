@@ -110,6 +110,8 @@ function fixHTML(html, filepath) {
 	dom = utils.fixLinks(dom, filepath, anchorMap);
 	dom = fixCodeBlocks(dom, filepath);
 	dom = convertTT2Code(dom, filepath);
+
+	dom('ul.childpages-macro').remove();
 	return dom.html();
 }
 
@@ -712,8 +714,7 @@ class Converter {
 		};
 
 		if (this.target === HUGO_TARGET && outputName === '_index.md') {
-			// add no_list: true to frontmatter to avoid re-listing children pages!
-			frontmatter.no_list = true;
+			frontmatter.description = 'ADD A DESCRIPTION';
 		}
 		const thisDocPage = lookupTable.get(entry.name);
 		if (!thisDocPage) {
