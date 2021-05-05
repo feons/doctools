@@ -101,9 +101,10 @@ class Page {
 /**
  * @param {string} html html source
  * @param {string} filepath path to html input file
+ * @param {string} output file name
  * @returns {string} modified html source
  */
-function fixHTML(html, filepath) {
+function fixHTML(html, filepath, outputName) {
 	let dom = utils.generateDOM(html);
 	dom = utils.stripFooter(dom);
 	dom = utils.addRedirects(dom, filepath);
@@ -111,7 +112,11 @@ function fixHTML(html, filepath) {
 	dom = fixCodeBlocks(dom, filepath);
 	dom = convertTT2Code(dom, filepath);
 
-	dom('ul.childpages-macro').remove();
+	// remove page content for index.md
+	if (outputName === '_index.md') {
+		dom('ul.childpages-macro').remove();
+	}
+
 	return dom.html();
 }
 
@@ -679,7 +684,7 @@ class Converter {
 		const filepath = path.join(this.inputDir, `${entry.name}.html`);
 		const content = await fs.readFile(filepath, 'utf8');
 
-		const modified = fixHTML(content, filepath);
+		const modified = fixHTML(content, filepath, outputName);
 
 
         // API_Builder_Getting_Started_Guide.md => Getting_Started_With_API_Builder.md
@@ -709,13 +714,11 @@ class Converter {
 		const frontmatter = {
 			title: entry.title,
 			linkTitle: frontMatterLlinkTitle.join(' '), // use sentence case
+			description: 'ADD A DESCRIPTION',
 			weight: ((index + 1) * 10), // Make the weight the (index + 1) * 10 as string
 			date: dayjs().format('YYYY-MM-DD####')
 		};
 
-		if (this.target === HUGO_TARGET && outputName === '_index.md') {
-			frontmatter.description = 'ADD A DESCRIPTION';
-		}
 		const thisDocPage = lookupTable.get(entry.name);
 		if (!thisDocPage) {
 			console.warn(`WAS UNABLE TO FIND PAGE METADATA ENTRY FOR ${entry.name}`);
