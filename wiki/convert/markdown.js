@@ -695,7 +695,7 @@ class Converter {
         }
         // remove product name
         // internal links need changing too.
-        outputName = outputName.replace(/^API_Builder_/, '');
+        outputName = outputName.replace(/^API_Builder_(-_)?/, '');
         entry.title = entry.title.replace(/^API Builder/g, '').trim();
         outDir = outDir.replace(/API_Builder_/g, '');
 
@@ -710,10 +710,12 @@ class Converter {
             return value.toLowerCase();
         });
 
+        const frontmatterTitle = frontMatterLlinkTitle.join(' ');
+
 		// Convert the html -> markdown prepend the frontmatter
 		const frontmatter = {
-			title: entry.title,
-			linkTitle: frontMatterLlinkTitle.join(' '), // use sentence case
+			title: frontmatterTitle, // use sentence case
+			linkTitle: frontmatterTitle, // use sentence case
 			description: 'ADD A DESCRIPTION',
 			weight: ((index + 1) * 10), // Make the weight the (index + 1) * 10 as string
 			date: dayjs().format('YYYY-MM-DD####')
@@ -1112,6 +1114,8 @@ class Converter {
 
 		// Next we remove trailing spaces on lines and then merge multiple blank newlines into a single one
         await fs.ensureDir(outDir);
+
+        outputName = outputName.charAt(0) + outputName.substring(1).toLowerCase();
 		return fs.writeFile(path.join(outDir, outputName), removeTrailingSpaces(converted).replace(/(\n){3,}/gm, '\n\n'));
 	}
 

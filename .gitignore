@@ -27,6 +27,7 @@ apidocs/sencha/
 
 # wiki exports
 wiki/wiki_export.zip
+wiki/*.zip
 wiki/htmlguides/
 
 # temporary/final build directories
