@@ -47,7 +47,7 @@ const skipTopics = new Set([
 
 // Replace produce name with shortcode variable
 const stMap = new Map([
-    [/AMPLIFY Platform/gi, '{{% variables/platform_prod_name %}}'],
+    [/AMPLIFY Platform/g, '{{% variables/platform_prod_name %}}'],
     [/AMPLIFY Dashboard/gi, '{{% variables/dashboard_prod_name %}}'],
     [/API Builder/g, '{{% variables/apibuilder_prod_name %}}'],
     [/AMPLIFY /g, 'Amplify '],
@@ -101,10 +101,24 @@ class Page {
 /**
  * @param {string} html html source
  * @param {string} filepath path to html input file
+ * @param {string} output file name
  * @returns {string} modified html source
  */
-function fixHTML(html, filepath) {
+function fixHTML(html, filepath, outputName) {
 	let dom = utils.generateDOM(html);
+
+    dom('div#main-header').remove();
+    dom('div.page-metadata').remove();
+    dom('div#footer').remove();
+    dom('style').remove();
+    dom('h2#attachments').remove();
+    dom('div.greybox').remove();
+
+	// remove page content for index.md
+	if (outputName === '_index.md') {
+		dom('ul.childpages-macro').remove();
+	}
+
 	dom = utils.stripFooter(dom);
 	dom = utils.addRedirects(dom, filepath);
 	dom = utils.fixLinks(dom, filepath, anchorMap);
@@ -156,7 +170,8 @@ function removeCodeBlockTitle(domNode) {
  * @returns {CheerioStatic} modified html dom
  */
 function fixCodeBlocks(node, filepath) {
-	node('div[class="defaultnew syntaxhighlighter scroll-html-formatted-code"]').not('.programlisting')
+//	node('div[class="defaultnew syntaxhighlighter scroll-html-formatted-code"]').not('.programlisting')
+    node('pre[class="syntaxhighlighter-pre"]')
 		.each(function (i, elem) {
 			try {
 				const domNode = node(elem);
@@ -312,30 +327,51 @@ function sniffLanguage(codeDiv, code) {
  * @returns {string}
  */
 function wikiLinkToMarkdown(href, lookupTable, tocParent, parentDir, thisDocPage) {
+    const endPath = href.replace('#!/guide/', '').trim();
+    let pageName = endPath;
 	let anchor;
-	const endPath = href.replace('#!/guide/', '');
-	let pageName = endPath;
 	let legacyId;
-	const dumbMatch = endPath.match(DUMB_PATTERN);
-	if (dumbMatch) {
-		pageName = dumbMatch[1];
-		legacyId = dumbMatch[2];
-		anchor = dumbMatch[4];
-		// Here we try to extract the anchor to use as a last-resort fallback
-		// ideally we'd already have the mapping for the old anchor/id from Confluence to the expected auto-generated one from docsy
-		if (anchor) {
-			if (anchor.startsWith('safe-id-')) {
-				const buff = Buffer.from(anchor.substring(8), 'base64');
-				anchor = buff.toString('ascii');
-				// TODO: Url encode?
-			}
-			// ok now we need to drop the pagename from prefix of anchor!
-			const anchorPageName = pageName.replace(/_/g, '');
-			if (anchor.startsWith(anchorPageName)) {
-				anchor = anchor.substring(anchorPageName.length + 1); // drop the page name prefix plus the trailing '-'
-			}
-		}
-	}
+
+//	const dumbMatch = endPath.match(DUMB_PATTERN);
+//	if (dumbMatch) {
+//		pageName = dumbMatch[1];
+//		legacyId = dumbMatch[2];
+//		anchor = dumbMatch[4];
+//		// Here we try to extract the anchor to use as a last-resort fallback
+//		// ideally we'd already have the mapping for the old anchor/id from Confluence to the expected auto-generated one from docsy
+//		if (anchor) {
+//			if (anchor.startsWith('safe-id-')) {
+//				const buff = Buffer.from(anchor.substring(8), 'base64');
+//				anchor = buff.toString('ascii');
+//				// TODO: Url encode?
+//			}
+//			// ok now we need to drop the pagename from prefix of anchor!
+//			const anchorPageName = pageName.replace(/_/g, '');
+//			if (anchor.startsWith(anchorPageName)) {
+//				anchor = anchor.substring(anchorPageName.length + 1); // drop the page name prefix plus the trailing '-'
+//			}
+//		}
+//	}
+//    console.log("++++++:", endPath);
+    const anchorParts = endPath.split('-section-');
+    // this is an anchor link
+    if (anchorParts.length === 2) {
+        pageName = anchorParts[0];
+        legacyId = anchorParts[1];
+
+        anchor = anchorMap.get(legacyId);
+        if (anchor) {
+            anchor = anchor.toLowerCase().replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
+        }
+
+        // anchor within the page
+        if (pageName === '') {
+            return `#${anchor}`;
+        }
+
+        // anchor in another page
+        legacyId = legacyId.toLowerCase();
+    }
 
     // THIS FIX MAILTO LINK
     if (pageName.startsWith('mailto:')) {
@@ -366,14 +402,11 @@ function wikiLinkToMarkdown(href, lookupTable, tocParent, parentDir, thisDocPage
 		}
 	}
 
-//    console.log('**[', anchor, pageName);
-
 	// We're linking to another section of the page!
 	if (docPage.docsyPath === thisDocPage.docsyPath) {
 		// Drop the doc path and just return the anchor!
 		return `#${anchor ? anchor : ''}`;
 	}
-
 
 	// TODO: try to use relative links? Or not because the _index.md thing breaks then?
 	let result = `${docPage.docsyPath}`; // FIXME: What the fuck is going on here, this is pointing to the input html file in my repo, not the docsy filepath!
@@ -406,6 +439,7 @@ class Converter {
 		this.target = program.target || HUGO_TARGET;
 		this.imgMap = new Map();
 		this.imageRefMap = new Map();
+		this.attachmentMap = new Map();
 	}
 
 	async convert() {
@@ -508,7 +542,8 @@ class Converter {
 	 */
 	async tableOfContents() {
 		if (!this.toc) {
-			let { topics, parent } = await utils.parseTOC(path.join(this.inputDir, 'toc.xml'));
+//			let { topics, parent } = await utils.parseTOC(path.join(this.inputDir, 'toc.xml'));
+            let { topics, parent } = await utils.generateTOC(path.join(this.inputDir, 'index.html'));
 		    this.toc = topics;
 		    this.tocParent = parent;
 		}
@@ -547,11 +582,13 @@ class Converter {
 		}
 
 		await fs.ensureDir(this.docsDir);
+
 		console.log('Converting HTML pages to markdown...');
 
         // Most likely a bulk export of multiple topics
+        //  handleEntry(entry, index, outDir, parentDir, lookupTable)
         if (this.tocParent === 'Home') {
-            return Promise.all(toc.map((entry, index) => this.handleEntry(entry, 0, path.join(this.docsDir, entry.name, 'content', 'en', 'docs'), entry.name, lookupTable)));
+            return Promise.all(toc.map((entry, index) => this.handleEntry(entry, 0, path.join(this.docsDir, entry.newName, 'content', 'en', 'docs'), entry.newName, lookupTable)));
         } else {
             // likely a single topic export
             return Promise.all(toc.map((entry, index) => this.handleEntry(entry, index, this.docsDir, entry.name, lookupTable)));
@@ -564,7 +601,7 @@ class Converter {
 	 */
 	async generateLookupTable(prefix, entries) {
 		return Promise.all(entries.map(async entry => {
-			const generatedPath = `${prefix}${entry.name}/`;
+            const generatedPath = `${prefix}${entry.newName}/`;
 			const page = await this.generatePageMetadata(entry.name, generatedPath, entry.items && entry.items.length !== 0);
 			this.pageMap.set(entry.name, page);
 			if (entry.items) {
@@ -587,39 +624,79 @@ class Converter {
 		const filepath = path.join(this.inputDir, `${pageName}.html`);
 		const content = await fs.readFile(filepath, 'utf8');
 
+        const anchors = new Map();
+        const page = new Page(generatedPath, anchors, isParent);
+
 		// FIXME: If we haven't manipulated the html already, we may not have the style of links we expect!
 		// Can we avoid this extra work?
+
+//		console.log('<============================================================');
 		const dom = utils.generateDOM(content);
+		const attachmentsDiv= dom('div.greybox').find('> a');
+
+        attachmentsDiv.each((index, elem) => {
+             this.attachmentMap.set(dom(elem).attr('href'), dom(elem).text().replace(/\s/g, '_'));
+        });
+
+        const anchorLinkSpan = dom('span.confluence-anchor-link');
+        anchorLinkSpan.each((index, elem) => {
+            const domElem = dom(elem);
+            const legacyId = domElem.attr('id');
+
+            // find the closest header and grab it's value
+            let generatedId;
+            const closestHeader = domElem.closest('h1, h2, h3, h4, h5, h6');
+            if (closestHeader) {
+                generatedId = dom(closestHeader).text().trim();
+
+                if (generatedId === '') {
+                    generatedId = domElem.parent().prev().text();
+                }
+            }
+
+            if (generatedId) {
+                generatedId = generatedId.trim().replace(/\s/g, '-')
+                anchorMap.set(legacyId, generatedId);
+                anchors.set(legacyId, generatedId);
+            }
+        });
+
+//        console.log('============================================================>');
+
 		utils.fixLinks(dom, filepath);
 		const modified = dom.html();
 
-		const anchors = new Map();
-		const page = new Page(generatedPath, anchors, isParent);
 		// Can we grab the first div with class "content" and then find all h1/2/3/4/5 tags with class "heading" - and grab parent div's id value to match?
 		const turndownService = new TurndownService();
 		// TODO: Don't use turndown, go straight to JSDOM? Because we don't actually want to convert anything
-		turndownService.addRule('log anchors', {
-			filter: node => {
-				if ([ 'H1', 'H2', 'H3', 'H4', 'H5' ].includes(node.nodeName) && node.classList.contains('heading')) {
-					const parent = node.parentElement;
-					// Record mapping of ids generated by Confluence versus ids auto-generated by Docsy
-					if (parent.nodeName === 'DIV' && parent.getAttribute('id')) {
-						const legacyId = parent.getAttribute('id');
-						const generatedId = node.textContent.toLowerCase().replace(/\s/g, '-').replace(/[()]/g, '');
-						anchors.set(legacyId, generatedId);
-					}
-				}
-				return false;
-			},
-			replacement: text => text
-		});
+//		turndownService.addRule('log anchors', {
+//			filter: node => {
+////				if ([ 'H1', 'H2', 'H3', 'H4', 'H5' ].includes(node.nodeName) && node.classList.contains('heading')) {
+//                if (node.nodeName === 'SPAN' && node.getAttribute('class') === 'confluence-anchor-link') {
+//
+//                    console.log("****************", node.getAttribute('id'));
+////					const parent = node.parentElement;
+////					console.log("++++", parent.getAttribute('text'));
+////					// Record mapping of ids generated by Confluence versus ids auto-generated by Docsy
+////					if (parent.nodeName === 'DIV' && parent.getAttribute('id')) {
+////						const legacyId = parent.getAttribute('id');
+////						const generatedId = node.textContent.toLowerCase().replace(/\s/g, '-').replace(/[()]/g, '');
+////						anchors.set(legacyId, generatedId);
+////					}
+//				}
+//				return false;
+//			},
+//			replacement: text => text
+//		});
 		// Record all the image references so we can cull down the images to only those referenced
 		// and soe we can copy/move images to live alongside their referring page (if they're the only reference!)
 		turndownService.addRule('images', {
 			filter: node => {
 				if (node.nodeName === 'IMG') {
 					const src = node.getAttribute('src') || '';
-					if (src.startsWith('images/')) {
+//					console.log("IMG: ", src);
+//					if (src.startsWith('images/')) {
+                    if (src.startsWith('attachments/')) {
 						// Record the image reference!
 						const value = this.imgMap.get(src) || new Set();
 						value.add(page);
@@ -639,6 +716,7 @@ class Converter {
 			},
 			replacement: text => text
 		});
+
 		turndownService.turndown(modified);
 		return page;
 	}
@@ -661,8 +739,8 @@ class Converter {
 		let outputName;
 		// if the entry has 'items' property, it's a parent! Need to recurse, and change filename to _index
 		if (entry.items) {
-		    if (this.tocParent !== 'Home' || entry.name !== parentDir) {
-			    outDir = path.join(outDir, entry.name);
+		    if (this.tocParent !== 'Home' || entry.newName !== parentDir) {
+			    outDir = path.join(outDir, entry.newName);
 			}
 
 			outputName = this.target === HUGO_TARGET ? '_index.md' : 'README.md';
@@ -672,12 +750,13 @@ class Converter {
 		} else if (entry.name === 'Home' || entry.name === 'Quick_Start' || entry.name === 'AMPLIFY_Dashboard' || entry.name === 'API_Builder') { // Treat top-level 'Home' page as index for all appc content
 			outputName = this.target === HUGO_TARGET ? '_index.md' : 'README.md';
 		} else {
-			outputName = `${entry.name}.md`;
+			outputName = `${entry.newName}.md`;
 		}
+
 		const filepath = path.join(this.inputDir, `${entry.name}.html`);
 		const content = await fs.readFile(filepath, 'utf8');
 
-		const modified = fixHTML(content, filepath);
+		const modified = fixHTML(content, filepath, outputName);
 
 
         // API_Builder_Getting_Started_Guide.md => Getting_Started_With_API_Builder.md
@@ -693,7 +772,7 @@ class Converter {
         outDir = outDir.replace(/API_Builder_/g, '');
 
 
-        const frontMatterLlinkTitle = entry.title.split(' ').map((value, index) => {
+        const frontMatterLinkTitle = entry.title.split(' ').map((value, index) => {
             if (keyWordsWhitelist.has(value)) return value;
 
             if (index == 0) {
@@ -702,19 +781,17 @@ class Converter {
 
             return value.toLowerCase();
         });
+        const fornmatterTitle = frontMatterLinkTitle.join(' ');
 
 		// Convert the html -> markdown prepend the frontmatter
 		const frontmatter = {
-			title: entry.title,
-			linkTitle: frontMatterLlinkTitle.join(' '), // use sentence case
+			title: fornmatterTitle, // use sentence case
+			linkTitle: fornmatterTitle, // use sentence case
+			description: 'ADD A DESCRIPTION',
 			weight: ((index + 1) * 10), // Make the weight the (index + 1) * 10 as string
 			date: dayjs().format('YYYY-MM-DD####')
 		};
 
-		if (this.target === HUGO_TARGET && outputName === '_index.md') {
-			// add no_list: true to frontmatter to avoid re-listing children pages!
-			frontmatter.no_list = true;
-		}
 		const thisDocPage = lookupTable.get(entry.name);
 		if (!thisDocPage) {
 			console.warn(`WAS UNABLE TO FIND PAGE METADATA ENTRY FOR ${entry.name}`);
@@ -831,7 +908,8 @@ class Converter {
 					// Best we can do here is strip it to the base filename without the extension, I suppose.
 					alt = path.basename(alt, path.extname(alt));
 				}
-				if (src.startsWith('images/')) {
+//				if (src.startsWith('images/')) {
+                if (src.startsWith('attachments/')) {
 				    const originalSrc = src;
 
 					// if this is the only reference to this image, make relative!
@@ -857,7 +935,8 @@ class Converter {
                     if (this.imageRefMap.get(imgName) && this.imageRefMap.get(imgName).size > 1) {
                         src = `${pageId}_${imgName}`;
                     } else {
-                        src = path.basename(src);
+//                        src = path.basename(src);
+                          src = this.attachmentMap.get(originalSrc).toLowerCase();
                     }
 
                     // IMAGES SHOULD BE /IMAGES/IMAGENAME.EXT
@@ -1050,32 +1129,60 @@ class Converter {
 			}
 		});
 
-		// TODO: Also handle div.panel. May have a child div.panelHeader; has div.panelContent child with contents
-		// Currently displays a grey box (very slightly lighter header) with a rounded corner black border
-		turndownService.addRule('panels', {
-			filter: node => node.nodeName === 'DIV' && node.classList.contains('panel'),
-			replacement: (content, node) => {
-				content = content.trim();
-				// Extract the title if there is one (we'll use a default below if not)
-				let title;
-				const firstChild = node.childNodes && node.childNodes[0];
-				if (firstChild && firstChild.nodeName === 'DIV' && firstChild.className === 'title') {
-					title = firstChild.textContent;
-					// remove the leading **${title}** from content!
-					content = content.substring(title.length + 4).trim();
-				}
-				if (title) {
-					if (this.target === VUEPRESS_TARGET) {
-						return `::: tip ${title}\n${content}\n:::\n`;
-					}
-					return `{{% alert title="${title}" color="info" %}}${content}{{% /alert %}}`;
-				}
-				if (this.target === VUEPRESS_TARGET) {
-					return `::: tip\n${content}\n:::\n`;
-				}
-				return `{{% alert color="info" %}}${content}{{% /alert %}}`;
-			}
-		});
+//		// TODO: Also handle div.panel. May have a child div.panelHeader; has div.panelContent child with contents
+//		// Currently displays a grey box (very slightly lighter header) with a rounded corner black border
+//		turndownService.addRule('panels', {
+//			filter: node => node.nodeName === 'DIV' && node.classList.contains('panel'),
+//			replacement: (content, node) => {
+//				content = content.trim();
+//				// Extract the title if there is one (we'll use a default below if not)
+//				let title;
+//				const firstChild = node.childNodes && node.childNodes[0];
+//				if (firstChild && firstChild.nodeName === 'DIV' && firstChild.className === 'title') {
+//					title = firstChild.textContent;
+//					// remove the leading **${title}** from content!
+//					content = content.substring(title.length + 4).trim();
+//				}
+//				if (title) {
+//					if (this.target === VUEPRESS_TARGET) {
+//						return `::: tip ${title}\n${content}\n:::\n`;
+//					}
+//					return `{{% alert title="${title}" color="info" %}}${content}{{% /alert %}}`;
+//				}
+//				if (this.target === VUEPRESS_TARGET) {
+//					return `::: tip\n${content}\n:::\n`;
+//				}
+//				return `{{% alert color="info" %}}${content}{{% /alert %}}`;
+//			}
+//		});
+
+        turndownService.addRule('p before list', {
+            filter: node => node.nodeName === 'P' && node.getAttribute('style') === 'margin-left: 60.0px;',
+            replacement: (content, _node) => {
+                return `\t${content}`;
+            }
+        });
+
+        turndownService.addRule('nested list', {
+            filter: node => node.nodeName === 'LI' && node.getAttribute('style') === 'margin-left: 60.0px;',
+            replacement: (content, _node) => {
+                return `\t* ${content}\n`;
+            }
+        });
+
+
+        turndownService.addRule('italicize text', {
+            filter: node => node.nodeName === 'EM',
+            replacement: (content, _node) => {
+
+                const firstChild = _node.childNodes && _node.childNodes[0];
+                if (firstChild && firstChild.nodeName === 'A') {
+                    return `__*${content}*__`;
+                }
+
+                return `_${content}_`;
+            }
+        });
 
 		turndownService.addRule('code sample titles', {
 			filter: node => node.nodeName === 'DIV' && node.className === 'title',
@@ -1181,7 +1288,8 @@ class Converter {
         if (this.imageRefMap.get(imgName) && this.imageRefMap.get(imgName).size > 1) {
             destImage = `${pageId}_${imgName}`;
         } else {
-            destImage = imgName;
+//            destImage = imgName;
+            destImage = this.attachmentMap.get(imgPath).toLowerCase();
         }
 
 

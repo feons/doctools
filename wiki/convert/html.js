@@ -61,6 +61,11 @@ async function convertHTMLFiles(htmlGuidesDir, outputDir, showEditButton) {
 	}));
 }
 
+async function generateTOC(inputDir, outputDir) {
+    const toc = await utils.generateTOC(path.join(inputDir, 'index.html'));
+    return fs.writeFile(path.join(outputDir, 'guides.json'), JSON.stringify(toc, null, 4));
+}
+
 async function main() {
 	const program = require('commander');
 	program
@@ -71,7 +76,8 @@ async function main() {
 
 	await fs.ensureDir(program.output);
 	return Promise.all([
-		convertTOC(program.input, program.output),
+//		convertTOC(program.input, program.output),
+		generateTOC(program.input, program.output),
 		convertHTMLFiles(program.input, program.output, program.showEditButton)
 	]);
 }

@@ -46,6 +46,7 @@
 		"wiki:convert:markdown": "node wiki/convert/markdown --input wiki/htmlguides --output ./build/appc-open-docs",
 		"wiki:convert:vuepress": "node wiki/convert/markdown --input wiki/htmlguides --output ./build/titanium-docs --target vuepress",
 		"wiki:post-export": "npm run wiki:unzip && npm run wiki:redirects && npm run wiki:convert",
+		"wiki:export-axway": "npm run wiki:convert:html && npm run wiki:convert:markdown",
 		"wiki": "func() { npm run wiki:export -- \"-u\" \"$1\" \"-p\" \"$2\" \"-id\" \"$3\" && npm run wiki:post-export; }; func",
 		"wiki:zoomin": "node wiki/zoomin"
 	},

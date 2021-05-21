@@ -162,56 +162,56 @@ function fixLinks(dom, filepath, anchorMap) {
 		if (href) {
 			const urlObj = url.parse(href);
 			if (urlObj.protocol === 'http:' || urlObj.protocol === 'https:') {
-				if (urlObj.hostname === 'docs.appcelerator.com') {
-					if (urlObj.pathname.includes('apidoc/mobile/latest')) {
-						// Convert old HTML site links to JSDuck
-						const token = href.substring(href.lastIndexOf('/') + 1);
-						const api = token.substring(0, token.indexOf('-'));
-						const type = token.substring(token.indexOf('-') + 1).replace('.html', '');
-						if (api === 'latest') {
-							href = '#!/api/';
-						} else if (type.indexOf('object') === 0 || type.indexOf('module') === 0) {
-							href = '#!/api/' + api;
-						} else if (~[ 'event', 'method', 'property' ].indexOf(type)) {
-							href = '#!/api/' + api.substring(0, api.lastIndexOf('.')) + '-' + type + '-' + api.substring(api.lastIndexOf('.') + 1);
-						} else if (!api && type) {
-							href = '#!/api/' + type;
-						} else {
-							console.log('Uncoverted wiki link: ' + href);
-						}
-					} else if (urlObj.hash) {
-						// turn to relative hashes for absolute URLs to docs site (or URLs pointing to old doc site layout)
-						if (urlObj.pathname.startsWith('/titanium')
-							|| urlObj.pathname.startsWith('/platform')) {
-							href = urlObj.hash;
-						} else if (urlObj.pathname.startsWith('/cloud')
-							|| urlObj.pathname.startsWith('/arrowd')) {
-							href = '/arrowdb/latest/' + urlObj.hash;
-						}
-					}
-				} else if (urlObj.hostname === 'wiki.appcelerator.org') {
-					// FIXME: Treat same as relative links? Basically can we "strip" the host name and treat equivalent to a relative link?
-					// Check for unconverted wiki URLs
-					const inList = WHITELIST.some(whitelisted => href.startsWith(whitelisted));
-					if (!inList) {
-						// TODO: if link is of form https://wiki.appcelerator.org/display/guides2/Appcelerator+CLI+7.1.2.GA+Release+Note
-						// then convert to #!/guide/Appcelerator+CLI+7.1.2.GA+Release+Note
-
-						// If link is of form https://wiki.appcelerator.org/display/DB/AMPLIFY+CLI+Package+Manager
-						// then it's pointing to the beta docs site! fix to point to guides2 equivalent? Warn?
-						if (urlObj.pathname.startsWith('/display/DB/')) {
-							console.error(`Wiki page at ${filepath} pointing at a Doc beta space: ${href} - Fix the original link in the wiki!`);
-							// if link is of form: https://wiki.appcelerator.org/display/AB4/API+Builder+Getting+Started+Guide
-							// it's pointing to API Builder docs. Where are those now?
-							// https://docs.axway.com/bundle/API_Builder_4x_allOS_en/page/api_builder_getting_started_guide.html
-						} else if (urlObj.pathname.startsWith('/display/AB4/')) {
-							const modifiedName = urlObj.pathname.substring(13).toLowerCase().replace(/\+/g, '_');
-							href = `https://docs.axway.com/bundle/API_Builder_4x_allOS_en/page/${modifiedName}.html`;
-						} else {
-							console.warn(`Unconverted wiki link: ${href}, from page: ${filepath}`);
-						}
-					}
-				} else {
+				if (urlObj.hostname === 'docs.appcelerator.com' || urlObj.hostname === 'wiki.appcelerator.org') {
+//					if (urlObj.pathname.includes('apidoc/mobile/latest')) {
+//						// Convert old HTML site links to JSDuck
+//						const token = href.substring(href.lastIndexOf('/') + 1);
+//						const api = token.substring(0, token.indexOf('-'));
+//						const type = token.substring(token.indexOf('-') + 1).replace('.html', '');
+//						if (api === 'latest') {
+//							href = '#!/api/';
+//						} else if (type.indexOf('object') === 0 || type.indexOf('module') === 0) {
+//							href = '#!/api/' + api;
+//						} else if (~[ 'event', 'method', 'property' ].indexOf(type)) {
+//							href = '#!/api/' + api.substring(0, api.lastIndexOf('.')) + '-' + type + '-' + api.substring(api.lastIndexOf('.') + 1);
+//						} else if (!api && type) {
+//							href = '#!/api/' + type;
+//						} else {
+//							console.log('Uncoverted wiki link: ' + href);
+//						}
+//					} else if (urlObj.hash) {
+//						// turn to relative hashes for absolute URLs to docs site (or URLs pointing to old doc site layout)
+//						if (urlObj.pathname.startsWith('/titanium')
+//							|| urlObj.pathname.startsWith('/platform')) {
+//							href = urlObj.hash;
+//						} else if (urlObj.pathname.startsWith('/cloud')
+//							|| urlObj.pathname.startsWith('/arrowd')) {
+//							href = '/arrowdb/latest/' + urlObj.hash;
+//						}
+//					}
+//				} else if (urlObj.hostname === 'wiki.appcelerator.org') {
+//					// FIXME: Treat same as relative links? Basically can we "strip" the host name and treat equivalent to a relative link?
+//					// Check for unconverted wiki URLs
+//					const inList = WHITELIST.some(whitelisted => href.startsWith(whitelisted));
+//					if (!inList) {
+//						// TODO: if link is of form https://wiki.appcelerator.org/display/guides2/Appcelerator+CLI+7.1.2.GA+Release+Note
+//						// then convert to #!/guide/Appcelerator+CLI+7.1.2.GA+Release+Note
+//
+//						// If link is of form https://wiki.appcelerator.org/display/DB/AMPLIFY+CLI+Package+Manager
+//						// then it's pointing to the beta docs site! fix to point to guides2 equivalent? Warn?
+//						if (urlObj.pathname.startsWith('/display/DB/')) {
+//							console.error(`Wiki page at ${filepath} pointing at a Doc beta space: ${href} - Fix the original link in the wiki!`);
+//							// if link is of form: https://wiki.appcelerator.org/display/AB4/API+Builder+Getting+Started+Guide
+//							// it's pointing to API Builder docs. Where are those now?
+//							// https://docs.axway.com/bundle/API_Builder_4x_allOS_en/page/api_builder_getting_started_guide.html
+//						} else if (urlObj.pathname.startsWith('/display/AB4/')) {
+//							const modifiedName = urlObj.pathname.substring(13).toLowerCase().replace(/\+/g, '_');
+//							href = `https://docs.axway.com/bundle/API_Builder_4x_allOS_en/page/${modifiedName}.html`;
+//						} else {
+//							console.warn(`Unconverted wiki link: ${href}, from page: ${filepath}`);
+//						}
+//					}
+//				} else {
 					// Open external links in new windows/tabs
 					elem.attribs.target = '_blank';
 				}
@@ -282,6 +282,11 @@ function manipulateHTMLContent(contents, filepath, options = { showEditButton: f
 	let $ = generateDOM(contents); // add jquery-like features
 	$ = stripFooter($);
 	// $ = addBanner($); // Don't add migration banner yet!
+
+//    $('div#footer').remove();
+//	$('div.page-metadata').remove();
+//    $('div#main-header').remove();
+
 	if (filepath) {
 		$ = addRedirects($, filepath);
 	}
@@ -290,6 +295,7 @@ function manipulateHTMLContent(contents, filepath, options = { showEditButton: f
 	if (options.showEditButton) {
 		$ = addEditButton($);
 	}
+
 	if (options.minify === false) {
 		return $.html();
 	}
@@ -388,6 +394,60 @@ function parse(node, topicsDone = new Set()) {
 	return rv;
 }
 
+/**
+ * Parses the index.html file and generates a JS object reproducing the hierarchy
+ * @param {string} indexFilePath the path to the HTML file
+ * @return {object[]}
+ */
+async function generateTOC(indexFilePath) {
+    let topics;
+    const parent = "Home";
+    try {
+        const indexFile = await fs.readFile(indexFilePath, 'utf8');
+        let $ = cheerio.load(indexFile);
+        const tocList = $('div[class="pageSection"]').find('> ul').first();
+        topics = [ parseList($, tocList) ];
+    } catch (e) {
+        console.log('e', e);
+    }
+
+    return { topics, parent };
+}
+
+/**
+ * Helper function to recursive populate the document hierarchy
+ * @param {CheerioStatic} $
+ * @param {CheerioStatic} element the list dom element
+ * @return {object[]}
+ */
+function parseList($, element) {
+    const ulList = $(element).find('> li').children();
+
+    const res = {};
+    const sublist = [];
+
+    ulList.each((index, child) => {
+        if (child.name === 'a') {
+            const htmlFilename = $(child).attr('href');
+            res.name = htmlFilename.replace('.html', '');
+            res.title = $(child).text();
+
+            const newFileName = res.title.replace(/\s/g, '-').toLowerCase();
+            res.newName = newFileName.charAt(0).toUpperCase() + newFileName.slice(1);
+        }
+
+        if (child.name === 'ul') {
+            sublist.push(parseList($, child));
+        }
+    });
+
+    if (sublist.length > 0) {
+        res.items = sublist;
+    }
+
+    return res;
+}
+
 module.exports = {
 	generateDOM,
 	stripFooter,
@@ -395,5 +455,6 @@ module.exports = {
 	fixLinks,
 	htmlMinify,
 	parseTOC,
-	manipulateHTMLContent
+	manipulateHTMLContent,
+	generateTOC
 };
