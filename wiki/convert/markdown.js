@@ -669,7 +669,7 @@ class Converter {
 		// if the entry has 'items' property, it's a parent! Need to recurse, and change filename to _index
 		if (entry.items) {
 		    if (this.tocParent !== 'Home' || entry.name !== parentDir) {
-			    outDir = path.join(outDir, entry.name);
+			    outDir = path.join(outDir, capitalize(entry.name.replace(/API_Builder_/g, '')));
 			}
 
 			outputName = this.target === HUGO_TARGET ? '_index.md' : 'README.md';
@@ -699,7 +699,6 @@ class Converter {
         entry.title = entry.title.replace(/^API Builder/g, '').trim();
         outDir = outDir.replace(/API_Builder_/g, '');
 
-
         const frontMatterLlinkTitle = entry.title.split(' ').map((value, index) => {
             if (keyWordsWhitelist.has(value)) return value;
 
@@ -720,6 +719,33 @@ class Converter {
 			weight: ((index + 1) * 10), // Make the weight the (index + 1) * 10 as string
 			date: dayjs().format('YYYY-MM-DD####')
 		};
+
+		if (outputName === '_index.md') {
+			entry.parentWeight = frontmatter.weight;
+		}
+
+		if (parentDir === 'API_Builder_Release_Notes' && outputName !== '_index.md') {
+			let parsed = processRelaseNoteFileName(entry.name);
+
+			if (!parsed) {
+				parsed = processRelaseNoteFileName(entry.title);
+			}
+
+			if (parsed) {		
+				let cityName = frontmatterTitle.replace('Standalone', '').replace(/-/g, '').trim();
+				cityName = capitalize(cityName);
+
+				frontmatter.title = `API Builder release notes - ${parsed}`;
+				frontmatter.linkTitle = `${cityName} - ${parsed}`;
+				frontmatter.weight = (entry.parentWeight || 20) * 10;
+				frontmatter.date = dayjs(parsed).format('YYYY-MM-DD####');
+
+				outputName = dayjs(parsed).format('YYYYMMDD') + '_relnotes.md';
+			}
+
+			frontmatter.description = 'Release details about updating your API Builder application to use the new features, fixes, and new or updated components. Includes a known issues list.';
+			frontmatter.Hide_readingtime = true;
+		}
 
 		const thisDocPage = lookupTable.get(entry.name);
 		if (!thisDocPage) {
@@ -847,6 +873,7 @@ class Converter {
 						src = (this.target === VUEPRESS_TARGET ? '/images/guide' : '/images') + src.substring(6); // 'images/...' -> '/images/...'  // if pushing to axway-open-docs, should be '/Images/appc'
 					}
 					src = decodeURIComponent(src); // unescape things like %2C for ','; %20 for ' '
+
 					// If ends in JPG/PNG (uppercase) make lowercase
 					if (src.endsWith('.PNG')) {
 						src = src.slice(0, -3) + 'png';
@@ -867,7 +894,7 @@ class Converter {
                     }
 
                     // IMAGES SHOULD BE /IMAGES/IMAGENAME.EXT
-                    src = path.join('/Images', src);
+                    src = path.join('/Images', changeImageName(src));
 				}
 
 
@@ -1192,6 +1219,7 @@ class Converter {
             destImage = imgName;
         }
 
+		destImage = changeImageName(destImage);
 
         if (this.tocParent !== 'Home') {
             return fs.copy(path.join(this.inputDir, decoded), path.join(this.outputDir, 'static', 'Images', destImage));
@@ -1203,6 +1231,29 @@ class Converter {
             await fs.copy(path.join(this.inputDir, decoded), path.join(this.outputDir, parentDir, 'static', 'Images', destImage));
         }
 	}
+}
+
+// lowercase and separated by underscores.
+function changeImageName(name) {
+	const ext = path.extname(name);
+	const baseName = path.basename(name, ext);
+	return baseName.toLowerCase().replace(/[\.-]+/g, '_') + ext;
+}
+
+function processRelaseNoteFileName(name) {
+	const parts = name.split('-');
+	if (parts.length < 2) {
+		return null;
+	}
+
+	const part = parts[1].replace(/_/g, ' ').trim();
+	
+	return part;
+}
+
+function capitalize(string) {
+	const str = string.trim();
+	return str[0].toUpperCase() + str.slice(1).toLowerCase();
 }
 
 if (require.main === module) {
