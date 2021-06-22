@@ -792,6 +792,10 @@ class Converter {
 			date: dayjs().format('YYYY-MM-DD####')
 		};
 
+		if (outputName === '_index.md') {
+			entry.parentWeight = frontmatter.weight;
+		}
+		
 		const thisDocPage = lookupTable.get(entry.name);
 		if (!thisDocPage) {
 			console.warn(`WAS UNABLE TO FIND PAGE METADATA ENTRY FOR ${entry.name}`);
@@ -825,6 +829,32 @@ class Converter {
 		// Skip the title since we put that in frontmatter
 		// FIXME: What if they don't match? Use the actual title tag value in preference? What does entry.title become? 'linkTitle'?
 		turndownService.remove([ 'head', 'title' ]);
+
+		turndownService.addRule('release note header', {
+			filter: node => entry.name.toLowerCase().match(/release-note|release_note/) !== -1 && outputName !== '_index.md' && (node.nodeName === 'H1' || node.nodeName === 'H2'),
+			replacement: (content, node) => {
+
+				frontmatter.weight = (entry.parentWeight || 20) * 10;
+				frontmatter.description = 'New features, improvements, and bug fixes for the release.';
+				frontmatter.Hide_readingtime = true;
+
+				const parts = content.split('-');
+				if (parts.length < 2) return content;
+
+				const versionParts = parts[0].trim().split(' ');
+				const version = versionParts[versionParts.length - 1].replace(/[^0-9\.]/g, '');
+				const date = parts[1].trim();
+
+				const title = `Platform Management ${version} release notes`;
+				frontmatter.title = title;
+				frontmatter.linkTitle = title;
+				frontmatter.date = dayjs(date).format('YYYY-MM-DD####');
+
+				outputName = dayjs(date).format('YYYYMMDD') + '_relnotes.md';
+
+				return content;
+			}
+		});
 
 		// Most wiki pages have a header with the page title at the top of the content
 		// We should strip that (it ends up being duplicated)
@@ -940,7 +970,7 @@ class Converter {
                     }
 
                     // IMAGES SHOULD BE /IMAGES/IMAGENAME.EXT
-                    src = path.join('/Images', src);
+                    src = path.join('/Images', changeImageName(src));
 				}
 
 
@@ -1292,6 +1322,7 @@ class Converter {
             destImage = this.attachmentMap.get(imgPath).toLowerCase();
         }
 
+		destImage = changeImageName(destImage);
 
         if (this.tocParent !== 'Home') {
             return fs.copy(path.join(this.inputDir, decoded), path.join(this.outputDir, 'static', 'Images', destImage));
@@ -1303,6 +1334,29 @@ class Converter {
             await fs.copy(path.join(this.inputDir, decoded), path.join(this.outputDir, parentDir, 'static', 'Images', destImage));
         }
 	}
+}
+
+// lowercase and separated by underscores.
+function changeImageName(name) {
+	const ext = path.extname(name);
+	const baseName = path.basename(name, ext);
+	return baseName.toLowerCase().replace(/[\.-]+/g, '_') + ext;
+}
+
+function processRelaseNoteFileName(name) {
+	const parts = name.split('-');
+	if (parts.length < 2) {
+		return null;
+	}
+
+	const part = parts[1].replace(/_/g, ' ').trim();
+
+	return part;
+}
+
+function capitalize(string) {
+	const str = string.trim();
+	return str[0].toUpperCase() + str.slice(1).toLowerCase();
 }
 
 if (require.main === module) {
