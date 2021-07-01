@@ -831,11 +831,9 @@ class Converter {
 		turndownService.remove([ 'head', 'title' ]);
 
 		turndownService.addRule('release note header', {
-			filter: node => entry.name.toLowerCase().match(/release-note|release_note/) !== -1 && outputName !== '_index.md' && (node.nodeName === 'H1' || node.nodeName === 'H2'),
+			filter: node => entry.newName.match(/release-note|release_note/) && outputName !== '_index.md' && (node.nodeName === 'H1' || node.nodeName === 'H2'),
 			replacement: (content, node) => {
-
 				frontmatter.weight = (entry.parentWeight || 20) * 10;
-				frontmatter.description = 'New features, improvements, and bug fixes for the release.';
 				frontmatter.Hide_readingtime = true;
 
 				const parts = content.split('-');
@@ -1115,13 +1113,13 @@ class Converter {
 		// warnings should ideally show the warning emoji, be shown in a yellow-ish box or something
 		// problems should show the red exclamation, have red background, (or maybe just this: https://www.docsy.dev/docs/adding-content/shortcodes/#alert)
 		turndownService.addRule('warnings', {
-			filter: node => node.nodeName === 'DIV' && node.classList.contains('information-macro'),
+			filter: node => node.nodeName === 'DIV' && (node.classList.contains('information-macro') || node.classList.contains('confluence-information-macro-body')),
 			replacement: (content, node) => {
 				content = content.trim(); // trim the content!
 				const hasNoicon = node.classList.contains('has-no-icon');
 
 				// Extract the title if there is one (we'll use a default below if not)
-				let title;
+				let title = 'Note';
 				const firstChild = node.childNodes && node.childNodes[0];
 				if (firstChild && firstChild.nodeName === 'DIV' && firstChild.className === 'title') {
 					title = firstChild.textContent;

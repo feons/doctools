@@ -433,7 +433,6 @@ function parseList($, element) {
             res.title = $(child).text();
 
             const newFileName = res.title.replace(/\s/g, '_').toLowerCase();
-            // res.newName = newFileName.charAt(0).toUpperCase() + newFileName.slice(1);
 			res.newName = newFileName;
         }
 
@@ -444,11 +443,11 @@ function parseList($, element) {
 
     if (sublist.length > 0) {
         res.items = sublist;
-		res.newName = res.newName.charAt(0).toUpperCase() + res.newName.slice(1);
+		res.newName = res.newName.toLowerCase();
     }
 
 	if (res.title === 'Amplify Platform Management Release Notes') {
-		res.newName = 'Release_notes';
+		res.newName = 'release_notes';
 	}
 	
     return res;
