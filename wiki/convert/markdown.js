@@ -669,7 +669,7 @@ class Converter {
 		// if the entry has 'items' property, it's a parent! Need to recurse, and change filename to _index
 		if (entry.items) {
 		    if (this.tocParent !== 'Home' || entry.name !== parentDir) {
-			    outDir = path.join(outDir, capitalize(entry.name.replace(/API_Builder_/g, '')));
+			    outDir = path.join(outDir, entry.name.replace(/API_Builder_/g, ''));
 			}
 
 			outputName = this.target === HUGO_TARGET ? '_index.md' : 'README.md';
@@ -1140,9 +1140,10 @@ class Converter {
 		const converted = `---\n${jsYaml.dump(frontmatter).replace('####', '')}---\n${markdown}\n`;
 
 		// Next we remove trailing spaces on lines and then merge multiple blank newlines into a single one
-        await fs.ensureDir(outDir);
+		outDir = outDir.toLowerCase();
+		outputName = outputName.toLowerCase();
 
-        outputName = outputName.charAt(0) + outputName.substring(1).toLowerCase();
+        await fs.ensureDir(outDir);
 		return fs.writeFile(path.join(outDir, outputName), removeTrailingSpaces(converted).replace(/(\n){3,}/gm, '\n\n'));
 	}
 
