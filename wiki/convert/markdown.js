@@ -1058,12 +1058,12 @@ class Converter {
 				let macro = 'tip'; // for Vuepress
 				// color can be 'primary', 'info', 'warning' or 'danger'. I think warning/danger are equivalent by default in our theme
 				if (node.classList.contains('problem')) {
-					prefix = '❗️ ';
+					// prefix = '❗️ ';
                     title = title || 'Caution';
 					color = 'danger';
 					macro = 'danger';
 				} else if (node.classList.contains('warning') || node.classList.contains('hint') || title == 'Note') {
-					prefix = '⚠️ ';
+					// prefix = '⚠️ ';
                     title = title || 'Note';
 					color = 'primary';
 					macro = 'warning';
