@@ -908,7 +908,7 @@ class Converter {
                         href = parts.join('/');
                     } else {
                         for (let i = 0; i < parts.length; i++) {
-                            parts[i] = parts[i].replace(/^api_builder_/, '');
+                            parts[i] = parts[i].replace(utils.PRODUCT_NAME_REMOVE_REG, '');
                         }
                     }
                     href = parts.join('/');

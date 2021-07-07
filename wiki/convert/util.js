@@ -433,7 +433,7 @@ function parseList($, element) {
             res.title = $(child).text();
 
             const newFileName = res.title.replace(/\s/g, '_').toLowerCase();
-			res.newName = newFileName;
+			res.newName = newFileName.replace(PRODUCT_NAME_REMOVE_REG, '');
         }
 
         if (child.name === 'ul') {
@@ -443,7 +443,7 @@ function parseList($, element) {
 
     if (sublist.length > 0) {
         res.items = sublist;
-		res.newName = res.newName.toLowerCase();
+		res.newName = res.newName.toLowerCase().replace(PRODUCT_NAME_REMOVE_REG, '');
     }
 
 	if (res.title === 'Amplify Platform Management Release Notes') {
@@ -453,6 +453,8 @@ function parseList($, element) {
     return res;
 }
 
+const PRODUCT_NAME_REMOVE_REG = /^(api_builder_)|^(amplify_platform_)|^(axway_cli_)/;
+
 module.exports = {
 	generateDOM,
 	stripFooter,
@@ -461,5 +463,6 @@ module.exports = {
 	htmlMinify,
 	parseTOC,
 	manipulateHTMLContent,
-	generateTOC
+	generateTOC,
+	PRODUCT_NAME_REMOVE_REG
 };
