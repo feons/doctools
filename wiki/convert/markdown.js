@@ -768,7 +768,7 @@ class Converter {
         // remove product name
         // internal links need changing too.
         outputName = outputName.replace(/^API_Builder_/, '');
-        entry.title = entry.title.replace(/^API Builder/g, '').trim();
+        entry.title = entry.title.replace(/(^API Builder)|(^Amplify platform)|(^Amplify cli)/gi, '').trim();
         outDir = outDir.replace(/API_Builder_/g, '');
 
 
